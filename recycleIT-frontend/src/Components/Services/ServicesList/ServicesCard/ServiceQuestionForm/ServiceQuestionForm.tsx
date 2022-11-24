@@ -6,11 +6,12 @@ import {
     TextField
 } from '@mui/material'
 
+interface IServiceQuestionFormProps {
+    postQuestion: (message: string) => void,
+    closeQuestionForm: () => void
+}
 
-const ServiceQuestionForm = (props: {
-        postQuestion: (message: string) => void,
-        closeQuestionForm: () => void
-    }) => {
+const ServiceQuestionForm = (props: IServiceQuestionFormProps) => {
 
     const [message, setMessage] = React.useState('');
     const handleMessageChange = (event: { target: { value: React.SetStateAction<string> } }) => {
@@ -26,7 +27,6 @@ const ServiceQuestionForm = (props: {
         <div className="item-details">
             <Divider style={{fontSize: '12px'}}>Ask A Question</Divider>
             <TextField 
-                id="standard-basic" 
                 label="Your message here" 
                 variant="standard" 
                 style={{width: '100%'}} 

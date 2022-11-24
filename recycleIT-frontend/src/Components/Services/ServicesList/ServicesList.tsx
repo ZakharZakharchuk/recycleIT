@@ -8,8 +8,7 @@ import {
 } from '@mui/material'
 import ServicesCard from './ServicesCard/ServicesCard'
 import ServicesSearch from './ServicesSearch/ServicesSearch'
-import { services } from '../../../util/data-list-mock'
-
+import { SERVICES } from '../../../util/data-list-mock'
 
 const ServicesList = () => {
     const [servicesList, setServicesList] = React.useState([{
@@ -31,7 +30,7 @@ const ServicesList = () => {
         setLoading(true);
         // server request to get all required services
         setTimeout(() => {
-            setServicesList(services);
+            setServicesList(SERVICES);
             setLoading(false)
         }, 1000);
     }

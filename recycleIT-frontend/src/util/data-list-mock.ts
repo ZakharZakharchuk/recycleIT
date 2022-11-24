@@ -1,4 +1,4 @@
-export const services = [
+export const SERVICES = [
     {
         "id": 1000,
         "name": "Fort Detrick",
@@ -38,7 +38,7 @@ export const services = [
     },
 ]
 
-export const servicesTypes = [
+export const SERVICES_TYPES = [
     {
         id: 4,
         name: 'Medical Waste Incinerators'
@@ -53,7 +53,7 @@ export const servicesTypes = [
     },
 ]
 
-export const wasteTypes = {
+export const WASTE_TYPES = {
     plastic: {
         types: [
             {
@@ -125,7 +125,7 @@ export const wasteTypes = {
 
 }
 
-export const stateCodes = {
+export const STATE_CODES = {
     "AL": "Alabama",
     "AK": "Alaska",
     "AZ": "Arizona",
