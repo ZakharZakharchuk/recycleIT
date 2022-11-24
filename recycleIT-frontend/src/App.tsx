@@ -1,13 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
-import Map from './Components/Services/Map/Map';
-function App() {
+import Services from './Components/Services/index'
+
+const App = () => {
   return (
     <div className="App">
-      <Map/>
-    </div>
-  );
-}
-
+        <Services/>
+      </div>
+    );
+  }
+  
 export default App;
