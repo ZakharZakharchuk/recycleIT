@@ -1,0 +1,27 @@
+.services-list {
+    width: 300px;
+    padding: 0 20px;
+}
+.services-search {
+    margin-bottom: 20px;
+}
+.services-search >*:not(:last-child) {
+    margin-bottom: 15px;
+}
+.text-left {
+    text-align: left;
+}
+.item-details {
+    margin-bottom: 8px;
+}
+
+.button-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.cards-container >*:not(:last-child) {
+    margin-bottom: 10px;
+}
