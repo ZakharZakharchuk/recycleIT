@@ -1,13 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Map from './Components/Services/Map/Map';
-function App() {
+import GoogleMapReact from "google-map-react";
+import React from "react";
+import Services from "./Components/Services";
+import Map from "./Components/Services/Map/Map";
+const App = () => {
   return (
     <div className="App">
-      <Map/>
-    </div>
-  );
-}
+        <Services/>
+      </div>
+    );
+  }
 
-export default App;
+export default App
