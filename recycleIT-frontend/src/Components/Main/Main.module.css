@@ -1,0 +1,144 @@
+.Main_container {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+.Main_par_button_wrapper {
+    width: 550px; 
+    place-self: center stretch;
+}
+
+.Main_typography {
+    font-size: 50px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    line-height: 120%;
+    letter-spacing: -0.5px;
+    color: #3F4732;
+}
+
+.Main_paragraph {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 175%;
+    letter-spacing: 0.15px;
+    color: #4F4F4F;
+    width: 500px;
+}
+
+.Main_button_eco {
+    width: 190px;
+    height: 42px;
+    background: #2E7D32 !important;
+    color: #FFFFFF !important;
+}
+
+.Main_button_types {
+    margin-left: 20px !important;
+    width: 190px;
+    height: 42px;
+    color: #2E7D32 !important;
+    border: 1px solid #2E7D32 !important;
+} 
+
+.Main_Avatar {
+    width: 575px !important;
+    height: 454px !important;
+}
+
+.SectionTypes_container {
+    display: grid;
+    background: #F1F1F1;
+    padding-top: 30px;
+    row-gap: 15px;
+}
+
+.SectionTypes_typography {
+    margin-left: 30px !important;
+    width: 554px;
+    height: 36px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 120%;
+    letter-spacing: -0.5px;
+    color: #3F4732;
+}
+
+.SectionTypes_paragraph {
+    margin-left: 30px !important;
+    padding-top: 15px;
+    width: 281px;
+    height: 28px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 175%;
+    letter-spacing: 0.15px;
+    color: rgba(63, 71, 50, 0.87);
+}
+
+.SectionTypes_buttonBroup_wrapper {
+    margin-left: 30px;
+}
+
+.SectionTypes_button {
+    width: 150px;
+    height: 60px;
+    background: #FFFFFF !important;
+    font-family: 'Roboto'!important;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.4px;
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+.SectionTypes_button:active {
+    color: rgba(61, 178, 102, 0.899) !important;
+}
+
+.Cards_container {
+    width: 96%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 15px;
+    row-gap: 15px;
+}
+
+.Card_wrapper {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 470px;
+}
+
+.Card_img {
+    width: 470px !important;
+}
+
+.Card_typography {
+    height: 24px;
+    margin: 15px !important;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 133.4%;
+    color: rgba(0, 0, 0, 0.87)
+}
+
+.Card_parg {
+    width: 368px;
+    height: 20px;
+    margin: 15px !important;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 143%;  
+    letter-spacing: 0.17px;  
+    color: rgba(0, 0, 0, 0.6);
+}
