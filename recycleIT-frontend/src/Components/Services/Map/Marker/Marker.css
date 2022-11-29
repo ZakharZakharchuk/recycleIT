@@ -1,0 +1,21 @@
+.location-icon {
+    color: #F59708;
+    transition: .3s;
+    z-index: 1;
+}
+
+.red {
+    color: #ee4d45;
+}
+
+.location-icon:hover {
+    color: #F55E08;
+    cursor: pointer;
+}
+
+.marker-label {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+}

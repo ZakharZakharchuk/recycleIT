@@ -7,21 +7,7 @@ import {
     Button,
 } from '@mui/material'
 import ServiceQuestionForm from './ServiceQuestionForm/ServiceQuestionForm'
-
-interface IServiceCardProps {
-    item: {
-        id: number;
-        name: string,
-        streetAddress: string,
-        city: string,
-        latitude: number,
-        longitude: number,
-        contactPhone: string,
-        facilitySubtypes: string,
-        raiting: number,
-        delivery: boolean
-    }
-}
+import {IServiceCardProps} from '../../../interfaces/Interfaces'
 
 const ServicesCard = (props: IServiceCardProps) => {
     const [isQuestionFormOpened, setIsQuestionFormOpened] = useState(false);
@@ -37,11 +23,11 @@ const ServicesCard = (props: IServiceCardProps) => {
         }
     }
 
-    const questionForm = isQuestionFormOpened ? 
+    const questionForm = !isQuestionFormOpened ||
         <ServiceQuestionForm 
             postQuestion={postQuestion} 
             closeQuestionForm={onChangeQuestionFormDisplay}
-            /> : null;
+        /> 
 
     return (
         <Card>
@@ -56,7 +42,7 @@ const ServicesCard = (props: IServiceCardProps) => {
                         readOnly 
                         size="small" 
                         style={{marginBottom: '10px'}}
-                        />
+                    />
                 </div>
                 <div className="item-details">
                     <Typography variant="body1" color="text.primary" className="text-left">
@@ -86,6 +72,13 @@ const ServicesCard = (props: IServiceCardProps) => {
                 { questionForm }
 
                 <div className="button-group">
+                    <Button 
+                        variant="text" 
+                        size="small" 
+                        onClick={() => props.getItemLocation(props.item.id, props.item.latitude, props.item.longitude)}
+                        >
+                        View
+                        </Button>
                     <Button variant="text" size="small">Call</Button>
 
                     {
