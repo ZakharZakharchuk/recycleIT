@@ -72,11 +72,10 @@ const ServicesSearch = (props: IServicesSearchProps) => {
 
     const selectCurrentLocation = () => {  
         console.log('location request');
-        // will be moved later
-        const API_KEY = 'db6c0e4cf2mshca157dd2f5fb16ap1d4985jsnd8a3ee0592c8',
-            API_HOST = 'address-from-to-latitude-longitude.p.rapidapi.com',
-            API_URL = 'https://address-from-to-latitude-longitude.p.rapidapi.com/geolocationapi'
-        
+        const API_KEY = process.env.REACT_APP_API_KEY,
+            API_HOST = process.env.REACT_APP_API_HOST,
+            API_URL = 'https://address-from-to-latitude-longitude.p.rapidapi.com/geolocationapi' 
+
         const options = {
             method: 'GET',
             url: API_URL,
@@ -96,13 +95,14 @@ const ServicesSearch = (props: IServicesSearchProps) => {
             
             if (stateCode) {
                 setLocation(stateCode.id);
-                console.log('location set to', location);
             } else {
                 // show alert if location does not satisfy us
                 setError(true)
             }
             setLoading(false)
         }).catch((error) => {
+            console.log(error);
+            
             setError(true)
             setLoading(false)
         });

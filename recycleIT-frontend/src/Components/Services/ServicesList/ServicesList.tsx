@@ -10,7 +10,8 @@ import ServicesCard from './ServicesCard/ServicesCard'
 import ServicesSearch from './ServicesSearch/ServicesSearch'
 import { SERVICES, SERVICES_TYPES } from '../../../util/data-list-mock'
 import AlertMessageBox from '../../helpers/AlertMessageBox'
-import { IServiceListProps } from '../../interfaces/Interfaces'
+import { IServiceListProps } from '../../interfaces/Interfaces';
+import CloseIcon from '@mui/icons-material/Close';
 
 const ServicesList = (props: IServiceListProps) => {
     const [loading, setLoading] = useState(false);
@@ -19,20 +20,6 @@ const ServicesList = (props: IServiceListProps) => {
 
     const fetchServices = (location: string, serviceType: string) => {
         console.log(location, serviceType);
-
-        let serviceTypeId = '';
-        // let serviceTypeFound;
-        
-        // if (props.servicesList) {
-        //     serviceTypeFound = props.servicesList
-        //     .find(service => service.id === Number(serviceType))
-        // }
-
-        // console.log(serviceTypeFound);
-
-        // if (serviceTypeFound) {
-        //     serviceTypeId = String(serviceTypeFound.facilitySubtypes)
-        // }
         
         setLoading(true);
         if (error) {
@@ -55,7 +42,7 @@ const ServicesList = (props: IServiceListProps) => {
     let servicesItems = null;
 
     if (props.servicesList) {
-        servicesItems = props.servicesList.map((item, i) => {
+        servicesItems = props.servicesList.map((item) => {
             if (item.name) {
                 return <ServicesCard 
                             key={item.id} 
@@ -70,20 +57,37 @@ const ServicesList = (props: IServiceListProps) => {
             && <AlertMessageBox error={true} text={errorMessage}/>
 
     return (
-        <div className="services-list">
-            <ServicesSearch fetchServices={fetchServices} />
-            <div className="cards-container">
-                { 
-                    loading ? 
-                        <CircularProgress 
-                            color="success"
-                            style={{display: 'block', margin: '0 auto'}}
-                        /> : servicesItems 
-                }
-                
-                {errorAlert}
+        <Drawer
+            variant="persistent"
+            anchor="left"
+            open={props.isDrawerOpened}
+        >
+            <ListSubheader component="div" 
+                className="list-subheader"
+            >
+                    Services
+                    <IconButton 
+                        style={{display: !props.isMobileDevice ? 'block' : 'none'}}
+                        onClick={props.toggleDrawerOpened}
+                    >
+                        <CloseIcon style={{color: 'grey', display: 'block'}}/>
+                    </IconButton>
+            </ListSubheader>
+            <div className="services-list">
+                <ServicesSearch fetchServices={fetchServices} />
+                <div className="cards-container">
+                    { 
+                        loading ? 
+                            <CircularProgress 
+                                color="success"
+                                style={{display: 'block', margin: '0 auto'}}
+                            /> : servicesItems 
+                    }
+                    
+                    {errorAlert}
+                </div>
             </div>
-        </div>
+        </Drawer>
     )
 }
 

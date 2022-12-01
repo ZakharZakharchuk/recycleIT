@@ -46,26 +46,25 @@ const Services = () => {
     }
 
     return (
-        <>
+        <div className='services-page'>
             {/* <Header/> */}
             <UserLocation.Provider value={userLocation}>
-                <ServicesWrapper 
-                    isDrawerOpened={isDrawerOpened} 
+                <ServicesList 
+                    servicesList={servicesList} 
+                    setServicesList={setServicesData}
+                    setItemLocation={setItemLocation}
+                    isDrawerOpened={isDrawerOpened}
                     isMobileDevice={isMobileDevice}
                     toggleDrawerOpened={toggleDrawerOpened}
-                    heading='Search for eco services, available for you'
-                    side={<ServicesList 
-                        servicesList={servicesList} 
-                        setServicesList={setServicesData}
-                        setItemLocation={setItemLocation}
-                    />}
-                    content={<Map 
-                        servicesList={servicesList}
-                        chosenItemLocation={chosenItemLocation}
-                    />}
+                />
+                <Map 
+                    servicesList={servicesList}
+                    chosenItemLocation={chosenItemLocation}
+                    toggleDrawerOpened={toggleDrawerOpened}
+                    isMobileDevice={isMobileDevice}
                 />
             </UserLocation.Provider>
-        </>
+        </div>
     )
 }
 export default Services
