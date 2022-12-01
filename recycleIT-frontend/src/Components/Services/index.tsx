@@ -8,6 +8,7 @@ import {
     ChosenItemType, 
     IServiceList 
 } from '../interfaces/Interfaces';
+import ServicesWrapper from './ServicesWrapper/ServicesWrapper';
 
 export const UserLocation = createContext<LocationType | null>(null);
 
@@ -48,19 +49,20 @@ const Services = () => {
         <>
             {/* <Header/> */}
             <UserLocation.Provider value={userLocation}>
-                <ServicesList 
-                    servicesList={servicesList} 
-                    setServicesList={setServicesData}
-                    setItemLocation={setItemLocation}
-                    isDrawerOpened={isDrawerOpened}
+                <ServicesWrapper 
+                    isDrawerOpened={isDrawerOpened} 
                     isMobileDevice={isMobileDevice}
                     toggleDrawerOpened={toggleDrawerOpened}
-                />
-                <Map 
-                    servicesList={servicesList}
-                    chosenItemLocation={chosenItemLocation}
-                    toggleDrawerOpened={toggleDrawerOpened}
-                    isMobileDevice={isMobileDevice}
+                    heading='Search for eco services, available for you'
+                    side={<ServicesList 
+                        servicesList={servicesList} 
+                        setServicesList={setServicesData}
+                        setItemLocation={setItemLocation}
+                    />}
+                    content={<Map 
+                        servicesList={servicesList}
+                        chosenItemLocation={chosenItemLocation}
+                    />}
                 />
             </UserLocation.Provider>
         </>

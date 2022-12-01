@@ -18,9 +18,6 @@ export interface IServiceListProps {
     servicesList: IServiceList[] | null, 
     setServicesList: (services: IServiceList[] | null) => void,
     setItemLocation: (id: number, lat: number, lng: number) => void,
-    toggleDrawerOpened: () => void,
-    isDrawerOpened: boolean,
-    isMobileDevice: boolean
 }
 
 export interface IServicesSearchProps {
@@ -42,9 +39,7 @@ export interface IServiceList {
 
 export interface IMapProps {
     servicesList: IServiceList[] | null,
-    chosenItemLocation: LocationType | null,
-    toggleDrawerOpened: () => void,
-    isMobileDevice: boolean,
+    chosenItemLocation: LocationType | null
 }
 
 export interface IMarkerProps {

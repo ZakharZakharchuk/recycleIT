@@ -1,6 +1,6 @@
 .map-side {
   width: calc(100% - 380px);
-  height: 500px;
+  height: calc(100vh - 30px);
   padding: 10px;
   margin-left: auto;
 }

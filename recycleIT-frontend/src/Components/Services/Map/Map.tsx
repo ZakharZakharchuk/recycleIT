@@ -83,14 +83,6 @@ export default function Map(props: IMapProps){
 
   return (
     <div className="map-side">
-      <Typography gutterBottom variant="h6" style={{color: '#4F4F4F'}}>
-        <IconButton 
-          style={{display: !props.isMobileDevice ? 'inline-block' : 'none'}} 
-          onClick={props.toggleDrawerOpened}>
-            <MenuOpenIcon style={{color: '#4F4F4F'}} />
-        </IconButton>
-          Search for eco services, available for you
-        </Typography>
       <div className="map-container">
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyBX9wy2s_ljVzoNiOBc_ki0fAFpgJCj2G4" }}

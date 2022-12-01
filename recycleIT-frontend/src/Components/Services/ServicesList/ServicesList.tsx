@@ -9,7 +9,6 @@ import {
 import ServicesCard from './ServicesCard/ServicesCard'
 import ServicesSearch from './ServicesSearch/ServicesSearch'
 import { SERVICES, SERVICES_TYPES } from '../../../util/data-list-mock'
-import CloseIcon from '@mui/icons-material/Close';
 import AlertMessageBox from '../../helpers/AlertMessageBox'
 import { IServiceListProps } from '../../interfaces/Interfaces'
 
@@ -71,39 +70,20 @@ const ServicesList = (props: IServiceListProps) => {
             && <AlertMessageBox error={true} text={errorMessage}/>
 
     return (
-        <Drawer
-            variant="persistent"
-            anchor="left"
-            open={props.isDrawerOpened}
-        >
-            <div className="services-list">
-                <ListSubheader component="div" 
-                    className="list-subheader"
-                >
-                    Services
-                    <IconButton 
-                        style={{display: !props.isMobileDevice ? 'block' : 'none'}}
-                        onClick={props.toggleDrawerOpened}
-                    >
-                        <CloseIcon style={{color: 'grey', display: 'block'}}/>
-                    </IconButton>
-                </ListSubheader>
-
-                <ServicesSearch fetchServices={fetchServices} />
-
-                <div className="cards-container">
-                    { 
-                        loading ? 
-                            <CircularProgress 
-                                color="success"
-                                style={{display: 'block', margin: '0 auto'}}
-                            /> : servicesItems 
-                    }
-                    
-                    {errorAlert}
-                </div>
+        <div className="services-list">
+            <ServicesSearch fetchServices={fetchServices} />
+            <div className="cards-container">
+                { 
+                    loading ? 
+                        <CircularProgress 
+                            color="success"
+                            style={{display: 'block', margin: '0 auto'}}
+                        /> : servicesItems 
+                }
+                
+                {errorAlert}
             </div>
-        </Drawer>
+        </div>
     )
 }
 

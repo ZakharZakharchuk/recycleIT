@@ -20,6 +20,7 @@ import {
     IServicesSearchProps, 
     LocationType 
 } from '../../../interfaces/Interfaces';
+import { renderMenuItems } from '../../../../util/renderMenuItems';
 
 const ServicesSearch = (props: IServicesSearchProps) => {
     const [error, setError] = useState(false);
@@ -52,19 +53,8 @@ const ServicesSearch = (props: IServicesSearchProps) => {
         setFacilityType(event.target.value);
     };
 
-    const states = Object.entries(STATE_CODES).map((code, i) => {
-        return <MenuItem key={i} value={code[0]}>{code[1]}</MenuItem>
-    })
-
-    const services = serviceTypes.map((type, i) => {
-        const maxStringLength = 27;
-        let itemName = type.name;
-
-        if (type.name.length > maxStringLength) {
-            itemName = itemName.slice(0, maxStringLength) + '...'
-        }
-        return <MenuItem key={i} value={type.id}>{itemName}</MenuItem>
-    })
+    const states = renderMenuItems(STATE_CODES);
+    const services = renderMenuItems(serviceTypes);
 
     const toggleCheckbox = () => {
         if (!isCheckboxSelected) {
@@ -92,8 +82,8 @@ const ServicesSearch = (props: IServicesSearchProps) => {
             url: API_URL,
             params: {lat: userLocation.lat, lng: userLocation.lng},
             headers: {
-            'X-RapidAPI-Key': API_KEY,
-            'X-RapidAPI-Host': API_HOST
+                'X-RapidAPI-Key': API_KEY,
+                'X-RapidAPI-Host': API_HOST
             }
         };
 
@@ -101,11 +91,11 @@ const ServicesSearch = (props: IServicesSearchProps) => {
         axios.request(options).then((response) => {
             const reg = response.data.Results[0].region;
             // find region code according to location
-            const stateCode = Object.entries(STATE_CODES)
-                .find(state => state[1].toUpperCase() === reg.toUpperCase());
+            const stateCode = STATE_CODES
+                .find(state => state.id.toUpperCase() === reg.toUpperCase());
             
             if (stateCode) {
-                setLocation(stateCode[0]);
+                setLocation(stateCode.id);
                 console.log('location set to', location);
             } else {
                 // show alert if location does not satisfy us
@@ -131,7 +121,7 @@ const ServicesSearch = (props: IServicesSearchProps) => {
                     onChange={handleLocationChange}
                     label="Location"
                     style={{maxWidth: '320px'}}
-                    >
+                >
                         <MenuItem value="">
                             <em>All country</em>
                         </MenuItem>
@@ -146,11 +136,11 @@ const ServicesSearch = (props: IServicesSearchProps) => {
                     value={facilityType}
                     onChange={handleFacilityTypeChange}
                     label="Location"
-                    >
-                        <MenuItem value="">
-                            <em>Any type</em>
-                        </MenuItem>
-                        { services }
+                >
+                    <MenuItem value="">
+                        <em>Any type</em>
+                    </MenuItem>
+                    { services }
                 </Select>
             </FormControl>
 
@@ -172,7 +162,9 @@ const ServicesSearch = (props: IServicesSearchProps) => {
                 variant="contained" 
                 style={{width: '100%', backgroundColor: "#82B23F"}}
                 onClick={requestFacilities}
-                >Find</Button>
+            >
+                Find
+            </Button>
         </div>
     )
 }

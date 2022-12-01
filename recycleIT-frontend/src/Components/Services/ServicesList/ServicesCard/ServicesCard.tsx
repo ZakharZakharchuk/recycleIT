@@ -76,9 +76,9 @@ const ServicesCard = (props: IServiceCardProps) => {
                         variant="text" 
                         size="small" 
                         onClick={() => props.getItemLocation(props.item.id, props.item.latitude, props.item.longitude)}
-                        >
+                    >
                         View
-                        </Button>
+                    </Button>
                     <Button variant="text" size="small">Call</Button>
 
                     {
