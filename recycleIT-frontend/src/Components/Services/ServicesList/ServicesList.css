@@ -1,9 +1,10 @@
 .services-list {
-    width: 300px;
-    padding: 0 20px;
+    width: 320px;
+    min-height: 100vh;
 }
 .services-search {
     margin-bottom: 20px;
+    padding: 0 20px;
 }
 .services-search >*:not(:last-child) {
     margin-bottom: 15px;
@@ -21,7 +22,21 @@
     gap: 10px;
     margin-top: 15px;
 }
+.cards-container {
+    padding-bottom: 15px;
+    padding: 0 20px;
+}
 
 .cards-container >*:not(:last-child) {
     margin-bottom: 10px;
+}
+
+.list-subheader {
+    font-weight: 600;
+    position: sticky;
+    width: 320px;
+    height: 50px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between
 }
