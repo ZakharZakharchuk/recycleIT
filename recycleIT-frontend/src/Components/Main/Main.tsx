@@ -50,7 +50,7 @@ const Main = () => {
             <Header/>
             <Box className={styles.Main_container}>
                 <Box className={styles.Main_par_button_wrapper}>
-                    <Typography variant="h2" className={styles.Main_typography}>
+                    <Typography variant="h3" className={styles.Main_typography}>
                         Recycle the waste - save the planet !
                     </Typography>
                     <Typography paragraph={true} className={styles.Main_paragraph}>Every time you throw something away, 
@@ -62,7 +62,7 @@ const Main = () => {
                         <Button className={styles.Main_button_types}>Types of waste</Button>
                     </Box>
                 </Box>
-                <Box>
+                <Box className={styles.Main_Avatar_wrapper}>
                     <Avatar src={garbageRecycle} alt='AccountCircleFilled'className={styles.Main_Avatar}/>
                 </Box>
             </Box>

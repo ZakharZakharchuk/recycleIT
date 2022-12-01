@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: auto;
     /* justify-content: space-between; */
+    width: 100%;
     margin: 0;
     background-color: #028E3F;
     height: 64px;
