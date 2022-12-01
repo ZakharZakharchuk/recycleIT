@@ -10,7 +10,7 @@ const CardsItem = ({setItem, item}:any) => {
                 item.map((card: {title: string,category: string, desc: string, image: string}, id: number) => {
                     return (
                         <Card className={styles.Card_wrapper} key={id}>
-                            <CardActionArea> 
+                            <CardActionArea className={styles.Card_inside_wrapper}> 
                                 <Typography variant="h6" className={styles.Card_typography}>
                                     {card.title}
                                 </Typography>

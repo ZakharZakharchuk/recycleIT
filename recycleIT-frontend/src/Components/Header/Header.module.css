@@ -11,6 +11,7 @@
 .Header_box_wrapper {
     width: 100%;
     justify-content: space-between;
+    height: 100%;
 }
 
 .Header_logo_wrapper {
@@ -21,7 +22,7 @@
 
 .Header_navbar_wrapper {
     display: grid;
-    grid-template-columns: auto auto; 
+    grid-template-columns: auto auto auto; 
     column-gap: 20px;
 }
 
@@ -59,7 +60,17 @@
     cursor: pointer;
 }
 
-/* .Header_account_avatar {
-    width: 20px;
-    height: 20px;
-} */
+.Header_burger {
+    display: none !important;
+}
+@media screen and (max-width: 850px){
+    .navbar_comtainer {
+        display: none !important;
+    } 
+    .Header_avatar_wrapper {
+        display: none !important;
+    }  
+    .Header_burger {
+        display: grid !important;
+    } 
+}

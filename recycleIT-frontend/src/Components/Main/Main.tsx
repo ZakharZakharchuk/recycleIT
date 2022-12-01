@@ -7,13 +7,18 @@ import garbageRecycle from '../assets/garbageRecycle.png'
 import data from './Data/data'
 import CardsItem from './CardsItem/CardsItem'
 import { ToggleButton } from '@mui/material';
+// import TabContext from '@mui/lab/TabContext';
+// import TabList from '@mui/lab/TabList';
+// import TabPanel from '@mui/lab/TabPanel';
+
 const Main = () => {
     const [item, setItem] = useState(data);
     const [alignment, setAlignment] = React.useState('plastic');
+    const [value, setValue] = React.useState('1');
 
-  const handleChange = (event: any, newAlignment: React.SetStateAction<string>) => {
-    setAlignment(newAlignment);
-  };
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+        setValue(newValue);
+      };
 
     const filterCards = (id: string | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const newCard = data.filter((card) => {
@@ -92,6 +97,18 @@ const Main = () => {
                     })
                 }        
                 </ToggleButtonGroup>
+                 {/* <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <Tab label="Item One" value="1" />
+            <Tab label="Item Two" value="2" />
+            <Tab label="Item Three" value="3" />
+          </TabList>
+        </Box>
+        <TabPanel value="1">Item One</TabPanel>
+        <TabPanel value="2">Item Two</TabPanel>
+        <TabPanel value="3">Item Three</TabPanel>
+      </TabContext> */}
                 <Box className={styles.Cards_container}>
                     <CardsItem item={item} setItem={setItem}/>
                 </Box>
