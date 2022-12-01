@@ -5,14 +5,13 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import styles from './Support.module.css'
 import { Box } from '@mui/material';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function Accordions() {
-  const [expanded, setExpanded] = React.useState<string | false>(false);
+  const [expanded, setExpanded] = React.useState<string | null>(null);
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false);
+      setExpanded(isExpanded ? panel : null);
     };
 
   return (
@@ -20,7 +19,6 @@ export default function Accordions() {
       <Accordion className={styles.Accordion_wrapper} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
             className={styles.Accordion_summary}
-        //   expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
@@ -39,7 +37,6 @@ export default function Accordions() {
       <Accordion  className={styles.Accordion_wrapper} expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <AccordionSummary
          className={styles.Accordion_summary}
-        //   expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2bh-content"
           id="panel2bh-header"
         >
@@ -56,7 +53,6 @@ export default function Accordions() {
       <Accordion  className={styles.Accordion_wrapper} expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <AccordionSummary
          className={styles.Accordion_summary}
-        //   expandIcon={}
           aria-controls="panel3bh-content"
           id="panel3bh-header"
         >
@@ -74,7 +70,6 @@ export default function Accordions() {
       <Accordion  className={styles.Accordion_wrapper} expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
         <AccordionSummary
          className={styles.Accordion_summary}
-        //   expandIcon={<ExpandMoreIcon />}
           aria-controls="panel4bh-content"
           id="panel4bh-header"
         >
