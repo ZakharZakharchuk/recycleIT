@@ -13,23 +13,16 @@ import styles from './Header.module.css'
 import leaf from '../assets/leaf.png'
 import AccountCircleFilled from '../assets/AccountCircleFilled.png';
 import LogoutOutlined from '../assets/LogoutOutlined.png'
-import { Badge, Icon } from '@mui/material';
 import burger from '../assets/burger.png'
 
 const pages = ['HOME', 'SERVICES MAP', 'SUPPORT'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function Header() {
-  // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+const Header:React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  // const [active, setActive] = React.useState(false)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
-
-  // const handleOpenNavMenu = (event:any) => {
-  //   setAnchorElNav(event.currentTarget);
-  // };
   const handleOpenUserMenu = (event:any) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -41,10 +34,6 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  // const handleMenuClose = () => {
-  //   setAnchorEl(null);
-  //   handleMobileMenuClose();
-  // };
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -58,11 +47,6 @@ function Header() {
   const renderMobileMenu = (
     <Menu
     anchorEl={mobileMoreAnchorEl}
-      // anchorOrigin={{
-      //   vertical: 'top',
-      //   horizontal: 'right',
-      // }}
-      // id={mobileMenuId}
       keepMounted
       transformOrigin={{
         vertical: 'top',
@@ -152,15 +136,6 @@ function Header() {
                   </Menu>
                   <Avatar src={LogoutOutlined} alt='garbageRecycle'className={styles.Header_logoOut}/>
               </Box>
-              {/* <IconButton
-              size="large"
-              aria-label="show more"
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <img src={burger} alt="burger" className={styles.Header_burger}/>
-              </IconButton> */}
             </Box>
             <IconButton
               size="large"

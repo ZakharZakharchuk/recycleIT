@@ -1,6 +1,4 @@
-import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material"
-import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal } from "react"
-import data from "../Data/data"
+import { Card, CardActionArea, CardMedia, Typography } from "@mui/material"
 import styles from '../Main.module.css'
 
 const CardsItem = ({setItem, item}:any) => {
