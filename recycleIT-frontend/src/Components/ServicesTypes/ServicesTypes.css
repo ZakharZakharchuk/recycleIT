@@ -1,0 +1,26 @@
+.services-types {
+    max-width: 1230px;
+    margin: 0 auto;
+}
+
+.sevices-types__cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.sevices-types__card {
+    background-color: #f1f1f1;
+    width: 100%;
+}
+
+.services-types__card-description {
+    padding-top: 15px;
+}
+
+@media screen and (max-width: 768px){
+    .sevices-types__cards {
+        display: flex;
+        flex-direction: column;
+    }
+}
