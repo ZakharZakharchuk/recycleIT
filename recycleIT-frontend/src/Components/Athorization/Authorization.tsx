@@ -134,7 +134,7 @@ const Authorization = () => {
                         required={true}
                         type='text'
                         id="name"
-                        label="Name"
+                        label="Username"
                         value={values.name}
                         onChange={handleChange('name')}
                         error={validationError.name}
