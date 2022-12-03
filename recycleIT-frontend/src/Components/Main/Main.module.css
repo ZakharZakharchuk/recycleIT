@@ -1,0 +1,170 @@
+.Main_container {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+.Main_par_button_wrapper {
+    margin-left: 5%;
+    width: 60%; 
+    place-self: center stretch;
+}
+.Main_typography {
+    width: 100%;
+    font-size: 45px !important;
+    color: #3F4732;
+}
+.Main_paragraph {
+    color: #4F4F4F;
+    width: 100%;
+}
+.Main_button_eco {
+    width: 45%;
+    height: 42px;
+    background: #2E7D32 !important;
+    color: #FFFFFF !important;
+}
+.Main_button_types {
+    margin-left: 20px !important;
+    width: 45%;
+    height: 42px;
+    font-size: 85% !important;
+    color: #2E7D32 !important;
+    border: 1px solid #2E7D32 !important;
+} 
+.Main_Avatar {
+    width: 100% !important;
+    height: 100% !important;
+}
+.SectionTypes_container {
+    display: grid;
+    background: #F1F1F1;
+    padding-top: 30px;
+    row-gap: 15px;
+}
+.SectionTypes_typography {
+    color: #3F4732;
+    margin-left: 3% !important;
+}
+.SectionTypes_paragraph {
+    margin-left: 3% !important;
+    padding-top: 15px;
+    height: 28px;
+    font-size: 16px;
+    color: rgba(63, 71, 50, 0.87);
+}
+.SectionTypes_button {
+    width: 10%;
+    height: 60px;
+    background: #FFFFFF !important;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid rgb(235, 235, 235) !important;
+}
+.SectionTypes_button:active {
+    color: rgba(61, 178, 102, 0.899) !important;
+    background: #FFFFFF !important;
+    border: 1px solid rgb(235, 235, 235) !important;
+}
+.Cards_container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.Card_typography {
+    margin: 15px !important;
+}
+.Card_parg {
+    margin: 15px !important;
+}
+
+@media screen and (max-width: 1030px) {
+    .Main_par_button_wrapper {
+        margin-left: 15%;
+        width: 80% !important; 
+    } 
+    .Main_paragraph {
+        color: #4F4F4F;
+        width: 100%;
+    }
+    .Main_Avatar_wrapper {
+        max-width: 90% !important;
+    }
+}
+@media screen and (max-width: 850px) {
+    .Main_Avatar_wrapper {
+        display: none;
+    }
+    .Main_buttonBroup_wrapper {
+        margin: 3%;
+    }  
+    .Main_typography {
+        font-size: 40px !important;
+        padding: 7px;
+    }
+    .Main_par_button_wrapper {
+        padding-top: 5%;
+        width: 70% !important; 
+    }
+    .SectionTypes_buttonBroup_wrapper {
+        margin: 0;
+
+    }
+    .SectionTypes_typography {
+        margin-left: 10px !important;
+        width: 90%;
+        height: 36px;
+        font-size: 27px;
+    }
+    .SectionTypes_button {
+        width: 17%;
+        height: 100%;
+        font-size: 13px !important;
+    }
+    .Cards_container {
+        margin: 0 auto;
+        grid-template-columns: auto auto ;
+    }
+}
+@media screen and (max-width: 587px) {
+    .Main_container {
+        height: 100% !important
+    }
+    .Main_par_button_wrapper {
+        margin-left: 2%;
+        width: 90% !important; 
+    }
+    .Cards_container {
+        max-width: 80%;
+        grid-template-columns: auto ;
+    }  
+    .Main_typography {
+        width: 90%;
+        font-size: 30px !important;
+    }
+    .Main_paragraph {
+        width: 80%;
+        padding-left: 105px;
+    }
+    .Main_button_eco, .Main_button_types {
+        width: 40%;
+    }
+    .SectionTypes_typography {
+        font-size: 30px !important;
+        padding: 13px 0 0 13px;
+    }
+    .SectionTypes_buttonBroup_wrapper {
+        max-width: 90%;
+        margin-bottom: 2%;
+
+    }
+    .SectionTypes_button {
+        margin: 0 auto;
+        height: 100%;
+        font-size: 11px !important;
+    }
+    .SectionTypes_container {
+        padding: 0;
+        row-gap: 0;
+        width: 100%;
+    }
+}
