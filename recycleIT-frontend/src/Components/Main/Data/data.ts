@@ -11,19 +11,21 @@ import ColoredGlass from '../../assets/ColoredGlass.png'
 import ColorlessGlass from '../../assets/ColorlessGlass.png'
 import Ferrous from '../../assets/Ferrous.png'
 import NonFerrous from '../../assets/NonFerrous.png'
-import TV from '../../assets/TV.jpg'
-import recycleElectronic2 from '../../assets/recycleElectronic2.jpg'
-import glass from '../../assets/glass.jpg'
-import metal from '../../assets/metal.jpg'
+import TV from '../../assets/TV.png'
+import recycleElectronic2 from '../../assets/recycleElectronic2.png'
+import recycleElectronic1 from '../../assets/recycleElectronic1.png'
+import glass from '../../assets/glass.png'
+import metal from '../../assets/metal.png'
 import electronic from '../../assets/electronic.jpg'
 
-const data: {category: string, id:string, title:string, desc:string, image:string}[] = [
+const data: {category: string, id:string, title:string, desc:string, image:string, value: string}[] = [
     {
         "id": "1",
         "title": "PET/PTE",
         "category": "plastic",
         "desc": "Single-use bottles",
         "image": PET,
+        "value": '1',
     },
     {
         "id": "2",
@@ -31,6 +33,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "plastic",
         "desc": "Packaging",
         "image": HDPE,
+        "value": '1',
     },
     {
         "id": "3",
@@ -38,6 +41,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "plastic",
         "desc": "Drain pipes or playground equipment",
         "image": PVC,
+        "value": '1',
     },
     {
         "id": "4",
@@ -45,6 +49,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "plastic",
         "desc": "Flexible plastic - tubes and bags",
         "image": LDPE,
+        "value": '1',
     },
     {
         "id": "5",
@@ -52,6 +57,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "plastic",
         "desc": "Containers for hot liquids, bottle caps",
         "image": PP,
+        "value": '1',
     },
     {
         "id": "6",
@@ -59,6 +65,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "plastic",
         "desc": "Disposable plates and cups, takeway containers",
         "image": PS,
+        "value": '1',
     },
     {
         "id": "7",
@@ -66,6 +73,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "paper",
         "desc": "Newspapers, printer paper, magazines, junk mail",
         "image": Household,
+        "value": '2',
     },
     {
         "id": "8",
@@ -73,6 +81,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "paper",
         "desc": "Brown corrugated cardboard",
         "image": CardBoard,
+        "value": '2',
     },
     {
         "id": "9",
@@ -80,6 +89,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "paper",
         "desc": "Sredded documents",
         "image": Confidencial,
+        "value": '2',
     },
     {
         "id": "10",
@@ -87,6 +97,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "glass",
         "desc": "Colored bottles",
         "image": ColoredGlass,
+        "value": '3',
     },
     {
         "id": "11",
@@ -94,6 +105,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "glass",
         "desc": "Transparent bottles",
         "image": ColorlessGlass,
+        "value": '3',
     },
     {
         "id": "12",
@@ -101,6 +113,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "glass",
         "desc": "Transparent bottles",
         "image": glass,
+        "value": '3',
     },
     {
         "id": "13",
@@ -108,6 +121,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "metal",
         "desc": "Refrigerators, ovens, cars",
         "image": Ferrous,
+        "value": '4'
     },
     {
         "id": "14",
@@ -115,6 +129,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "metal",
         "desc": "Soda cans, wrap foils, lead pipes",
         "image": NonFerrous,
+        "value": '4'
     },
     {
         "id": "15",
@@ -122,13 +137,15 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "metal",
         "desc": "Soda cans, wrap foils, lead pipes",
         "image": metal,
+        "value": '4'
     },
     {
         "id": "16",
         "title": "Non-ferrous metals",
         "category": "electronic",
         "desc": "Soda cans, wrap foils, lead pipes",
-        "image": TV,
+        "image": recycleElectronic1,
+        "value": '5'
     },
     {
         "id": "17",
@@ -136,13 +153,15 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "category": "electronic",
         "desc": "Soda cans, wrap foils, lead pipes",
         "image": recycleElectronic2,
+        "value": '5'
     },
     {
         "id": "18",
         "title": "Non-ferrous metals",
         "category": "electronic",
         "desc": "Soda cans, wrap foils, lead pipes",
-        "image": electronic,
+        "image": TV,
+        "value": '5'
     }
 ]
 export default data

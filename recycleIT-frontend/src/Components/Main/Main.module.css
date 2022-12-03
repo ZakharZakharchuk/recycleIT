@@ -43,21 +43,15 @@
     row-gap: 15px;
 }
 .SectionTypes_typography {
-    margin-left: 30px !important;
-    width: 100%;
-    height: 36px;
-    font-size: 30px;
     color: #3F4732;
+    margin-left: 3% !important;
 }
 .SectionTypes_paragraph {
-    margin-left: 30px !important;
+    margin-left: 3% !important;
     padding-top: 15px;
     height: 28px;
     font-size: 16px;
     color: rgba(63, 71, 50, 0.87);
-}
-.SectionTypes_buttonBroup_wrapper {
-    margin-left: 30px;
 }
 .SectionTypes_button {
     width: 10%;
@@ -69,35 +63,18 @@
 }
 .SectionTypes_button:active {
     color: rgba(61, 178, 102, 0.899) !important;
+    background: #FFFFFF !important;
+    border: 1px solid rgb(235, 235, 235) !important;
 }
 .Cards_container {
-    width: 96%;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: auto auto auto;
-    column-gap: 15px;
-    row-gap: 15px;
-}
-.Card_wrapper {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    width: 100%;
-}
-.Card_img {
-    width: 470px !important;
 }
 .Card_typography {
-    height: 24px;
     margin: 15px !important;
-    font-size: 18px;
-    color: rgba(0, 0, 0, 0.87)
 }
 .Card_parg {
-    width: 368px;
-    height: 20px;
     margin: 15px !important;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
 }
 
 @media screen and (max-width: 1030px) {
@@ -160,11 +137,13 @@
         max-width: 80%;
         grid-template-columns: auto ;
     }  
-    .Card_typography {
-        width: 30%;
-    }
     .Main_typography {
+        width: 90%;
         font-size: 30px !important;
+    }
+    .Main_paragraph {
+        width: 80%;
+        padding-left: 105px;
     }
     .Main_button_eco, .Main_button_types {
         width: 40%;
@@ -174,11 +153,11 @@
         padding: 13px 0 0 13px;
     }
     .SectionTypes_buttonBroup_wrapper {
+        max-width: 90%;
         margin-bottom: 2%;
 
     }
     .SectionTypes_button {
-        width: 22%;
         margin: 0 auto;
         height: 100%;
         font-size: 11px !important;

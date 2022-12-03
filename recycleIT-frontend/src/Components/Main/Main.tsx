@@ -1,4 +1,4 @@
-import { Avatar, Button,ToggleButtonGroup, Typography } from '@mui/material'
+import { Avatar, Button,Tab, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useState } from 'react'
 import Header from '../Header/Header'
@@ -6,43 +6,44 @@ import styles from './Main.module.css'
 import garbageRecycle from '../assets/garbageRecycle.png'
 import data from './Data/data'
 import CardsItem from './CardsItem/CardsItem'
-import { ToggleButton } from '@mui/material';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
 
 const Main = () => {
     const [item, setItem] = useState(data);
-    const [alignment, setAlignment] = React.useState('plastic');
-    const [value, setValue] = React.useState('1');
-
+    const [value, setValue] = useState<string>('1');
+    const [active, setActive] = useState<boolean>(false)
+    
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
-      };
 
-    const filterCards = (id: string | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        const newCard = data.filter((card) => {
-                return id === card.category
-        })
-        setItem(newCard)
-   }
+      };
+    
    const ButtonData =[
     {
         title:'PLASTIC',
-        id: 'plastic'
+        id: 'plastic',
+        value: '1'
     },
     {
         title:'PAPERE',
-        id: 'paper'
+        id: 'paper',
+        value: '2'
     },
     {
         title:'GLASS',
-        id: 'glass'
+        id: 'glass',
+        value: '3'
     },
     {
         title:'METAL',
-        id: 'metal'
+        id: 'metal',
+        value: '4'
     },
     {
         title:'ELECTRONIC',
-        id: 'electronic'
+        id: 'electronic',
+        value: '5'
     }
    ]
     return (
@@ -73,28 +74,33 @@ const Main = () => {
                 <Typography paragraph={true} className={styles.SectionTypes_paragraph}>
                     Find out about different types of waste
                 </Typography>
-                <ToggleButtonGroup 
-                    className={styles.SectionTypes_buttonBroup_wrapper}
-                    value={alignment}
-                    exclusive
-                    color="primary"
-                    onChange={handleChange}>    
-                {
-                    ButtonData.map((button: {title: string, id: string}) => {
-                        return <ToggleButton 
-                                    id={button.id}
-                                    value={button.title}
-                                    key={button.id}
-                                    className={styles.SectionTypes_button} 
-                                    onClick={() => filterCards(button.id)}> 
-                                        {button.title}
-                                </ToggleButton>
-                    })
-                }        
-                </ToggleButtonGroup>
-                <Box className={styles.Cards_container}>
-                    <CardsItem item={item} setItem={setItem}/>
-                </Box>
+                <TabContext value={value}>
+                    <TabList
+                        className={ styles.SectionTypes_buttonBroup_wrapper } 
+                        onChange={handleChange}
+                        TabIndicatorProps={{style: {display:'none'}}}
+                        textColor="secondary"
+                        variant="scrollable"
+                        scrollButtons
+                        allowScrollButtonsMobile>
+                        {
+                            ButtonData.map((button: {title: string, id: string, value: string}) => {
+                                return <Tab 
+                                            label={button.title}
+                                            id={button.id}
+                                            value={button.value}
+                                            // className={active ? styles.SectionTypes_button_active : styles.SectionTypes_button }
+                                            onClick={() => setActive(active => !active)}
+                                            key={button.id}
+                                            className={styles.SectionTypes_button} 
+                                       />
+                            })
+                        }  
+                     </TabList> 
+                    <Box className={styles.Cards_container}>
+                        <CardsItem item={item} setItem={setItem} value={ButtonData}/>
+                    </Box>
+                </TabContext>
             </Box>
         </>
     )

@@ -1,20 +1,13 @@
-.Header_container {
-    display: grid;
-    grid-template-columns: auto;
-    width: 100%;
-    margin: 0;
-    background-color: #028E3F;
-    height: 64px;
-}
 .Header_box_wrapper {
     width: 100%;
     justify-content: space-between;
-    height: 100%;
+    background-color: #028E3F;
 }
 .Header_logo_wrapper {
     display: grid;
     grid-template-columns: auto auto;
     width: 170px;
+    padding-left: 30px;
 }
 .Header_navbar_wrapper {
     display: grid;

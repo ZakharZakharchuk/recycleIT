@@ -79,7 +79,6 @@ const Header:React.FC = () => {
     </Menu>
   );
   return (
-      <Container maxWidth="xl" className={styles.Header_container}>
         <Toolbar disableGutters className={styles.Header_box_wrapper}>
             <Box className={styles.Header_logo_wrapper}>
                 <Avatar src={leaf} alt='leaf' className={styles.Header_logo}/>
@@ -150,7 +149,6 @@ const Header:React.FC = () => {
             </IconButton>
             {renderMobileMenu}
         </Toolbar>
-      </Container>
   );
 }
 export default Header;
