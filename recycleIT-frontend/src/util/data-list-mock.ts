@@ -40,17 +40,25 @@ export const SERVICES = [
 
 export const SERVICES_TYPES = [
     {
-        id: 4,
-        name: 'Medical Waste Incinerators'
+        id: 37,
+        name: 'Household Hazardous Waste Collection',
+        description: 'Facilities that collect household hazardous waste materials for recycling. Leftover household products that contain corrosive, toxic, ignitable, or reactive ingredients are considered to be household hazardous waste.'
     },
     {
-        id: 22,
-        name: 'Radioactive Waste Disposal'
+        id: 36,
+        name: 'Electronics Recyclers',
+        description: 'Active, permitted facilities that process electronic materials for recycling. Items that may be accepted include but are not limited to: cell phones, televisions, computers, batteries, printers, scanners, telecom equipment, copiers, and gaming systems.'
     },
     {
         id: 34,
-        name: 'Composting'
+        name: 'Composting',
+        description: 'Active, permitted facilities that process organic waste for composting. Materials that may be accepted include but are not limited to: yard waste, such as fallen leaves, grass clippings, weeds, and other plants, limbs or trunks of trees and other woody plants; pre- or post-consumer food waste, and manure.'
     },
+    {
+        id: 38,
+        name: 'Metal Recyclers',
+        description: 'Facilities that process metals for recycling e.g. aluminum, steel, copper, lead, zinc, and auto scrap.'
+    }
 ]
 
 export const WASTE_TYPES = {
