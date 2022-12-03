@@ -182,3 +182,31 @@ export const STATE_CODES = [
     { id: 'WI', name: 'Wisconsin' },
     { id: 'WY', name: 'Wyoming' }
 ]
+
+export const FAQ = [
+    {
+        id: '123',
+        question: 'Where is the service available?',
+        answer: 'For now, our application is available for USA residents. You can select your current location or choose one from the available ones in the list. If you do not specify the location, the services will be searched for all the country.'
+    },
+    {
+        id: '456',
+        question: 'What locations can I search for?',
+        answer: 'You can search for different eco facilities by the type of waste they accept. To view the examples of waste disposal facilities visit main page.'
+    },
+    {
+        id: '789',
+        question: 'What eco services are available?',
+        answer: 'We have a range of eco services that accept different types of waste, like food waste, electronics, batteries, plastic and even toxic waste. To find out about the types of services visit the main page.'
+    },
+    {
+        id: '910',
+        question: 'What do I do if I have question about the eco service?',
+        answer: 'You can ask your question in the form which is available for each services on our Services Page. Just type your question and you will receive the answer on your email.'
+    },
+    {
+        id: '101',
+        question: 'How do I receive answer to my question?',
+        answer: 'If you are authorized, just leave your question in a question form. If you are new here, leave your email address and our support team will send you the answer to your inbox.'
+    },
+]
