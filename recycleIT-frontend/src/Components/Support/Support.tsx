@@ -6,18 +6,18 @@ import Question from './Question';
 import styles from './Support.module.css'
 const Support = () => {
     return (
-        < >
-            <Header/>
-            <Box className={styles.Support_ask_quetions}>
+        <div className={styles.Support_page}>
+            {/* <Header/> */}
+            <div className={styles.Support_ask_quetions}>
                 <Typography variant="h4" className={styles.Support_ask_typography}>
                     Frequently Asked Questions
                 </Typography>
-            </Box>
+            </div>
             <Box className={styles.Support_main_containner}>
                 <Accordions/>
                 <Question/>
             </Box>
-        </>
+        </div>
     )
 }
 
