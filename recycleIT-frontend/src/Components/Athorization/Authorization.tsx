@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import {useState} from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import Header from '../Header/Header';
 
 interface IFormState {
     name: string;
@@ -97,6 +98,8 @@ const Authorization = () => {
     }
     
     return (
+    <> 
+    <Header/>
         <div className="form-container">
             <form className="form">
             <Typography variant="h5" style={{textAlign: 'center'}}>RecycleIT</Typography>
@@ -201,6 +204,7 @@ const Authorization = () => {
                 </Typography>
             </form>
         </div>
+    </>
     )
 }
 

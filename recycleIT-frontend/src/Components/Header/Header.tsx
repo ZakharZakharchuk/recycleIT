@@ -4,7 +4,6 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
@@ -14,8 +13,9 @@ import leaf from '../assets/leaf.png'
 import AccountCircleFilled from '../assets/AccountCircleFilled.png';
 import LogoutOutlined from '../assets/LogoutOutlined.png'
 import burger from '../assets/burger.png'
+import { Link } from 'react-router-dom';
 
-const pages = ['HOME', 'SERVICES MAP', 'SUPPORT'];
+
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header:React.FC = () => {
@@ -46,7 +46,7 @@ const Header:React.FC = () => {
   };
   const renderMobileMenu = (
     <Menu
-    anchorEl={mobileMoreAnchorEl}
+      anchorEl={mobileMoreAnchorEl}
       keepMounted
       transformOrigin={{
         vertical: 'top',
@@ -57,7 +57,9 @@ const Header:React.FC = () => {
     >
       <MenuItem>
         <IconButton size="small"  color="inherit">        
-          <p>HOME</p>
+          <Link to="/" className={styles.Link}>
+              <p className={styles.burger_parag}>HOME</p>
+          </Link>
         </IconButton>
       </MenuItem>
       <MenuItem>
@@ -65,7 +67,9 @@ const Header:React.FC = () => {
           size="small"
           color="inherit"
         >
-        <p>SERVICES MAP</p>
+          <Link to="/services" className={styles.Link}>
+            <p className={styles.burger_parag}>SERVICES MAP</p>
+          </Link>
         </IconButton>
       </MenuItem>
       <MenuItem >
@@ -73,7 +77,9 @@ const Header:React.FC = () => {
           size="small"
           color="inherit"
         >
-        <p>SUPPORT</p>
+          <Link to='/support' className={styles.Link}>
+            <p className={styles.burger_parag}>SUPPORT</p>
+          </Link>
         </IconButton>
       </MenuItem>
     </Menu>
@@ -94,16 +100,21 @@ const Header:React.FC = () => {
             </Box>
             <Box className={styles.Header_navbar_wrapper}>
               <Box  className={styles.navbar_comtainer}>
-                  {pages.map((page) => (
-                  <Button
-                      key={page}
-                      onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: 'white', display: 'block' }}
-                      className={styles.Header_navBar}
-                  >
-                      {page}
-                  </Button>
-                  ))}
+                  <Link to="/" className={styles.Link}>
+                    <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                      HOME
+                    </Button>
+                  </Link>
+                  <Link to="/services" className={styles.Link}>
+                    <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                      SERVICES MAP
+                    </Button>
+                  </Link>
+                  <Link to='/support' className={styles.Link}>
+                    <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                      SUPPORT
+                    </Button>
+                  </Link>
               </Box>
               <Box className={styles.Header_avatar_wrapper}>
                   <Tooltip title="Open settings">
@@ -133,7 +144,9 @@ const Header:React.FC = () => {
                         </MenuItem>
                     ))}
                   </Menu>
-                  <Avatar src={LogoutOutlined} alt='garbageRecycle'className={styles.Header_logoOut}/>
+                  <Link to="/authorization">
+                    <Avatar src={LogoutOutlined} alt='garbageRecycle'className={styles.Header_logoOut}/>
+                  </Link>
               </Box>
             </Box>
             <IconButton
