@@ -8,7 +8,7 @@ import data from './Data/data'
 import CardsItem from './CardsItem/CardsItem'
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-
+import Footer from '../Footer/Footer'
 const Main = () => {
     const [item, setItem] = useState(data);
     const [value, setValue] = useState<string>('1');
@@ -102,6 +102,7 @@ const Main = () => {
                     </Box>
                 </TabContext>
             </Box>
+            <Footer/>
         </>
     )
 }

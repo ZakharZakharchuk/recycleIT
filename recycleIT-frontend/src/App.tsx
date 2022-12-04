@@ -9,7 +9,7 @@ import Support from "./Components/Support/Support";
 const App = () => {
   return (
     <div className="App">
-        <Footer/>
+        <Main/>
       </div>
     );
   }

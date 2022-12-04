@@ -18,7 +18,6 @@
     justify-self: start;
 }
 .Footer_buttons_wrapper {
-    /* grid-template-columns: auto auto a; */
     padding-top: 5px;
 }
 .Footer_button {
@@ -44,5 +43,17 @@
 @media screen and (max-width: 1020px) {
     .Footer_container {
         grid-template-columns: auto auto;
+        grid-template-areas:
+            "logo buttons"
+            ". call"
+    }
+    .Footer_logo_wrapper {
+        grid-area: logo;
+    }
+    .Footer_buttons_wrapper {
+        grid-area: buttons;
+    }
+    .Footer_icons_wrapper {
+        grid-area: call;
     }
 }
