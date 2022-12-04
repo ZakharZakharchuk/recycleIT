@@ -1,6 +1,6 @@
 import { Avatar, Button,Tab, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Header from '../Header/Header'
 import styles from './Main.module.css'
 import garbageRecycle from '../assets/garbageRecycle.png'
@@ -8,15 +8,20 @@ import data from './Data/data'
 import CardsItem from './CardsItem/CardsItem'
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
+import { Link } from 'react-router-dom'
 
 const Main = () => {
     const [item, setItem] = useState(data);
     const [value, setValue] = useState<string>('1');
-    const [active, setActive] = useState<boolean>(false)
+    const [active, setActive] = useState<boolean>(false);
+    const ref = useRef<any>(null);
     
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
 
+      };
+      const handleClick = () => {
+        ref.current?.scrollIntoView({behavior: 'smooth'});
       };
     
    const ButtonData =[
@@ -59,8 +64,10 @@ const Main = () => {
                          services to help save the environment!
                     </Typography>
                     <Box className={styles.Main_buttonBroup_wrapper}>
-                        <Button className={styles.Main_button_eco}>Eco services</Button>
-                        <Button className={styles.Main_button_types}>Types of waste</Button>
+                        <Link to="/services" className={styles.Link}>
+                            <Button className={styles.Main_button_eco}>Eco services</Button>
+                        </Link>
+                        <Button className={styles.Main_button_types} onClick={handleClick}>Types of waste</Button>
                     </Box>
                 </Box>
                 <Box className={styles.Main_Avatar_wrapper}>
@@ -76,6 +83,7 @@ const Main = () => {
                 </Typography>
                 <TabContext value={value}>
                     <TabList
+                        ref={ref}
                         className={ styles.SectionTypes_buttonBroup_wrapper } 
                         onChange={handleChange}
                         TabIndicatorProps={{style: {display:'none'}}}
