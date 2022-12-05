@@ -1,59 +1,90 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, createRef, useContext } from 'react'
 import './ServicesList.css'
 import { 
     Drawer,
-    ListSubheader, 
-    Box, 
-    CircularProgress
+    ListSubheader,  
+    CircularProgress,
+    IconButton
 } from '@mui/material'
 import ServicesCard from './ServicesCard/ServicesCard'
 import ServicesSearch from './ServicesSearch/ServicesSearch'
-import { SERVICES } from '../../../util/data-list-mock'
+import { SERVICES, SERVICES_TYPES } from '../../../util/data-list-mock'
+import AlertMessageBox from '../../helpers/AlertMessageBox'
+import { IServiceListProps } from '../../interfaces/Interfaces';
+import CloseIcon from '@mui/icons-material/Close';
 
-const ServicesList = () => {
-    const [servicesList, setServicesList] = React.useState([{
-        id: 0,
-        name: '',
-        streetAddress: '',
-        city: '',
-        latitude: 0,
-        longitude: 0,
-        contactPhone: '',
-        facilitySubtypes: '',
-        raiting: 0,
-        delivery: false,
-    }])
+const ServicesList = (props: IServiceListProps) => {
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const fetchServices = (location: string, serviceType: string, id?: number) => {
-        console.log(location, serviceType, id);
+    const fetchServices = (location: string, serviceType: string) => {
+        console.log(location, serviceType);
+        
         setLoading(true);
+        if (error) {
+            setError(false)
+        }
         // server request to get all required services
+
+        //imitate server request
         setTimeout(() => {
-            setServicesList(SERVICES);
+            props.setServicesList(SERVICES)
             setLoading(false)
+            setError(false)
         }, 1000);
     }
 
-    const servicesItems = servicesList.map((item) => {
-        if (item.name) {
-            return <ServicesCard key={item.id} item={item}></ServicesCard>
-        }
-    })    
+    const getItemLocation = (id: number, lat: number, lng: number) => {
+        props.setItemLocation(id, lat, lng);
+    }
+
+    let servicesItems = null;
+
+    if (props.servicesList) {
+        servicesItems = props.servicesList.map((item) => {
+            if (item.name) {
+                return <ServicesCard 
+                            key={item.id} 
+                            item={item}
+                            getItemLocation={getItemLocation}
+                        />
+            }
+        }) 
+    }  
+    
+    const errorAlert = error 
+            && <AlertMessageBox error={true} text={errorMessage}/>
 
     return (
         <Drawer
             variant="persistent"
             anchor="left"
-            open={true}
+            open={props.isDrawerOpened}
         >
+            <ListSubheader component="div" 
+                className="list-subheader"
+            >
+                    Services
+                    <IconButton 
+                        style={{display: !props.isMobileDevice ? 'block' : 'none'}}
+                        onClick={props.toggleDrawerOpened}
+                    >
+                        <CloseIcon style={{color: 'grey', display: 'block'}}/>
+                    </IconButton>
+            </ListSubheader>
             <div className="services-list">
-                <ListSubheader component="div" style={{fontWeight: '600', position: "relative"}}>Services</ListSubheader>
-                <ServicesSearch 
-                    fetchServices={fetchServices}
-                    ></ServicesSearch>
+                <ServicesSearch fetchServices={fetchServices} />
                 <div className="cards-container">
-                    { loading ? <CircularProgress color="success"/> : servicesItems }
+                    { 
+                        loading ? 
+                            <CircularProgress 
+                                color="success"
+                                style={{display: 'block', margin: '0 auto'}}
+                            /> : servicesItems 
+                    }
+                    
+                    {errorAlert}
                 </div>
             </div>
         </Drawer>

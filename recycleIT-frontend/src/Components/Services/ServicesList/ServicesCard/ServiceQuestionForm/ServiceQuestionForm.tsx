@@ -25,7 +25,7 @@ const ServiceQuestionForm = (props: IServiceQuestionFormProps) => {
 
     return (
         <div className="item-details">
-            <Divider style={{fontSize: '12px'}}>Ask A Question</Divider>
+            <Divider style={{fontSize: '12px', fontFamily: 'sans-serif'}}>Ask A Question</Divider>
             <TextField 
                 label="Your message here" 
                 variant="standard" 
