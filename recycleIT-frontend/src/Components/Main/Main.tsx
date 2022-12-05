@@ -1,6 +1,6 @@
 import { Avatar, Button,Tab, Typography, Container, Card, Divider } from '@mui/material'
 import { Box } from '@mui/system'
-import React, { useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import Header from '../Header/Header'
 import styles from './Main.module.css'
 import garbageRecycle from '../assets/garbageRecycle.png'
@@ -10,15 +10,20 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import { TabPanel } from "@mui/lab"
 import { FACILITIES_TYPES } from '../../util/data-list-mock'
+import { Link } from 'react-router-dom'
 
 const Main = () => {
     const [item, setItem] = useState(data);
     const [value, setValue] = useState<string>('1');
-    const [active, setActive] = useState<boolean>(false)
+    const [active, setActive] = useState<boolean>(false);
+    const ref = useRef<any>(null);
     
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
-    };
+      };
+      const handleClick = () => {
+        ref.current?.scrollIntoView({behavior: 'smooth'});
+      };
     
     const ButtonData = [
         {
@@ -60,7 +65,11 @@ const Main = () => {
                             services to help save the environment!
                         </Typography>
                         <Box className={styles.Main_buttonBroup_wrapper}>
-                            <Button variant="contained" size="small" color="success" className={styles.Main_button}>Eco services</Button>
+                            <Button variant="contained" size="small" color="success" className={styles.Main_button}>
+                                <Link to="/services" className={styles.Link}>
+                                    Eco services
+                                </Link>
+                            </Button>
                             <Button variant="outlined" size="small" color="success" className={styles.Main_button}>Types of waste</Button>
                         </Box>
                     </Box>

@@ -6,15 +6,20 @@ import {
     FormControl,
     InputLabel,
     InputAdornment,
-    IconButton
+    IconButton,
+    TextField
 } from '@mui/material';
 import {useState} from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import Header from '../Header/Header';
+import ErrorMessage from './../helpers/ErrorMessage/ErrorMessage'
+
 
 interface IFormState {
     name: string;
     email: string;
     password: string;
+    repeatPassword: string;
     showPassword: boolean;
     isFormValid: boolean
 }
@@ -22,11 +27,7 @@ interface IFormState {
 interface IFormProps {
     submitForm: () => void
 }
-const ErrorMessage = (props: {text: string}) => {
-    return (
-        <div className='error-message'>{props.text}</div>
-    )
-}
+
 // minimum eight characters, at least one letter and one number and no spaces
 const passwordRegexpr = /^(?=.*[A-Za-z])(?=.*\d)(?=^\S*$)[A-Za-z\d]{8,}$/
 
@@ -37,36 +38,39 @@ const Authorization = () => {
         name: '',
         email: '',
         password: '',
+        repeatPassword: '',
         showPassword: false,
         isFormValid: false
     });
     const [validationError, setValidationError] = useState({
         name: false,
         email: false,
-        password: false
+        password: false,
+        passwordsMatch: false,
     });
-    console.log(validationError);
+
     const [isLoginMode, setIsLoginMode] = useState(false);
 
-    const validateForm = (name: string, email: string, password: string) => {
+    const validateForm = (name: string, email: string, password: string, repeatPassword: string) => {
         let isNameInvalid = false,
             isEmailInvalid = false,
-            isPasswordInvalid = false;
+            isPasswordInvalid = false,
+            doPasswordsMatch = false;
         
         if (!isLoginMode) {
             isNameInvalid = name.length < 3 || name.length > 15;
-            console.log(isNameInvalid);
         }
         isEmailInvalid = !emailRegexpr.test(email);
-        console.log(isEmailInvalid);
         
         isPasswordInvalid = !passwordRegexpr.test(password);
-        console.log(isPasswordInvalid);
+
+        doPasswordsMatch = password === repeatPassword;
         
         setValidationError({
             name: isNameInvalid,
             email: isEmailInvalid,
-            password: isPasswordInvalid
+            password: isPasswordInvalid,
+            passwordsMatch: !doPasswordsMatch
         })        
     }
 
@@ -82,14 +86,34 @@ const Authorization = () => {
         });
     };
 
+    const handleLoginModeChange = () => {
+        setIsLoginMode(prev => !prev);
+
+        // clear the errors if they occured on previous form state
+        setValidationError({
+            name: false,
+            email: false,
+            password: false,
+            passwordsMatch: false
+        });
+        // if password was visible - hide it 
+        if (values.showPassword) {
+            setValues({
+                ...values,
+                showPassword: !values.showPassword,
+            });
+        }
+    }
+
     const submitForm = () => {
-        validateForm(values.name, values.email, values.password)
+        validateForm(values.name, values.email, values.password, values.repeatPassword)
         if (values.isFormValid) {
             console.log('submit form');
             setValidationError({
                 name: false,
                 email: false,
-                password: false
+                password: false,
+                passwordsMatch: false
             })
         } else {
             console.log('form invalid')
@@ -97,6 +121,8 @@ const Authorization = () => {
     }
     
     return (
+    <> 
+    <Header/>
         <div className="form-container">
             <form className="form">
             <Typography variant="h5" style={{textAlign: 'center'}}>RecycleIT</Typography>
@@ -107,13 +133,12 @@ const Authorization = () => {
                 </Typography>
                 
                 <FormControl style={{display: isLoginMode ? 'none' : 'block'}}>
-                    <InputLabel htmlFor="name">Name</InputLabel>
-                    <OutlinedInput
+                    <TextField
                         fullWidth
-                        required
+                        required={true}
                         type='text'
                         id="name"
-                        label="Required"
+                        label="Username"
                         value={values.name}
                         onChange={handleChange('name')}
                         error={validationError.name}
@@ -121,19 +146,18 @@ const Authorization = () => {
                     {
                         validationError.name ?
                             <ErrorMessage 
-                                text={"Name must be between 3 and 5 symbols"}
+                                text={"Name must be between 3 and 15 symbols"}
                             /> : null
                     }
                 </FormControl>
 
                 <FormControl>
-                    <InputLabel htmlFor="name">Email</InputLabel>
-                    <OutlinedInput
+                    <TextField
                         fullWidth
-                        required
+                        required={true}
                         type='email'
                         id="email"
-                        label="Required"
+                        label="Email"
                         value={values.email}
                         onChange={handleChange('email')}
                         error={validationError.email}
@@ -147,10 +171,12 @@ const Authorization = () => {
                 </FormControl>
                 
                 <FormControl>
-                    <InputLabel htmlFor="password">Password</InputLabel>
+                    <InputLabel htmlFor="password">Password *</InputLabel>
                     <OutlinedInput
                         id="password"
                         fullWidth
+                        required={true}
+                        label="Password"
                         type={values.showPassword ? 'text' : 'password'}
                         value={values.password}
                         onChange={handleChange('password')}
@@ -165,12 +191,41 @@ const Authorization = () => {
                             </IconButton>
                         </InputAdornment>
                         }
-                        label="Password"
                     />
                     {
                         validationError.password ?
                             <ErrorMessage 
-                                text={"Password must be minimum eight characters, at least one letter and one number"}
+                                text={"Password must be minimum 8 characters, at least one letter and one number"}
+                            /> : null
+                    }
+                </FormControl>
+
+                <FormControl style={{display: isLoginMode ? 'none' : 'block'}}>
+                    <InputLabel htmlFor="repeat-password">Repeat password *</InputLabel>
+                    <OutlinedInput
+                        id="repeat-password"
+                        fullWidth
+                        required={true}
+                        label="Repeat password"
+                        type={values.showPassword ? 'text' : 'password'}
+                        value={values.repeatPassword}
+                        onChange={handleChange('repeatPassword')}
+                        error={validationError.passwordsMatch}
+                        endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            edge="end">
+                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                        }
+                    />
+                    {
+                        validationError.passwordsMatch ?
+                            <ErrorMessage 
+                                text={"Passwords do not match"}
                             /> : null
                     }
                 </FormControl>
@@ -192,7 +247,7 @@ const Authorization = () => {
                     <Button 
                         size="small" 
                         color="success"
-                        onClick={() => setIsLoginMode(prev => !prev)}
+                        onClick={handleLoginModeChange}
                     >
                         {
                             isLoginMode ? 'Sign Up' : 'Sign In'
@@ -201,6 +256,7 @@ const Authorization = () => {
                 </Typography>
             </form>
         </div>
+    </>
     )
 }
 
