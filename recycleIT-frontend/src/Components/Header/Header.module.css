@@ -16,19 +16,22 @@
 }
 .Header_logo_description {
     color: #FFFFFF;
-    font-weight: 500;
     font-size: 20px;
     align-self: center;
     text-decoration: none;
-}
-.Header_navBar {
-    color: #FFFFFF;
 }
 .navbar_comtainer {
     display: grid;
     grid-template-columns: auto auto auto;
     justify-self: end;
 }
+.Link {
+    text-decoration: none;
+}
+.burger_parag {
+    color: #225839;
+}
+
 .Header_avatar_wrapper{
     display: grid;
     grid-template-columns: auto auto;
