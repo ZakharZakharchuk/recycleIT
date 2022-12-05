@@ -54,7 +54,6 @@ const Main = () => {
     ]    
     return (
         <>
-            <Header/>
                 <Container maxWidth="xl" style={{display: 'flex', justifyContent: 'space-between', gap: '20px', minHeight: '80vh'}}>
                     <Box className={styles.Main_par_button_wrapper}>
                         <Typography gutterBottom variant="h3" className={styles.Main_typography}>
