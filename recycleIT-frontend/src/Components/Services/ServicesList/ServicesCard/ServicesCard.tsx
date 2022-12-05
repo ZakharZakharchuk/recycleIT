@@ -8,10 +8,14 @@ import {
 } from '@mui/material'
 import ServiceQuestionForm from './ServiceQuestionForm/ServiceQuestionForm'
 import {IServiceCardProps} from '../../../interfaces/Interfaces'
+import FacilitiesService from '../../../../Services/apiService'
 
 const ServicesCard = (props: IServiceCardProps) => {
     const [isQuestionFormOpened, setIsQuestionFormOpened] = useState(false);
-    
+    const [rating, setRating] = useState(props.item.raiting);
+
+    const facilitiesService = new FacilitiesService();
+
     const onChangeQuestionFormDisplay = () => {
         setIsQuestionFormOpened(prevValue => !prevValue)
     }
@@ -21,6 +25,20 @@ const ServicesCard = (props: IServiceCardProps) => {
             alert(`message sent to server: ${message}`);
             // send message to server
         }
+    }
+
+    const setServiceRating = (event: any, newValue: any) => {
+        setRating(newValue);
+        // rate service on server
+        console.log('service ' + props.item.id + ' rated ' + rating);
+        facilitiesService.rateService(props.item.id, rating)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+                
+            })
     }
 
     const questionForm = !isQuestionFormOpened ||
@@ -37,11 +55,9 @@ const ServicesCard = (props: IServiceCardProps) => {
                 </Typography>
                 <div className="text-left">
                     <Rating 
-                        name="read-only" 
-                        value={props.item.raiting} 
-                        readOnly 
-                        size="small" 
+                        value={rating}   
                         style={{marginBottom: '10px'}}
+                        onChange={setServiceRating}
                     />
                 </div>
                 <div className="item-details">
