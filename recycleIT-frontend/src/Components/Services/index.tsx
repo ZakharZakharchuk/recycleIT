@@ -48,7 +48,6 @@ const Services = () => {
 
     return (
         <div className='services-page'>
-            <Header/>
             <UserLocation.Provider value={userLocation}>
                 <div className="container">
                     <ServicesList 
