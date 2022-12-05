@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
 
-    private static final String ADMIN_ENDPOINT = "/facilities/subtypes";
+    private static final String USER_ENDPOINT = "/facilities/subtypes";
     private static final String LOGIN_ENDPOINT = "/login";
 
     @Autowired
@@ -39,8 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             .antMatchers(LOGIN_ENDPOINT).permitAll()
-            .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
-/*            .anyRequest().authenticated()*/
+            .antMatchers(USER_ENDPOINT).hasRole("USER")
             .and()
             .apply(new JwtConfigurer(jwtTokenProvider));
     }
