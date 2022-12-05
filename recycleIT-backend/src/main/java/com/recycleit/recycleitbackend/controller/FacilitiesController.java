@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/facilities")
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:3000/"})
 public class FacilitiesController {
 
     private final ExternalAPIService externalAPIService;
