@@ -5,7 +5,6 @@ import com.recycleit.recycleitbackend.entity.User;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
-
     private Long id;
     private String username;
     private String email;
