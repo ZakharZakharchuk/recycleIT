@@ -17,11 +17,4 @@ public class FacilitySubtype {
         return shortName;
     }
 
-    public String getGuidanceHtml() {
-        return guidanceHtml;
-    }
-
-    public void setGuidanceHtml(String guidanceHtml) {
-        this.guidanceHtml = guidanceHtml;
-    }
 }
