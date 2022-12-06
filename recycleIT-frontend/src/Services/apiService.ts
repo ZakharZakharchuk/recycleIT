@@ -8,7 +8,7 @@ export class FacilitiesService {
             const res = await axios.get(baseURL + 'facilities/subtypes');
             return res.data
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
@@ -17,7 +17,7 @@ export class FacilitiesService {
             const res = await axios.get(baseURL + 'facilities/all');
             return res.data
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
@@ -25,7 +25,7 @@ export class FacilitiesService {
         try {
             return axios.post(baseURL, {})
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
