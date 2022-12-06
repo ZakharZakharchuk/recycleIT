@@ -7,6 +7,8 @@ public class FacilitySubtype {
     private Long id;
     private String shortName;
 
+    private String guidanceHtml;
+
     public Long getId() {
         return id;
     }
@@ -14,4 +16,5 @@ public class FacilitySubtype {
     public String getShortName() {
         return shortName;
     }
+
 }

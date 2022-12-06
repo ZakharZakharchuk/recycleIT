@@ -20,7 +20,8 @@ import org.springframework.web.client.RestTemplate;
 public class ExternalAPIService {
 
     private static final String SUBTYPES_REQUEST_URL = "https://iwaste.epa.gov/api/disposal-facility-subtypes";
-    private final static List<Long> SUBTYPES_ID = Arrays.asList(4L, 22L, 34L, 36L, 38L, 39L, 40L);
+    private final static List<Long> SUBTYPES_ID = Arrays.asList(1L, 4L, 6L, 11L, 34L, 36L, 37L, 38L,
+        39L, 40L);
     private static final String FACILITIES_REQUEST_URL =
         "https://iwaste.epa.gov/api/facilities?facilityTypeId=%s&stateCode=%s&epaRegion=";
     private static final String FACILITIES_ARRAY_NAME = "data";
@@ -28,9 +29,9 @@ public class ExternalAPIService {
 
 
     public List<FacilitySubtype> getSubtypes() {
-        ResponseEntity<FacilitySubtype[]> response = restTemplate.getForEntity(SUBTYPES_REQUEST_URL,
-            FacilitySubtype[].class);
-        FacilitySubtype[] objects = response.getBody();
+        FacilitySubtype[] objects = restTemplate
+            .getForEntity(SUBTYPES_REQUEST_URL, FacilitySubtype[].class)
+            .getBody();
         return Arrays.stream(objects)
             .filter(subtype -> SUBTYPES_ID.contains(subtype.getId()))
             .collect(Collectors.toList());
@@ -43,10 +44,12 @@ public class ExternalAPIService {
 
         ResponseEntity<Object> response = restTemplate.getForEntity(url,
             Object.class);
+        System.out.println(restTemplate.getForEntity(url, Facility.class));
         String json = new Gson().toJson(response.getBody());
         JSONObject jsonObject = new JSONObject(json);
         JSONArray data = jsonObject.getJSONArray(FACILITIES_ARRAY_NAME);
 
+        System.out.println(data);
         ObjectMapper mapper = new ObjectMapper();
         Facility[] facilities = mapper.readValue(data.toString(), Facility[].class);
         return Arrays.stream(facilities).collect(Collectors.toList());

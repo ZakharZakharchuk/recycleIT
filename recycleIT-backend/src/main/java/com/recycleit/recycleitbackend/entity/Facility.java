@@ -14,7 +14,7 @@ public class Facility {
 
     private String latitude;
 
-    private String longtitude;
+    private String longitude;
 
     private String contactPhone;
 
@@ -44,8 +44,8 @@ public class Facility {
         return latitude;
     }
 
-    public String getLongtitude() {
-        return longtitude;
+    public String getLongitude() {
+        return longitude;
     }
 
     public String getContactPhone() {
