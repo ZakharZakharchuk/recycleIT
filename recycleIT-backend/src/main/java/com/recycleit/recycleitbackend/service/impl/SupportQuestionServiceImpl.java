@@ -30,8 +30,7 @@ public class SupportQuestionServiceImpl implements SupportQuestionService {
 
     @Override
     public SupportQuestion createQuestion(SupportQuestionDto supportQuestionDto) {
-        supportQuestionRepository.save(supportQuestionDto.mapToSupportQuestion());
-        return null;
+        return supportQuestionRepository.save(supportQuestionDto.mapToSupportQuestion());
     }
 
     @Override
@@ -40,14 +39,12 @@ public class SupportQuestionServiceImpl implements SupportQuestionService {
     }
 
     @Override
-    public SupportQuestion giveAnswer(Long id, String answer) {
+    public void giveAnswer(Long id, String answer) {
         supportQuestionRepository.giveAnswer(id, answer);
-        return null;
     }
 
     @Override
-    public SupportQuestion markToShowOnPage(Long id) {
+    public void markToShowOnPage(Long id) {
         supportQuestionRepository.showOnPage(id);
-        return null;
     }
 }

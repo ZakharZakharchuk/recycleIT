@@ -31,13 +31,13 @@ public class SupportQuestionController {
     }
 
     @PatchMapping("/give-answer")
-    SupportQuestion giveAnswer(@RequestBody SupportQuestionDto supportQuestion){
+    void giveAnswer(@RequestBody SupportQuestionDto supportQuestion){
         //todo send answer on mail
-        return supportQuestionService.giveAnswer(supportQuestion.getId(), supportQuestion.getAnswer());
+        supportQuestionService.giveAnswer(supportQuestion.getId(), supportQuestion.getAnswer());
     }
 
     @PatchMapping("/show-on-page")
-    SupportQuestion showOnPage(@RequestBody SupportQuestionDto supportQuestion){
-        return supportQuestionService.markToShowOnPage(supportQuestion.getId());
+    void showOnPage(@RequestBody SupportQuestionDto supportQuestion){
+        supportQuestionService.markToShowOnPage(supportQuestion.getId());
     }
 }

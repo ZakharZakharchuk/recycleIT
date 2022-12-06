@@ -10,6 +10,6 @@ public interface SupportQuestionService {
     SupportQuestion findById(Long id);
     SupportQuestion createQuestion(SupportQuestionDto supportQuestionDto);
     void deleteById(Long id);
-    SupportQuestion giveAnswer(Long id, String answer);
-    SupportQuestion markToShowOnPage(Long id);
+    void giveAnswer(Long id, String answer);
+    void markToShowOnPage(Long id);
 }
