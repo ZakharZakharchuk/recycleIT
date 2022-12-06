@@ -8,7 +8,6 @@ import {
     ChosenItemType, 
     IServiceList 
 } from '../interfaces/Interfaces';
-import ServicesWrapper from './ServicesWrapper/ServicesWrapper';
 
 export const UserLocation = createContext<LocationType | null>(null);
 

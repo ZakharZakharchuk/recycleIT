@@ -5,13 +5,8 @@
 }
 .Main_container {
     display: flex;
-    /* justify-content: space-between; */
-    /* display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-around; */
 }
 .Main_par_button_wrapper {
-    /* margin-left: 5%; */
     flex: 1 1 50%;
     place-self: center stretch;
 }
@@ -27,8 +22,6 @@
     width: 250px;
 }
 .Main_button_types {
-    /* margin-left: 20px !important;
-    width: 45%; */
     height: 42px;
     font-size: 85% !important;
     color: #2E7D32 !important;
@@ -39,10 +32,7 @@
     height: 100% !important;
 }
 .SectionTypes_container {
-    /* display: grid; */
     background: #F1F1F1;
-    /* padding-top: 30px;
-    row-gap: 15px; */
 }
 .SectionTypes_container_white {
     display: grid;
@@ -100,7 +90,6 @@
     padding: 0 10px;
     font-size: 12px;
     flex: 1 0 auto;
-    /* margin-bottom: 8px; */
 }
 .Main_buttonBroup_wrapper {
     display: flex;
@@ -159,12 +148,8 @@
 }
 
 @media screen and (max-width: 850px) {
-    /* .Main_Avatar_wrapper {
-        display: none;
-    } */
     .Main_par_button_wrapper {
         width: 40%;
-        /* flex: 1 1 100%; */
     }
     .Main_par_button_wrapper > *:not(:last-child) {
         margin-bottom: 30px;
@@ -174,7 +159,6 @@
     }
     .SectionTypes_buttonBroup_wrapper {
         display: flex;
-        /* flex-wrap: wrap; */
     } 
 }
 
@@ -190,8 +174,6 @@
     }
     .Cards_container {
         grid-template-columns: 1fr;
-        /* display: flex;
-        flex-direction: column; */
     }
     .Main_typography {
         text-align: center;
@@ -204,94 +186,3 @@
         flex-direction: column;
     }
 }
-/* 
-@media screen and (max-width: 1030px) {
-    .Main_par_button_wrapper {
-        margin-left: 15%;
-        width: 80% !important; 
-    } 
-    .Main_paragraph {
-        color: #4F4F4F;
-        width: 100%;
-    }
-    .Main_Avatar_wrapper {
-        max-width: 90% !important;
-    }
-}
-@media screen and (max-width: 850px) {
-    .Main_Avatar_wrapper {
-        display: none;
-    }
-    .Main_buttonBroup_wrapper {
-        margin: 3%;
-    }  
-    .Main_typography {
-        font-size: 40px !important;
-        padding: 7px;
-    }
-    .Main_par_button_wrapper {
-        padding-top: 5%;
-        width: 70% !important; 
-    }
-    .SectionTypes_buttonBroup_wrapper {
-        margin-bottom: 10px;
-    }
-    .SectionTypes_typography {
-        margin-left: 10px !important;
-        width: 90%;
-        height: 36px;
-        font-size: 27px;
-    }
-    .SectionTypes_button {
-        width: 17%;
-        height: 100%;
-        font-size: 13px !important; 
-    }
-    .Cards_container {
-        margin: 0 auto;
-        grid-template-columns: auto auto ;
-    }
-}
-@media screen and (max-width: 587px) {
-    .Main_container {
-        height: 100% !important
-    }
-    .Main_par_button_wrapper {
-        margin-left: 2%;
-        width: 90% !important; 
-    }
-    .Cards_container {
-        max-width: 80%;
-        grid-template-columns: auto ;
-    }  
-    .Main_typography {
-        width: 90%;
-        font-size: 30px !important;
-    }
-    .Main_paragraph {
-        width: 80%;
-        padding-left: 105px;
-    }
-    .Main_button_eco, .Main_button_types {
-        width: 40%;
-    }
-    .SectionTypes_typography {
-        font-size: 30px !important;
-        padding: 13px 0 0 13px;
-    }
-    .SectionTypes_buttonBroup_wrapper {
-        max-width: 90%;
-        margin-bottom: 2%;
-
-    }
-    .SectionTypes_button {
-        margin: 0 auto;
-        height: 100%;
-        font-size: 11px !important;
-    }
-    .SectionTypes_container {
-        padding: 0;
-        row-gap: 0;
-        width: 100%;
-    }
-} */
