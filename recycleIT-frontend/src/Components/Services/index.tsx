@@ -8,7 +8,7 @@ import {
     ChosenItemType, 
     IServiceList 
 } from '../interfaces/Interfaces';
-import ServicesWrapper from './ServicesWrapper/ServicesWrapper';
+import './index.css'
 
 export const UserLocation = createContext<LocationType | null>(null);
 
@@ -47,22 +47,23 @@ const Services = () => {
 
     return (
         <div className='services-page'>
-            <Header/>
             <UserLocation.Provider value={userLocation}>
-                <ServicesList 
-                    servicesList={servicesList} 
-                    setServicesList={setServicesData}
-                    setItemLocation={setItemLocation}
-                    isDrawerOpened={isDrawerOpened}
-                    isMobileDevice={isMobileDevice}
-                    toggleDrawerOpened={toggleDrawerOpened}
-                />
-                <Map 
-                    servicesList={servicesList}
-                    chosenItemLocation={chosenItemLocation}
-                    toggleDrawerOpened={toggleDrawerOpened}
-                    isMobileDevice={isMobileDevice}
-                />
+                <div className="container">
+                    <ServicesList 
+                        servicesList={servicesList} 
+                        setServicesList={setServicesData}
+                        setItemLocation={setItemLocation}
+                        isDrawerOpened={isDrawerOpened}
+                        isMobileDevice={isMobileDevice}
+                        toggleDrawerOpened={toggleDrawerOpened}
+                    />
+                    <Map 
+                        servicesList={servicesList}
+                        chosenItemLocation={chosenItemLocation}
+                        toggleDrawerOpened={toggleDrawerOpened}
+                        isMobileDevice={isMobileDevice}
+                    />
+                </div>
             </UserLocation.Provider>
         </div>
     )

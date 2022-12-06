@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import './ServicesList.css'
 import { 
     Drawer,
@@ -12,11 +12,15 @@ import { SERVICES, SERVICES_TYPES } from '../../../util/data-list-mock'
 import AlertMessageBox from '../../helpers/AlertMessageBox'
 import { IServiceListProps } from '../../interfaces/Interfaces';
 import CloseIcon from '@mui/icons-material/Close';
+import FacilitiesService from '../../../Services/apiService'
 
 const ServicesList = (props: IServiceListProps) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [serviceTypes, setServiceTypes] = useState<{id: number, shortName: string}[]>([]);
+
+    const facilitiesService = new FacilitiesService();
 
     const fetchServices = (location: string, serviceType: string) => {
         console.log(location, serviceType);
@@ -25,6 +29,16 @@ const ServicesList = (props: IServiceListProps) => {
         if (error) {
             setError(false)
         }
+
+        // facilitiesService.getServicesTypes()
+        //     .then(data => {
+        //         console.log(data);
+        //         setServiceTypes(data);
+        //     })
+        //     .catch(error => {
+        //         setError(true);
+        //         console.log(error);
+        //     })
         // server request to get all required services
 
         //imitate server request
@@ -56,12 +70,10 @@ const ServicesList = (props: IServiceListProps) => {
     const errorAlert = error 
             && <AlertMessageBox error={true} text={errorMessage}/>
 
+    const sideBarClass = props.isDrawerOpened ? "side_bar opened" : "side_bar"
+
     return (
-        <Drawer
-            variant="persistent"
-            anchor="left"
-            open={props.isDrawerOpened}
-        >
+        <div className={sideBarClass}>
             <ListSubheader component="div" 
                 className="list-subheader"
             >
@@ -87,7 +99,7 @@ const ServicesList = (props: IServiceListProps) => {
                     {errorAlert}
                 </div>
             </div>
-        </Drawer>
+        </div>
     )
 }
 
