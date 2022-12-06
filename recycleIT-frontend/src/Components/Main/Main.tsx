@@ -25,7 +25,7 @@ const Main = () => {
         ref.current?.scrollIntoView({behavior: 'smooth'});
       };
     
-    const ButtonData = [
+    const WASTE_CATEGORIES = [
         {
             title:'PLASTIC',
             id: 'plastic',
@@ -96,7 +96,7 @@ const Main = () => {
                                 allowScrollButtonsMobile
                             >
                                 {
-                                    ButtonData.map((button: {title: string, id: string, value: string}) => {
+                                    WASTE_CATEGORIES.map((button: {title: string, id: string, value: string}) => {
                                         return <Tab 
                                                     label={button.title}
                                                     id={button.id}
@@ -110,7 +110,7 @@ const Main = () => {
                             </TabList> 
                             <Box>
                                 {
-                                    ButtonData.map(type => {
+                                    WASTE_CATEGORIES.map(type => {
                                         // filter cards
                                         const cardsForTab = data.filter(item => item.value === type.value);
                                         return <TabPanel style={{padding: 0}} value={type.value} key={type.value}>
