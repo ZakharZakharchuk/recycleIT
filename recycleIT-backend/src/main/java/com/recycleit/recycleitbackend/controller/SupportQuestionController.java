@@ -16,28 +16,27 @@ public class SupportQuestionController {
     private final SupportQuestionService supportQuestionService;
 
     @GetMapping
-    Page<SupportQuestion> findAll(@RequestParam("pageSize") int pageSize, @RequestParam("pageNumber") int pageNumber){
+    Page<SupportQuestion> findAll(@RequestParam("pageSize") int pageSize, @RequestParam("pageNumber") int pageNumber) {
         return supportQuestionService.findAll(PageRequest.of(pageNumber, pageSize));
     }
 
     @GetMapping("/{id}")
-    SupportQuestion findById(@PathVariable("id") Long id){
+    SupportQuestion findById(@PathVariable("id") Long id) {
         return supportQuestionService.findById(id);
     }
 
     @PostMapping
-    SupportQuestion createSupportQuestion(@RequestBody SupportQuestionDto questionDto){
+    SupportQuestion createSupportQuestion(@RequestBody SupportQuestionDto questionDto) {
         return supportQuestionService.createQuestion(questionDto);
     }
 
     @PatchMapping("/give-answer")
-    void giveAnswer(@RequestBody SupportQuestionDto supportQuestion){
-        //todo send answer on mail
+    void giveAnswer(@RequestBody SupportQuestionDto supportQuestion) {
         supportQuestionService.giveAnswer(supportQuestion.getId(), supportQuestion.getAnswer());
     }
 
     @PatchMapping("/show-on-page")
-    void showOnPage(@RequestBody SupportQuestionDto supportQuestion){
+    void showOnPage(@RequestBody SupportQuestionDto supportQuestion) {
         supportQuestionService.markToShowOnPage(supportQuestion.getId());
     }
 }

@@ -29,44 +29,4 @@ public class Facility {
     private BigDecimal rating;
 
     private boolean delivery;
-
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public String getStreetAddress() {
-//        return streetAddress;
-//    }
-//
-//    public String getCity() {
-//        return city;
-//    }
-//
-//    public String getLatitude() {
-//        return latitude;
-//    }
-//
-//    public String getLongitude() {
-//        return longitude;
-//    }
-//
-//    public String getContactPhone() {
-//        return contactPhone;
-//    }
-//
-//    public String getFacilitySubtypes() {
-//        return facilitySubtypes;
-//    }
-//
-//    public BigDecimal getRating() {
-//        return rating;
-//    }
-//
-//    public boolean isDelivery() {
-//        return delivery;
-//    }
 }

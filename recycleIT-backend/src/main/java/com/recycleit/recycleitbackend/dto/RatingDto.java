@@ -15,7 +15,7 @@ public class RatingDto {
     private Long facilityId;
     private Integer mark;
 
-    public Rating mapToRating(){
+    public Rating mapToRating() {
         return Rating.builder()
                 .id(id)
                 .userId(userId)
