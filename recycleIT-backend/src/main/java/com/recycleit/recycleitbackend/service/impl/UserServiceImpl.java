@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(User user) throws UserAlreadyExistException {
         Role roleUser = roleRepository.findByName("USER");
-        User checkUser = userRepository.findByUsername(user.getUsername());
+        User checkUser = userRepository.findByEmail(user.getEmail());
         if (checkUser == null) {
             List<Role> userRoles = new ArrayList<>();
             userRoles.add(roleUser);
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
             return registeredUser;
         } else {
             throw new UserAlreadyExistException(
-                "User with username: " + user.getUsername() + " already exist");
+                "User with username: " + user.getEmail() + " already exist");
         }
     }
 
@@ -56,6 +56,12 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         User result = userRepository.findByUsername(username);
         log.info("IN findByUsername - user: {} found by username: {}", result, username);
+        return result;
+    }
+    @Override
+    public User findByEmail(String email) {
+        User result = userRepository.findByEmail(email);
+        log.info("IN findByUsername - email: {} found by email: {}", result, email);
         return result;
     }
 }

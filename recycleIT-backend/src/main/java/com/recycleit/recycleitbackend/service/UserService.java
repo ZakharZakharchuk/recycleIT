@@ -7,4 +7,6 @@ public interface UserService {
     User findByUsername(String username);
     User register(User user) throws UserAlreadyExistException;
 
+    User findByEmail(String email);
+
 }
