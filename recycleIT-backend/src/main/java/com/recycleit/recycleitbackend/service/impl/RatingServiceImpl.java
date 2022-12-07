@@ -7,6 +7,7 @@ import com.recycleit.recycleitbackend.service.RatingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -26,7 +27,7 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public Integer getServiceRating(Long serviceId) {
+    public BigDecimal getFacilityRating(Long serviceId) {
 
         List<Rating> allMarks= ratingRepository.getRatingsByFacilityId(serviceId);
         double avgMarks = 0;
@@ -36,6 +37,6 @@ public class RatingServiceImpl implements RatingService {
         }
 
         avgMarks = avgMarks/allMarks.size();
-        return (int) avgMarks;
+        return BigDecimal.valueOf(avgMarks);
     }
 }
