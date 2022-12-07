@@ -6,8 +6,10 @@ import com.recycleit.recycleitbackend.entity.User;
 import com.recycleit.recycleitbackend.exception.UserAlreadyExistException;
 import com.recycleit.recycleitbackend.security.jwt.JwtTokenProvider;
 import com.recycleit.recycleitbackend.service.UserService;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,7 +32,7 @@ public class UserController {
 
     @Autowired
     public UserController(AuthenticationManager authenticationManager,
-        JwtTokenProvider jwtTokenProvider, UserService userService) {
+                          JwtTokenProvider jwtTokenProvider, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userService = userService;
@@ -41,12 +43,12 @@ public class UserController {
         try {
             String username = requestDto.getUsername();
             authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
+                    new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
             User user = userService.findByUsername(username);
 
             if (user == null) {
                 throw new UsernameNotFoundException(
-                    "User with username: " + username + " not found");
+                        "User with username: " + username + " not found");
             }
 
             String token = jwtTokenProvider.createToken(username, user.getRoles());
@@ -60,6 +62,7 @@ public class UserController {
             throw new BadCredentialsException("Invalid username or password");
         }
     }
+
     @PostMapping("/register")
     public ResponseEntity login(@RequestBody UserDto userDto) {
         try {
@@ -67,7 +70,7 @@ public class UserController {
 
             String username = userDto.getUsername();
             authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, userDto.getPassword()));
+                    new UsernamePasswordAuthenticationToken(username, userDto.getPassword()));
             User user = userService.findByUsername(username);
 
 /*            if (user == null) {

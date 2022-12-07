@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface SupportQuestionRepository extends JpaRepository<SupportQuestion, Long> {
+
     @Modifying
     @Query(value = "update SupportQuestion s set s.answer = :answer where s.id = :id ")
     void giveAnswer(Long id, String answer);

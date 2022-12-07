@@ -16,5 +16,5 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 
     @Modifying
     @Query(value = "update Rating r set r.mark = :mark where r.userId= :userId and r.facilityId = :facilityId ")
-    void changeRating(Long userId, Long facilityId, Integer mark );
+    void changeRating(Long userId, Long facilityId, Integer mark);
 }

@@ -38,15 +38,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .httpBasic().disable()
-            .csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .authorizeRequests()
-            .antMatchers(LOGIN_ENDPOINT, Register_ENDPOINT, FACILITY_ENDPOINT).permitAll()
-            /*.antMatchers(ADMIN_ENDPOINT).hasRole("USER")*/
-            .anyRequest().authenticated()
-            .and()
-            .apply(new JwtConfigurer(jwtTokenProvider));
+                .httpBasic().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers(LOGIN_ENDPOINT, Register_ENDPOINT, FACILITY_ENDPOINT).permitAll()
+                /*.antMatchers(ADMIN_ENDPOINT).hasRole("USER")*/
+                .anyRequest().authenticated()
+                .and()
+                .apply(new JwtConfigurer(jwtTokenProvider));
     }
 }

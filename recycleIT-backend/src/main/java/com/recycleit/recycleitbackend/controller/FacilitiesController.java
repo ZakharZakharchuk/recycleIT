@@ -2,7 +2,7 @@ package com.recycleit.recycleitbackend.controller;
 
 import com.recycleit.recycleitbackend.entity.FacilityRequest;
 import com.recycleit.recycleitbackend.entity.FacilitySubtype;
-import com.recycleit.recycleitbackend.service.ExternalAPIService;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class FacilitiesController {
 
     @PostMapping("/all")
     public Object getAll(@RequestBody FacilityRequest facilityRequest)
-        throws IOException {
+            throws IOException {
         return facilitiesService.getAll(facilityRequest);
     }
 }

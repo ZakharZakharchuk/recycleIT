@@ -16,7 +16,7 @@ public class SupportQuestionDto {
     private String answer;
     private Boolean showOnPage;
 
-    public SupportQuestion mapToSupportQuestion(){
+    public SupportQuestion mapToSupportQuestion() {
         return SupportQuestion.builder()
                 .id(id)
                 .author(author)
