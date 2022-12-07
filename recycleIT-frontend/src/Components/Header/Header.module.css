@@ -1,19 +1,24 @@
+button {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+}
 .Header_box_wrapper {
     width: 100%;
     justify-content: space-between;
+    padding: 0 20px;
     background-color: #028E3F;
+    height: 70px;
 }
 .Header_logo_wrapper {
     display: grid;
     grid-template-columns: auto auto;
     width: 170px;
-    padding-left: 30px;
 }
-.Header_navbar_wrapper {
-    display: grid;
-    grid-template-columns: auto auto auto; 
-    column-gap: 20px;
-}
+
 .Header_logo_description {
     color: #FFFFFF;
     font-size: 20px;
@@ -21,12 +26,44 @@
     text-decoration: none;
 }
 .navbar_comtainer {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 .Link {
+    font-family: 'Roboto', sans-serif;
     text-decoration: none;
+    color: #225839;
+    font-size: 18px;
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.navButton {
+    display: block;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: .4s;
+    padding: 4px 6px;
+    height: 40px;
+}
+.navButton:hover {
+    color: #B3E856;
+    cursor: pointer;
+}
+.activeTab {
+    display: block;
+    width: 20px;
+    height: 3px;
+    background-color: white;
+}
+.username {
+    font-size: 16px;
+    color: white;
+    text-transform: capitalize;
+    padding: 0 0 0 5px;
 }
 .burger_parag {
     color: #225839;

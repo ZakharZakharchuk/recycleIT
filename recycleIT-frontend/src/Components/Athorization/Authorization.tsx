@@ -7,13 +7,16 @@ import {
     InputLabel,
     InputAdornment,
     IconButton,
-    TextField
+    TextField,
+    Box
 } from '@mui/material';
-import {useState} from 'react';
+import {useState, useContext, useEffect} from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import Header from '../Header/Header';
 import ErrorMessage from './../helpers/ErrorMessage/ErrorMessage'
-
+import { UserContext } from '../UserContext/UserContextProvider';
+import AlertMessageBox from '../helpers/AlertMessageBox';
+import LogoButton from './../assets/LogoButton.svg';
+import { useNavigate } from 'react-router-dom';
 
 interface IFormState {
     name: string;
@@ -21,7 +24,6 @@ interface IFormState {
     password: string;
     repeatPassword: string;
     showPassword: boolean;
-    isFormValid: boolean
 }
 
 interface IFormProps {
@@ -30,48 +32,87 @@ interface IFormProps {
 
 // minimum eight characters, at least one letter and one number and no spaces
 const passwordRegexpr = /^(?=.*[A-Za-z])(?=.*\d)(?=^\S*$)[A-Za-z\d]{8,}$/
-
 const emailRegexpr = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i
 
 const Authorization = () => {
+    const user = useContext(UserContext);
     const [values, setValues] = useState<IFormState>({
         name: '',
         email: '',
         password: '',
         repeatPassword: '',
         showPassword: false,
-        isFormValid: false
     });
     const [validationError, setValidationError] = useState({
         name: false,
         email: false,
         password: false,
         passwordsMatch: false,
+        isFormInvalid: false
     });
 
-    const [isLoginMode, setIsLoginMode] = useState(false);
+    const [isLoginMode, setIsLoginMode] = useState(true);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(user?.errorMessage || '');
+    const navigate = useNavigate();
+
+    if (user?.isLoggedIn) {
+        navigate(-1);
+    }
+
+    useEffect(() => {
+        console.log(user);
+        if (user?.loading) {
+            setLoading(true)
+            setError(false)
+        } else { 
+            setLoading(false)
+        }
+        if (user?.isRegistered) {
+            setIsLoginMode(true)
+        } 
+        if (user?.error) {
+            setError(true);
+            setErrorMessage(user.errorMessage);
+        }
+    }, [user])
+
+    useEffect(() => {
+        setValues({
+            name: '', 
+            email: '', 
+            password: '', 
+            repeatPassword: '',
+            showPassword: false
+        })
+    }, [isLoginMode])
 
     const validateForm = (name: string, email: string, password: string, repeatPassword: string) => {
         let isNameInvalid = false,
             isEmailInvalid = false,
             isPasswordInvalid = false,
-            doPasswordsMatch = false;
+            doPasswordsMatch = false,
+            isFormInvalid = false;
         
         if (!isLoginMode) {
             isNameInvalid = name.length < 3 || name.length > 15;
+            doPasswordsMatch = !repeatPassword || !(password === repeatPassword);
+            isFormInvalid = isNameInvalid || doPasswordsMatch;
         }
         isEmailInvalid = !emailRegexpr.test(email);
-        
         isPasswordInvalid = !passwordRegexpr.test(password);
+        isFormInvalid = isFormInvalid || isEmailInvalid || isPasswordInvalid;
 
-        doPasswordsMatch = password === repeatPassword;
-        
         setValidationError({
             name: isNameInvalid,
             email: isEmailInvalid,
             password: isPasswordInvalid,
-            passwordsMatch: !doPasswordsMatch
-        })        
+            passwordsMatch: doPasswordsMatch,
+            isFormInvalid: isFormInvalid
+        })
+
+        return isFormInvalid;
     }
 
     const handleChange =
@@ -89,12 +130,17 @@ const Authorization = () => {
     const handleLoginModeChange = () => {
         setIsLoginMode(prev => !prev);
 
+        if (error) {
+            setError(false);
+        }
+
         // clear the errors if they occured on previous form state
         setValidationError({
             name: false,
             email: false,
             password: false,
-            passwordsMatch: false
+            passwordsMatch: false,
+            isFormInvalid: false
         });
         // if password was visible - hide it 
         if (values.showPassword) {
@@ -106,31 +152,33 @@ const Authorization = () => {
     }
 
     const submitForm = () => {
-        validateForm(values.name, values.email, values.password, values.repeatPassword)
-        if (values.isFormValid) {
+        if (!validateForm(values.name, values.email, values.password, values.repeatPassword)) {
             console.log('submit form');
+            if (isLoginMode) {
+                user?.signin(values.email, values.password);
+            } else {
+                user?.signup(values.name, values.email, values.password);
+            }
+            
             setValidationError({
                 name: false,
                 email: false,
                 password: false,
-                passwordsMatch: false
+                passwordsMatch: false,
+                isFormInvalid: false
             })
         } else {
-            console.log('form invalid')
+            console.error('form invalid')
         }
     }
     
     return (
-    <> 
-    <Header/>
         <div className="form-container">
             <form className="form">
-            <Typography variant="h5" style={{textAlign: 'center'}}>RecycleIT</Typography>
-                <Typography variant="h6">
-                    {
-                        isLoginMode ? 'Sign In' : 'Create Account'
-                    }
-                </Typography>
+                <Box style={{width: '100%', display: 'flex', justifyContent: 'center', gap: '10px'}}>
+                    <img src={LogoButton} alt="logo" />
+                    <Typography variant="h5" style={{color: 'green'}}>{ isLoginMode ? 'Sign In' : 'Sign Up'}</Typography>
+                </Box>
                 
                 <FormControl style={{display: isLoginMode ? 'none' : 'block'}}>
                     <TextField
@@ -254,9 +302,14 @@ const Authorization = () => {
                         }
                     </Button>
                 </Typography>
+                {
+                    error ? <AlertMessageBox error text={errorMessage}/> : null
+                }
+                {
+                    loading ? <AlertMessageBox loading text={'Loading...'}/> : null
+                }
             </form>
         </div>
-    </>
     )
 }
 
