@@ -22,26 +22,28 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public void changeRating(Long serviceId, Long userId, int mark) {
+    public void changeRating(Long serviceId, Long userId, BigDecimal mark) {
         ratingRepository.changeRating(userId, serviceId, mark);
     }
 
     @Override
     public BigDecimal getFacilityRating(Long serviceId) {
 
-        List<Rating> allMarks = ratingRepository.getRatingsByFacilityId(serviceId);
-        if (allMarks.isEmpty()) {
-            return BigDecimal.ZERO;
-        } else {
+        return ratingRepository.getAvgMarkByFacilityId(serviceId);
 
-            double avgMarks = 0;
-
-            for (Rating mark : allMarks) {
-                avgMarks += mark.getMark().doubleValue();
-            }
-
-            avgMarks = avgMarks / allMarks.size();
-            return BigDecimal.valueOf(avgMarks);
-        }
+//        List<Rating> allMarks = ratingRepository.getRatingsByFacilityId(serviceId);
+//        if (allMarks.isEmpty()) {
+//            return BigDecimal.ZERO;
+//        } else {
+//
+//            double avgMarks = 0;
+//
+//            for (Rating mark : allMarks) {
+//                avgMarks += mark.getMark().doubleValue();
+//            }
+//
+//            avgMarks = avgMarks / allMarks.size();
+//            return BigDecimal.valueOf(avgMarks);
+//        }
     }
 }
