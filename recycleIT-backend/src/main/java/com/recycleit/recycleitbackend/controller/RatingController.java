@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/ratings")
 @AllArgsConstructor
@@ -17,8 +19,8 @@ public class RatingController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    Integer getServiceRating(@PathVariable("id") Long id){
-        return ratingService.getServiceRating(id);
+    BigDecimal   getServiceRating(@PathVariable("id") Long id){
+        return ratingService.getFacilityRating(id);
     }
 
     @PostMapping("/set-rating/{id}")
