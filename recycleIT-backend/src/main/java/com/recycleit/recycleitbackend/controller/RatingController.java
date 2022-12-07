@@ -30,7 +30,7 @@ public class RatingController {
         RatingDto rating = RatingDto.builder()
                 .userId(userId)
                 .facilityId(id)
-                .mark(mark)
+                .mark(BigDecimal.valueOf(mark))
                 .build();
         ratingService.setRating(rating);
     }
@@ -42,7 +42,7 @@ public class RatingController {
         RatingDto rating = RatingDto.builder()
                 .userId(userId)
                 .facilityId(id)
-                .mark(mark)
+                .mark(BigDecimal.valueOf(mark))
                 .build();
         ratingService.changeRating(id, userId.getId(), rating.getMark());
     }

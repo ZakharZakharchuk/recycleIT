@@ -3,6 +3,7 @@ package com.recycleit.recycleitbackend.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "ratings")
@@ -24,5 +25,5 @@ public class Rating {
     private Long facilityId;
 
     @Column(name = "mark")
-    private Integer mark;
+    private BigDecimal mark;
 }
