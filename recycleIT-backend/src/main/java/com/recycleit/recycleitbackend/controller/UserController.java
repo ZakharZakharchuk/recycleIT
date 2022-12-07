@@ -32,7 +32,7 @@ public class UserController {
 
     @Autowired
     public UserController(AuthenticationManager authenticationManager,
-                          JwtTokenProvider jwtTokenProvider, UserService userService) {
+        JwtTokenProvider jwtTokenProvider, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userService = userService;
@@ -41,14 +41,14 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
         try {
-            String username = requestDto.getUsername();
+            String username = userService.findByEmail(requestDto.getEmail()).getUsername();
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
+                new UsernamePasswordAuthenticationToken(username,  requestDto.getPassword()));
             User user = userService.findByUsername(username);
 
             if (user == null) {
                 throw new UsernameNotFoundException(
-                        "User with username: " + username + " not found");
+                    "User with username: " + username + " not found");
             }
 
             String token = jwtTokenProvider.createToken(username, user.getRoles());
@@ -64,13 +64,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity login(@RequestBody UserDto userDto) {
+    public ResponseEntity register(@RequestBody UserDto userDto) {
         try {
             userService.register(userDto.mapToUser());
 
             String username = userDto.getUsername();
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, userDto.getPassword()));
+                new UsernamePasswordAuthenticationToken(username, userDto.getPassword()));
             User user = userService.findByUsername(username);
 
 /*            if (user == null) {

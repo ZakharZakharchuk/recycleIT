@@ -2,16 +2,19 @@ package com.recycleit.recycleitbackend.config;
 
 import com.recycleit.recycleitbackend.security.jwt.JwtConfigurer;
 import com.recycleit.recycleitbackend.security.jwt.JwtTokenProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -23,9 +26,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String Register_ENDPOINT = "/register";
 
+    private static final String SUPPORT_ENDPOINT = "/support-questions/**";
+
+    private static final String SERVICE_ENDPOINT = "/services_questions/**";
+
+    private static final String RATINGS_ENDPOINT = "/ratings/**";
+
     @Autowired
     public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.debug(true);
     }
 
     @Bean
@@ -38,15 +52,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic().disable()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers(LOGIN_ENDPOINT, Register_ENDPOINT, FACILITY_ENDPOINT).permitAll()
-                /*.antMatchers(ADMIN_ENDPOINT).hasRole("USER")*/
-                .anyRequest().authenticated()
-                .and()
-                .apply(new JwtConfigurer(jwtTokenProvider));
+            .httpBasic().disable()
+            .csrf().disable()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .authorizeRequests()
+            .antMatchers(LOGIN_ENDPOINT, Register_ENDPOINT, FACILITY_ENDPOINT, SUPPORT_ENDPOINT,
+                SERVICE_ENDPOINT).permitAll()
+            .antMatchers(RATINGS_ENDPOINT).hasRole("USER")
+            .and()
+            .apply(new JwtConfigurer(jwtTokenProvider));
     }
 }
