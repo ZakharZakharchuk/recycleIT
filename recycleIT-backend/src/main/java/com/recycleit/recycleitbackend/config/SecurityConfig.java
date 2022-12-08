@@ -8,9 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,12 +17,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
 
-    private static final String USER_ENDPOINT = null;
     private static final String LOGIN_ENDPOINT = "/login";
 
     private static final String FACILITY_ENDPOINT = "/facilities/**";
 
-    private static final String Register_ENDPOINT = "/register";
+    private static final String REGISTER_ENDPOINT = "/register";
 
     private static final String SUPPORT_ENDPOINT = "/support-questions/**";
 
@@ -35,11 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
-    }
-
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.debug(true);
     }
 
     @Bean
@@ -57,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers(LOGIN_ENDPOINT, Register_ENDPOINT, FACILITY_ENDPOINT, SUPPORT_ENDPOINT,
+            .antMatchers(LOGIN_ENDPOINT, REGISTER_ENDPOINT, FACILITY_ENDPOINT, SUPPORT_ENDPOINT,
                 SERVICE_ENDPOINT).permitAll()
             .antMatchers(RATINGS_ENDPOINT).hasRole("USER")
             .and()

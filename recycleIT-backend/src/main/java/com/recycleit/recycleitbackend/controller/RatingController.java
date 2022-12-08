@@ -1,6 +1,7 @@
 package com.recycleit.recycleitbackend.controller;
 
 import com.recycleit.recycleitbackend.dto.RatingDto;
+import com.recycleit.recycleitbackend.dto.RatingRequestDto;
 import com.recycleit.recycleitbackend.entity.User;
 import com.recycleit.recycleitbackend.service.RatingService;
 import com.recycleit.recycleitbackend.service.UserService;
@@ -18,15 +19,16 @@ public class RatingController {
     private final RatingService ratingService;
     private final UserService userService;
 
-    @PostMapping("/set-rating/{id}")
-    void setRating(@PathVariable("id") Long id, @RequestParam("mark") int mark) {
-        User userId = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+    @PostMapping("/set-rating")
+    void setRating(@RequestBody RatingRequestDto ratingRequestDto) {
+        User userId = userService.findByUsername(
+            SecurityContextHolder.getContext().getAuthentication().getName());
 
         RatingDto rating = RatingDto.builder()
-                .userId(userId)
-                .facilityId(id)
-                .mark(BigDecimal.valueOf(mark))
-                .build();
+            .userId(userId)
+            .facilityId(ratingRequestDto.getServiceId())
+            .mark(BigDecimal.valueOf(ratingRequestDto.getMark()))
+            .build();
         ratingService.setRating(rating);
     }
 }
