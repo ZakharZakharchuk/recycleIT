@@ -73,11 +73,6 @@ public class UserController {
                 new UsernamePasswordAuthenticationToken(username, userDto.getPassword()));
             User user = userService.findByUsername(username);
 
-/*            if (user == null) {
-                throw new UsernameNotFoundException(
-                    "User with username: " + username + " not found");
-            }*/
-
             String token = jwtTokenProvider.createToken(username, user.getRoles());
 
             Map<Object, Object> response = new HashMap<>();

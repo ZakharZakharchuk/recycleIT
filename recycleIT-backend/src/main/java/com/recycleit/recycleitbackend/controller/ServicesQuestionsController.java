@@ -16,8 +16,7 @@ public class ServicesQuestionsController {
     private final EmailService emailService;
 
     @PostMapping("/send")
-    public void postQuestion(@RequestBody SendRequestDto sendRequestDto) {
-        /*        servicesQuestionsServiceImpl.postQuestion(id, userMail, question);*/
+    public void sendQuestion(@RequestBody SendRequestDto sendRequestDto) {
         emailService.sendSimpleMessage(sendRequestDto.getEmail(), sendRequestDto.getQuestion());
     }
 }

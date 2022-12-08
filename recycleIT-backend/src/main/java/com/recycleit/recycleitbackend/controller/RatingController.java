@@ -20,13 +20,14 @@ public class RatingController {
 
     @PostMapping("/set-rating/{id}")
     void setRating(@PathVariable("id") Long id, @RequestParam("mark") int mark) {
-        User userId = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        User userId = userService.findByUsername(
+            SecurityContextHolder.getContext().getAuthentication().getName());
 
         RatingDto rating = RatingDto.builder()
-                .userId(userId)
-                .facilityId(id)
-                .mark(BigDecimal.valueOf(mark))
-                .build();
+            .userId(userId)
+            .facilityId(id)
+            .mark(BigDecimal.valueOf(mark))
+            .build();
         ratingService.setRating(rating);
     }
 }
