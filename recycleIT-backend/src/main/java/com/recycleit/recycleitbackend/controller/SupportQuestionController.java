@@ -3,6 +3,7 @@ package com.recycleit.recycleitbackend.controller;
 import com.recycleit.recycleitbackend.dto.SupportQuestionDto;
 import com.recycleit.recycleitbackend.entity.SupportQuestion;
 import com.recycleit.recycleitbackend.service.SupportQuestionService;
+import com.recycleit.recycleitbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class SupportQuestionController {
 
     private final SupportQuestionService supportQuestionService;
+    private final UserService userService;
 
     @GetMapping
     Page<SupportQuestion> findAll(@RequestParam("pageSize") int pageSize, @RequestParam("pageNumber") int pageNumber) {
@@ -26,7 +28,12 @@ public class SupportQuestionController {
     }
 
     @PostMapping
-    SupportQuestion createSupportQuestion(@RequestBody SupportQuestionDto questionDto) {
+    SupportQuestion createSupportQuestion(@RequestBody String mail, String message) {
+        SupportQuestionDto questionDto = new SupportQuestionDto();
+        questionDto.setMessage(message);
+        if(mail!=null){
+            questionDto.setAuthor(userService.findByEmail(mail));
+        }
         return supportQuestionService.createQuestion(questionDto);
     }
 
