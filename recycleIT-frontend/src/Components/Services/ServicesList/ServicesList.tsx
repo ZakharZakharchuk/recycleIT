@@ -12,13 +12,25 @@ import { SERVICES, SERVICES_TYPES } from '../../../util/data-list-mock'
 import AlertMessageBox from '../../helpers/AlertMessageBox'
 import { IServiceListProps } from '../../interfaces/Interfaces';
 import CloseIcon from '@mui/icons-material/Close';
-import FacilitiesService from '../../../Services/apiService'
+import FacilitiesService from '../../../Services/apiService';
+
+interface IService {
+    city: string,
+    contactPhone: string,
+    delivery: boolean,
+    facilitySubtypes: string,
+    id: number,
+    latitude: string,
+    longitude: string,
+    name: string,
+    rating: number,
+    streetAddress: string
+}
 
 const ServicesList = (props: IServiceListProps) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [serviceTypes, setServiceTypes] = useState<{id: number, shortName: string}[]>([]);
 
     const facilitiesService = new FacilitiesService();
 
@@ -30,23 +42,22 @@ const ServicesList = (props: IServiceListProps) => {
             setError(false)
         }
 
-        // facilitiesService.getServicesTypes()
-        //     .then(data => {
-        //         console.log(data);
-        //         setServiceTypes(data);
-        //     })
-        //     .catch(error => {
-        //         setError(true);
-        //         console.log(error);
-        //     })
-        // server request to get all required services
-
-        //imitate server request
-        setTimeout(() => {
-            props.setServicesList(SERVICES)
-            setLoading(false)
-            setError(false)
-        }, 1000);
+        facilitiesService.getFacilities(location, String(serviceType))
+            .then(data => {
+                if (data.data.length) {
+                    props.setServicesList(data.data);
+                } else {
+                    props.setServicesList(null);
+                    setError(true);
+                    setErrorMessage('No eco services that satisfy your request');
+                }
+                setLoading(false);
+            })
+            .catch(error => {
+                setLoading(false);
+                setError(true);
+                console.error(error);
+            });
     }
 
     const getItemLocation = (id: number, lat: number, lng: number) => {

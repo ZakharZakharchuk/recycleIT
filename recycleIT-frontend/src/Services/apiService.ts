@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = 'http://localhost:8080/'
+const baseURL = 'http://recycleit-env.eba-xtnxyihv.us-east-1.elasticbeanstalk.com/'
 
 export class FacilitiesService {
     async getServicesTypes() {
@@ -13,12 +13,11 @@ export class FacilitiesService {
     }
 
     async getFacilities(location: string, typeId: string) {
-        try {
-            const res = await axios.get(baseURL + 'facilities/all');
-            return res.data
-        } catch (error) {
-            console.error(error);
-        }
+        return await axios.post(baseURL + 'facilities/all',  
+            {
+                facilityTypeId: typeId, 
+                stateCode: location
+            })
     }
 
     async postServiceQuestion(userEmail: string, message: string) {

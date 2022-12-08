@@ -21,6 +21,7 @@ import {
     LocationType 
 } from '../../../interfaces/Interfaces';
 import { renderMenuItems } from '../../../../util/renderMenuItems';
+import FacilitiesService from '../../../../Services/apiService';
 
 const ServicesSearch = (props: IServicesSearchProps) => {
     const [error, setError] = useState(false);
@@ -31,12 +32,21 @@ const ServicesSearch = (props: IServicesSearchProps) => {
     const [serviceTypes, setServiceTypes] = useState([{id: 0, name: ''}]);
     
     const userLocation = useContext(UserLocation) as LocationType;
+    const apiService = new FacilitiesService();
 
     useEffect(() => {
         //server request to get all available services types
-        setTimeout(() => {
-            setServiceTypes(SERVICES_TYPES);
-        }, 700);
+        apiService.getServicesTypes()
+            .then(res => {
+                const servicesTypes = res.map((item: {id: number, shortName: string, guidanceHtml: string}) => {
+                    return {id: item.id, name: item.shortName}
+                })
+                setServiceTypes(servicesTypes);
+            })
+            .catch(error => {
+                console.error(error);
+                setError(true);
+            })
     }, [])
 
     const handleLocationChange = (event: SelectChangeEvent) => {
@@ -91,8 +101,8 @@ const ServicesSearch = (props: IServicesSearchProps) => {
             const reg = response.data.Results[0].region;
             // find region code according to location
             const stateCode = STATE_CODES
-                .find(state => state.id.toUpperCase() === reg.toUpperCase());
-            
+                .find(state => state.name.toUpperCase() === reg.toUpperCase());
+
             if (stateCode) {
                 setLocation(stateCode.id);
             } else {
@@ -101,14 +111,13 @@ const ServicesSearch = (props: IServicesSearchProps) => {
             }
             setLoading(false)
         }).catch((error) => {
-            console.log(error);
-            
+            console.error(error);
             setError(true)
             setLoading(false)
         });
     }
     
-    const errorComponent = error && <AlertMessageBox error={true} text="Your location does not work"/>
+    const errorComponent = error && <AlertMessageBox error={true} text="Sorry, currently the service is not available in you area"/>
     const loader = loading && <AlertMessageBox loading={true} text="Loading your location"/>
 
     return (
