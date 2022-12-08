@@ -24,15 +24,11 @@ const Header:React.FC = () => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
   const user = useContext(UserContext);
   const navigate = useNavigate();
-  const [isUserAuthorized, setUserAuthorized] = useState(false);
+  const [isUserAuthorized, setUserAuthorized] = useState<boolean | undefined>(false);
   const isMobileDevice = useMediaQuery('(max-width:900px)');
 
   React.useEffect(() => {
-    if (user?.isLoggedIn) {
-      setUserAuthorized(true)
-    } else if (!user?.isLoggedIn) {
-      setUserAuthorized(false)
-    }
+    setUserAuthorized(user?.isLoggedIn)
   }, [user]);
 
   useEffect(() => {
