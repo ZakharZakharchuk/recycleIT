@@ -62,7 +62,6 @@ const Authorization = () => {
     }
 
     useEffect(() => {
-        console.log(user);
         if (user?.loading) {
             setLoading(true)
             setError(false)
@@ -98,11 +97,10 @@ const Authorization = () => {
         if (!isLoginMode) {
             isNameInvalid = name.length < 3 || name.length > 15;
             doPasswordsMatch = !repeatPassword || !(password === repeatPassword);
-            isFormInvalid = isNameInvalid || doPasswordsMatch;
         }
         isEmailInvalid = !emailRegexpr.test(email);
         isPasswordInvalid = !passwordRegexpr.test(password);
-        isFormInvalid = isFormInvalid || isEmailInvalid || isPasswordInvalid;
+        isFormInvalid = isNameInvalid || doPasswordsMatch || isEmailInvalid || isPasswordInvalid;
 
         setValidationError({
             name: isNameInvalid,
@@ -112,7 +110,7 @@ const Authorization = () => {
             isFormInvalid: isFormInvalid
         })
 
-        return isFormInvalid;
+        return !isFormInvalid;
     }
 
     const handleChange =
@@ -152,8 +150,7 @@ const Authorization = () => {
     }
 
     const submitForm = () => {
-        if (!validateForm(values.name, values.email, values.password, values.repeatPassword)) {
-            console.log('submit form');
+        if (validateForm(values.name, values.email, values.password, values.repeatPassword)) {
             if (isLoginMode) {
                 user?.signin(values.email, values.password);
             } else {
@@ -302,12 +299,8 @@ const Authorization = () => {
                         }
                     </Button>
                 </Typography>
-                {
-                    error ? <AlertMessageBox error text={errorMessage}/> : null
-                }
-                {
-                    loading ? <AlertMessageBox loading text={'Loading...'}/> : null
-                }
+                { error && <AlertMessageBox error text={errorMessage}/> }
+                { loading && <AlertMessageBox loading text={'Loading...'}/> }
             </form>
         </div>
     )

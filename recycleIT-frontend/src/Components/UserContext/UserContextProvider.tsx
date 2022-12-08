@@ -44,7 +44,6 @@ const UserContextProvider = ({ children }: any) => {
     }, [])
 
     useEffect(() => {
-        console.log(location.pathname);
         // if we leave the authorization page, 
         // but the error is still present:
         if (location.pathname !== '/authorization' && error) {

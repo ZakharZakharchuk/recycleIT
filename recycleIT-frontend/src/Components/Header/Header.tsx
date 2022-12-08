@@ -25,7 +25,7 @@ const Header:React.FC = () => {
   const user = useContext(UserContext);
   const navigate = useNavigate();
   const [isUserAuthorized, setUserAuthorized] = useState(false);
-  const isMobileDevice = useMediaQuery('(min-width:900px)');
+  const isMobileDevice = useMediaQuery('(max-width:900px)');
 
   React.useEffect(() => {
     if (user?.isLoggedIn) {
@@ -57,12 +57,14 @@ const Header:React.FC = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  let activeNavLinkStyle = {
+  const activeNavLinkStyle = {
     borderBottom: "1.5px solid white",
   };
-  let defaultNavLinkStyle = {
+  const defaultNavLinkStyle = {
     borderBottom: "1.5px solid transparent",
   };
+
+  const getNavLinkStyle = ({isActive} : any) => isActive ? activeNavLinkStyle : defaultNavLinkStyle; 
 
   const renderMenu = (
     <Box className={styles.Header_navbar_wrapper}>
@@ -70,9 +72,7 @@ const Header:React.FC = () => {
           <NavLink 
             to="/" 
             className={styles.Link}
-            style={({ isActive }) =>
-              isActive ? activeNavLinkStyle : defaultNavLinkStyle
-            }
+            style={getNavLinkStyle}
           >
             <button 
               onClick={handleCloseNavMenu} 
@@ -84,9 +84,8 @@ const Header:React.FC = () => {
           <NavLink 
             to="/services" 
             className={styles.Link} 
-            style={({ isActive }) =>
-              isActive ? activeNavLinkStyle : defaultNavLinkStyle
-            }>
+            style={getNavLinkStyle}
+          >
             <button onClick={handleCloseNavMenu} className={styles.navButton}>
               SERVICES MAP
             </button>
@@ -94,9 +93,7 @@ const Header:React.FC = () => {
           <NavLink 
             to='/support' 
             className={styles.Link}
-            style={({ isActive }) =>
-              isActive ? activeNavLinkStyle : defaultNavLinkStyle
-            }
+            style={getNavLinkStyle}
           >
             <button onClick={handleCloseNavMenu} className={styles.navButton}>
               SUPPORT
@@ -163,26 +160,25 @@ const Header:React.FC = () => {
             SUPPORT
           </Link>
         </MenuItem>
-        <MenuItem>
         {
-          isUserAuthorized ?
-          <div className={styles.Link}>
-            <AccountCircle style={{color: 'green', fontSize: '25px'}} />
-            <span>{user?.user?.name}</span>
-          </div> :
+          isUserAuthorized &&
+          <div>
+            <div className={styles.Link}>
+              <AccountCircle style={{color: 'green', fontSize: '25px'}} />
+              <span>{user?.user?.name}</span>
+            </div>
+            <MenuItem>
+              <button className={styles.Link} onClick={() => user?.signout()}>
+                Log out
+              </button> 
+            </MenuItem>
+          </div>
+        }
+        {
+          !isUserAuthorized &&
           <button className={styles.Link} onClick={() => navigate('/authorization')}>
             Sign in
           </button>
-        }
-        </MenuItem>
-
-        {
-          isUserAuthorized ? 
-          <MenuItem>
-            <button className={styles.Link} onClick={() => user?.signout()}>
-              Log out
-            </button> 
-            </MenuItem> : null
         }
       </Menu>
     </>
@@ -195,13 +191,10 @@ const Header:React.FC = () => {
                 <img src={IconLogo} alt="logo"></img>
             </IconButton>
           </Link>
-            {
-              (location.pathname !== '/authorization') ? renderMenu : null
-            }
-            {
-              (location.pathname !== '/authorization') ? renderMobileMenu : null
-            }
-            
+          {
+            location.pathname !== '/authorization' &&
+            (isMobileDevice ? renderMobileMenu : renderMenu)
+          }           
         </Toolbar>
   );
 }
