@@ -1,6 +1,7 @@
 package com.recycleit.recycleitbackend.repository;
 
 import com.recycleit.recycleitbackend.entity.Rating;
+import com.recycleit.recycleitbackend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,12 +13,10 @@ import java.math.BigDecimal;
 @Repository
 @Transactional
 public interface RatingRepository extends JpaRepository<Rating, Long> {
-    //List<Rating> getRatingsByFacilityId(Long id);
+
+    Rating getByFacilityIdAndUserId(Long facilityId, User user);
 
     @Query(value = "select avg(r.mark) from Rating r where r.facilityId = :id")
     BigDecimal getAvgMarkByFacilityId(Long id);
 
-    @Modifying
-    @Query(value = "update Rating r set r.mark = :mark where r.userId= :userId and r.facilityId = :facilityId ")
-    void changeRating(Long userId, Long facilityId, BigDecimal mark);
 }

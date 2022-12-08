@@ -4,6 +4,7 @@ import com.recycleit.recycleitbackend.dto.RatingDto;
 import com.recycleit.recycleitbackend.entity.Rating;
 import com.recycleit.recycleitbackend.repository.RatingRepository;
 import com.recycleit.recycleitbackend.service.RatingService;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,32 +19,20 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public void setRating(RatingDto rating) {
-        ratingRepository.save(rating.mapToRating());
-    }
-
-    @Override
-    public void changeRating(Long serviceId, Long userId, BigDecimal mark) {
-        ratingRepository.changeRating(userId, serviceId, mark);
+        Optional<Rating> currentRating = Optional.ofNullable(
+            ratingRepository.getByFacilityIdAndUserId(rating.getFacilityId(),
+                rating.getUserId()));
+        if (currentRating.isPresent()) {
+            rating.setId(currentRating.get().getId());
+            ratingRepository.save(rating.mapToRating());
+        } else {
+            ratingRepository.save(rating.mapToRating());
+        }
     }
 
     @Override
     public BigDecimal getFacilityRating(Long serviceId) {
-
-        return ratingRepository.getAvgMarkByFacilityId(serviceId);
-
-//        List<Rating> allMarks = ratingRepository.getRatingsByFacilityId(serviceId);
-//        if (allMarks.isEmpty()) {
-//            return BigDecimal.ZERO;
-//        } else {
-//
-//            double avgMarks = 0;
-//
-//            for (Rating mark : allMarks) {
-//                avgMarks += mark.getMark().doubleValue();
-//            }
-//
-//            avgMarks = avgMarks / allMarks.size();
-//            return BigDecimal.valueOf(avgMarks);
-//        }
+        BigDecimal rating = ratingRepository.getAvgMarkByFacilityId(serviceId);
+        return rating != null ? rating : BigDecimal.ZERO;
     }
 }

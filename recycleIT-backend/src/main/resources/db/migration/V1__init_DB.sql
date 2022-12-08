@@ -1,4 +1,4 @@
-create table ratings (id bigint not null auto_increment, facility_id bigint, mark integer, user_id bigint, primary key (id));
+create table ratings (id bigint not null auto_increment, facility_id bigint, mark decimal(2,1), user_id bigint, primary key (id));
 create table roles (id bigint not null auto_increment, name varchar(255), primary key (id));
 create table support_questions (id bigint not null auto_increment, answer varchar(255), message varchar(255), show_on_page bit, author bigint, primary key (id));
  create table user_roles (user_id bigint not null, role_id bigint not null);
