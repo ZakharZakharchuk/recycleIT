@@ -1,7 +1,7 @@
 package com.recycleit.recycleitbackend.controller;
 
-import com.recycleit.recycleitbackend.dto.SendRequestDto;
-import com.recycleit.recycleitbackend.service.EmailService;
+import com.recycleit.recycleitbackend.dto.QuestionRequestDto;
+import com.recycleit.recycleitbackend.service.ServiceQuestionService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class ServicesQuestionsController {
 
-    private final EmailService emailService;
+    private final ServiceQuestionService questionService;
 
     @PostMapping("/send")
-    public void sendQuestion(@RequestBody SendRequestDto sendRequestDto) {
-        emailService.sendSimpleMessage(sendRequestDto.getEmail(), sendRequestDto.getQuestion());
+    public void sendQuestion(@RequestBody QuestionRequestDto sendRequestDto) {
+        questionService.sendQuestion(sendRequestDto);
     }
 }
