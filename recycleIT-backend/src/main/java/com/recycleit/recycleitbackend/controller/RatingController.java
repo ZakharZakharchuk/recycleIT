@@ -18,11 +18,6 @@ public class RatingController {
     private final RatingService ratingService;
     private final UserService userService;
 
-    @GetMapping("/{id}")
-    BigDecimal getServiceRating(@PathVariable("id") Long id) {
-        return ratingService.getFacilityRating(id);
-    }
-
     @PostMapping("/set-rating/{id}")
     void setRating(@PathVariable("id") Long id, @RequestParam("mark") int mark) {
         User userId = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -30,20 +25,8 @@ public class RatingController {
         RatingDto rating = RatingDto.builder()
                 .userId(userId)
                 .facilityId(id)
-                .mark(mark)
+                .mark(BigDecimal.valueOf(mark))
                 .build();
         ratingService.setRating(rating);
-    }
-
-    @PatchMapping("/change-ratting/{id}")
-    void changeRating(@PathVariable("id") Long id, @RequestParam("mark") int mark) {
-        User userId = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-
-        RatingDto rating = RatingDto.builder()
-                .userId(userId)
-                .facilityId(id)
-                .mark(mark)
-                .build();
-        ratingService.changeRating(id, userId.getId(), rating.getMark());
     }
 }
