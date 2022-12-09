@@ -15,6 +15,6 @@ public class ServicesQuestionServiceImpl implements ServiceQuestionService {
     @Override
     public void sendQuestion(QuestionRequestDto questionRequestDto) {
         emailService.sendSimpleMessage("Service question", questionRequestDto.getEmail(),
-            questionRequestDto.getQuestion());
+            questionRequestDto.getQuestion() + "\nService id:" + questionRequestDto.getServiceId());
     }
 }
