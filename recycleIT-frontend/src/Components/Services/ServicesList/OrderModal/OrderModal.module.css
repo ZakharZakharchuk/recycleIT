@@ -1,0 +1,69 @@
+.Stepper_wrapper {
+    background-color: antiquewhite;
+    
+}
+.Stepper_card {
+    max-width: 30%;
+    border-radius: 5px;
+} 
+.Stepper_email_number {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 10px;
+    row-gap: 20px;
+}
+.Stepper_descr {
+    color: rgb(109, 109, 109);
+    width: 90%;
+    margin: 0 auto;
+}
+.Stepper_email_number_wrapper {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    width: 80%;
+    row-gap: 15px;
+    margin: 0 auto;
+}
+.Stepper_Standart_wrapper {
+    margin-left: 15px;
+}
+.Stepper_checkbox_label {
+    margin-right: 30px;
+}
+.Stepper_delivery {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: rgb(245, 245, 245);
+    border-radius: 5px;
+    margin: 30px 0 10px 0;
+}
+.Stepper_payed {
+    display: grid;
+    grid-template-columns: auto ;
+    row-gap: 15px;
+}
+.Stepper_phone {
+    margin-top: 13px !important;
+}
+.Stepper_cash_wrapper {
+    display: grid;
+    grid-template-columns: auto  auto;
+    max-width: 13%;
+}
+.Stepper_cash {
+    margin-top: 15px !important;
+}
+.Stepper_express_check_wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+    max-width: 50%;
+}
+.Stepper_express_card_wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 15px;
+    max-width: 80%;
+    margin-left: 10px;
+    /* margin: 0 auto; */
+
+}

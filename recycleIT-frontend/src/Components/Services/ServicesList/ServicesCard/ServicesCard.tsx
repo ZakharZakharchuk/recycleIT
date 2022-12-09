@@ -9,10 +9,15 @@ import {
 import ServiceQuestionForm from './ServiceQuestionForm/ServiceQuestionForm'
 import {IServiceCardProps} from '../../../interfaces/Interfaces'
 import FacilitiesService from '../../../../Services/apiService'
+import OrderModal from '../OrderModal/OrderModal'
 
 const ServicesCard = (props: IServiceCardProps) => {
     const [isQuestionFormOpened, setIsQuestionFormOpened] = useState(false);
     const [rating, setRating] = useState(props.item.raiting);
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
     const facilitiesService = new FacilitiesService();
 
@@ -39,7 +44,6 @@ const ServicesCard = (props: IServiceCardProps) => {
                 console.error(err);
             })
     }
-
     const questionForm = !isQuestionFormOpened ||
         <ServiceQuestionForm 
             postQuestion={postQuestion} 
@@ -98,6 +102,7 @@ const ServicesCard = (props: IServiceCardProps) => {
 
                     {
                         !isQuestionFormOpened && 
+                        <>
                             <Button 
                                 variant="text" 
                                 size="small" 
@@ -105,6 +110,16 @@ const ServicesCard = (props: IServiceCardProps) => {
                             >
                                 Ask
                             </Button>
+                            <Button 
+                                variant="text" 
+                                size="small" 
+                                onClick={handleOpen}
+                            >
+                                Order
+                            </Button>  
+                            <OrderModal setOpen={setOpen} open={open}/>                    
+                        </>
+                            
                     }
                 </div>
             </CardContent>
