@@ -1,25 +1,34 @@
-import {useState} from 'react';
+import {useContext, useState, useEffect} from 'react';
 import TextField from '@mui/material/TextField';
-import { Button, FormControl, Typography } from '@mui/material';
+import { 
+  Button, 
+  FormControl, 
+  Typography, 
+  Dialog, 
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions 
+} from '@mui/material';
 import styles from './Support.module.css'
 import ErrorMessage from '../helpers/ErrorMessage/ErrorMessage';
+import { UserContext } from '../UserContext/UserContextProvider';
 
 interface IQuestionFormState {
   email: string,
-  message: string,
-  isFormValid: boolean
+  message: string
 }
 
-const emailRegexpr = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i
+const emailRegexpr = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
 
 const Question = () => {
   // user will be later retrieved from User context
-  const user = {name: '', email: 'cool.email@mail.com'};
+  const user = useContext(UserContext);
 
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [values, setValues] = useState<IQuestionFormState>({
-    email: user.email || '',
-    message: '',
-    isFormValid: false
+    email: user?.user?.email || '',
+    message: ''
   });
 
   const handleChange =
@@ -27,11 +36,31 @@ const Question = () => {
         setValues({ ...values, [prop]: event.target.value });
     };
 
+  const handleClose = () => {
+    setDialogOpen(prev => !prev);
+    setValues({ 
+      email: '',
+      message: ''
+    })
+  }
+
   const [validationError, setValidationError] = useState({
     email: false,
     message: false,
-    isFormValid: false
   });
+
+  useEffect(() => {
+    if (user?.isLoggedIn) {
+      if (user?.user?.email) {
+        setValues({...values, email: user?.user?.email})
+      }
+    } else {
+      setValues({ 
+        email: '',
+        message: ''
+      })
+    }
+  }, [user])
 
   const validateForm = (email: string, message: string) => {
     let isEmailInvalid = false,
@@ -42,16 +71,19 @@ const Question = () => {
 
     setValidationError({
       email: isEmailInvalid,
-      message: isMessageInvalid,
-      isFormValid: true
-    })        
+      message: isMessageInvalid
+    });   
+
+    return !(isEmailInvalid || isMessageInvalid);
   }
 
   const onFormSubmit = () => {
-    validateForm(values.email, values.message);
-    if (values.isFormValid) {
+    if (validateForm(values.email, values.message)) {
       console.log('send message to server');
       // server request
+
+      // open dialog
+      setDialogOpen(true);
     }
   }
 
@@ -113,6 +145,25 @@ const Question = () => {
         >
           SEND QUESTION
         </Button>
+
+        <Dialog
+          open={dialogOpen}
+          onClose={handleClose}
+          style={{padding: '20px'}}
+        >
+          <DialogTitle style={{textAlign: 'center'}}>
+            Thank you for your question!
+          </DialogTitle>
+          <DialogContent>
+          <DialogContentText>
+            Our support team will contact you via email 
+            <span style={{color: '#2E7D32'}}> {values.email} </span>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions style={{padding: '0 15px 15px'}}>
+          <Button color="success" onClick={handleClose}>Continue to page</Button>
+        </DialogActions>
+        </Dialog>
       </div>
     )
 }

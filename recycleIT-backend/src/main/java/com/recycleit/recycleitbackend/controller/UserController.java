@@ -6,8 +6,10 @@ import com.recycleit.recycleitbackend.entity.User;
 import com.recycleit.recycleitbackend.exception.UserAlreadyExistException;
 import com.recycleit.recycleitbackend.security.jwt.JwtTokenProvider;
 import com.recycleit.recycleitbackend.service.UserService;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,9 +41,9 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
         try {
-            String username = requestDto.getUsername();
+            String username = userService.findByEmail(requestDto.getEmail()).getUsername();
             authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
+                new UsernamePasswordAuthenticationToken(username,  requestDto.getPassword()));
             User user = userService.findByUsername(username);
 
             if (user == null) {
@@ -60,8 +62,9 @@ public class UserController {
             throw new BadCredentialsException("Invalid username or password");
         }
     }
+
     @PostMapping("/register")
-    public ResponseEntity login(@RequestBody UserDto userDto) {
+    public ResponseEntity register(@RequestBody UserDto userDto) {
         try {
             userService.register(userDto.mapToUser());
 
@@ -69,11 +72,6 @@ public class UserController {
             authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, userDto.getPassword()));
             User user = userService.findByUsername(username);
-
-/*            if (user == null) {
-                throw new UsernameNotFoundException(
-                    "User with username: " + username + " not found");
-            }*/
 
             String token = jwtTokenProvider.createToken(username, user.getRoles());
 

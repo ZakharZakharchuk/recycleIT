@@ -8,16 +8,22 @@ import Map from "./Components/Services/Map/Map";
 import Support from "./Components/Support/Support";
 import Authorization from "./Components/Athorization/Authorization";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { UserContextProvider } from "./Components/UserContext/UserContextProvider";
 const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={ <Main/>}/>
-          <Route path="/services" element={<Services/>}/>
-          <Route path="/authorization" element={<Authorization/>}/>
-          <Route path="/support" element={<Support/>}/>
-        </Routes>    
+        <UserContextProvider>
+          <Header/>
+          <main>
+            <Routes>
+              <Route path="/" element={ <Main/>}/>
+              <Route path="/services" element={<Services/>}/>
+              <Route path="/authorization" element={<Authorization/>}/>
+              <Route path="/support" element={<Support/>}/>
+            </Routes>    
+          </main>
+        </UserContextProvider>
       </BrowserRouter>
       </div>
     );

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -8,31 +8,39 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import styles from './Header.module.css'
-import leaf from '../assets/leaf.png'
-import AccountCircleFilled from '../assets/AccountCircleFilled.png';
-import LogoutOutlined from '../assets/LogoutOutlined.png'
-import burger from '../assets/burger.png'
-import { Link } from 'react-router-dom';
+import styles from './Header.module.css';
+import MenuIcon from '@mui/icons-material/Menu';
+import IconLogo from './../assets/IconLogo.svg';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { UserContext } from '../UserContext/UserContextProvider';
+import { AccountCircle, Logout } from '@mui/icons-material';
+import CloseIcon from '@mui/icons-material/Close';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header:React.FC = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+  const location = useLocation();
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
+  const user = useContext(UserContext);
+  const navigate = useNavigate();
+  const [isUserAuthorized, setUserAuthorized] = useState<boolean | undefined>(false);
+  const isMobileDevice = useMediaQuery('(max-width:900px)');
 
-  const handleOpenUserMenu = (event:any) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  React.useEffect(() => {
+    setUserAuthorized(user?.isLoggedIn)
+  }, [user]);
+
+  useEffect(() => {
+    setMobileMoreAnchorEl(null);
+  }, [location]);
+
+  useEffect(() => {
+    handleMobileMenuClose();
+  }, [isMobileDevice])
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -44,123 +52,145 @@ const Header:React.FC = () => {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const activeNavLinkStyle = {
+    borderBottom: "1.5px solid white",
+  };
+  const defaultNavLinkStyle = {
+    borderBottom: "1.5px solid transparent",
+  };
+
+  const getNavLinkStyle = ({isActive} : any) => isActive ? activeNavLinkStyle : defaultNavLinkStyle; 
+
+  const renderMenu = (
+    <Box className={styles.Header_navbar_wrapper}>
+      <Box  className={styles.navbar_comtainer}>
+          <NavLink 
+            to="/" 
+            className={styles.Link}
+            style={getNavLinkStyle}
+          >
+            <button 
+              onClick={handleCloseNavMenu} 
+              className={styles.navButton}
+            >
+              HOME
+            </button>
+          </NavLink>
+          <NavLink 
+            to="/services" 
+            className={styles.Link} 
+            style={getNavLinkStyle}
+          >
+            <button onClick={handleCloseNavMenu} className={styles.navButton}>
+              SERVICES MAP
+            </button>
+          </NavLink>
+          <NavLink 
+            to='/support' 
+            className={styles.Link}
+            style={getNavLinkStyle}
+          >
+            <button onClick={handleCloseNavMenu} className={styles.navButton}>
+              SUPPORT
+            </button>
+          </NavLink>
+          {
+            !isUserAuthorized ? <Button 
+                                  variant="outlined" 
+                                  style={{color: 'white', border: '1px solid white', height: '40px'}}
+                                  onClick={() => navigate('/authorization')}
+                                >
+                                  Sign In
+                                </Button> :
+                                <Box className={styles.Header_avatar_wrapper}>
+                                  <IconButton sx={{ p: 0 }}>
+                                    <AccountCircle style={{color: 'white', fontSize: '35px'}} />
+                                    <span className={styles.username}>{user?.user?.name}</span>
+                                  </IconButton>
+                                  <Button onClick={() => user?.signout()}>
+                                    <Logout style={{color: 'white', fontSize: '35px'}} />
+                                  </Button>
+                                </Box>
+          }
+      </Box>              
+    </Box>
+  )
   const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="small"  color="inherit">        
+    <>
+      <IconButton
+        size="large"
+        aria-label="show more"
+        className={styles.Header_burger}
+        aria-haspopup="true"
+        onClick={handleMobileMenuOpen}
+        color="inherit"
+      >
+        {
+          isMobileMenuOpen ? <CloseIcon style={{color: 'white', fontSize: '35px'}} /> : 
+          <MenuIcon style={{color: 'white', fontSize: '35px'}}/>
+        }
+      </IconButton>
+      <Menu
+        anchorEl={mobileMoreAnchorEl}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+      >
+        <MenuItem>
           <Link to="/" className={styles.Link}>
-              <p className={styles.burger_parag}>HOME</p>
+            HOME
           </Link>
-        </IconButton>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="small"
-          color="inherit"
-        >
+        </MenuItem>
+        <MenuItem>
           <Link to="/services" className={styles.Link}>
-            <p className={styles.burger_parag}>SERVICES MAP</p>
+            SERVICES MAP
           </Link>
-        </IconButton>
-      </MenuItem>
-      <MenuItem >
-        <IconButton
-          size="small"
-          color="inherit"
-        >
+        </MenuItem>
+        <MenuItem >
           <Link to='/support' className={styles.Link}>
-            <p className={styles.burger_parag}>SUPPORT</p>
+            SUPPORT
           </Link>
-        </IconButton>
-      </MenuItem>
-    </Menu>
+        </MenuItem>
+        {
+          isUserAuthorized &&
+          <div>
+            <div className={styles.Link}>
+              <AccountCircle style={{color: 'green', fontSize: '25px'}} />
+              <span>{user?.user?.name}</span>
+            </div>
+            <MenuItem>
+              <button className={styles.Link} onClick={() => user?.signout()}>
+                Log out
+              </button> 
+            </MenuItem>
+          </div>
+        }
+        {
+          !isUserAuthorized &&
+          <button className={styles.Link} onClick={() => navigate('/authorization')}>
+            Sign in
+          </button>
+        }
+      </Menu>
+    </>
   );
+
   return (
         <Toolbar disableGutters className={styles.Header_box_wrapper}>
-            <Box className={styles.Header_logo_wrapper}>
-                <Avatar src={leaf} alt='leaf' className={styles.Header_logo}/>
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component="a"
-                    href="/"
-                    className={styles.Header_logo_description}
-                >
-                    RecycleIT
-                </Typography>
-            </Box>
-            <Box className={styles.Header_navbar_wrapper}>
-              <Box  className={styles.navbar_comtainer}>
-                  <Link to="/" className={styles.Link}>
-                    <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
-                      HOME
-                    </Button>
-                  </Link>
-                  <Link to="/services" className={styles.Link}>
-                    <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
-                      SERVICES MAP
-                    </Button>
-                  </Link>
-                  <Link to='/support' className={styles.Link}>
-                    <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
-                      SUPPORT
-                    </Button>
-                  </Link>
-              </Box>
-              <Box className={styles.Header_avatar_wrapper}>
-                  <Tooltip title="Open settings">
-                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                        <Avatar alt="Remy Sharp" src={AccountCircleFilled} className={styles.Header_account_avatar} />
-                    </IconButton>
-                  </Tooltip>
-                  <Menu
-                    sx={{ mt: '45px' }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                    >
-                    {settings.map((setting) => (
-                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
-                        </MenuItem>
-                    ))}
-                  </Menu>
-                  <Link to="/authorization">
-                    <Avatar src={LogoutOutlined} alt='garbageRecycle'className={styles.Header_logoOut}/>
-                  </Link>
-              </Box>
-            </Box>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              className={styles.Header_burger}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <img src={burger} alt="burger" />
-   
+          <Link to='/'>
+            <IconButton>
+                <img src={IconLogo} alt="logo"></img>
             </IconButton>
-            {renderMobileMenu}
+          </Link>
+          {
+            location.pathname !== '/authorization' &&
+            (isMobileDevice ? renderMobileMenu : renderMenu)
+          }           
         </Toolbar>
   );
 }

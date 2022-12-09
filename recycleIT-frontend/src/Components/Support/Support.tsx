@@ -7,7 +7,6 @@ import styles from './Support.module.css'
 const Support = () => {
     return (
         <div className={styles.Support_page}>
-            <Header/>
             <div className={styles.Support_ask_quetions}>
                 <Typography variant="h4" className={styles.Support_ask_typography}>
                     Frequently Asked Questions

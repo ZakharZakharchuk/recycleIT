@@ -218,3 +218,27 @@ export const FAQ = [
         answer: 'If you are authorized, just leave your question in a question form. If you are new here, leave your email address and our support team will send you the answer to your inbox.'
     },
 ]
+
+
+export const FACILITIES_TYPES = [
+    {
+        id: 1,
+        title: 'Composting',
+        description: 'Active, permitted facilities that process organic waste for composting. Materials that may be accepted include but are not limited to: yard waste, such as fallen leaves, grass clippings, weeds, and other plants, limbs or trunks of trees and other woody plants; pre- or post-consumer food waste, and manure.'
+    },
+    {
+        id: 2,
+        title: 'Electronics Recyclers',
+        description: 'Active, permitted facilities that process electronic materials for recycling. Items that may be accepted include but are not limited to: cell phones, televisions, computers, batteries, printers, scanners, telecom equipment, copiers, and gaming systems.'
+    },
+    {
+        id: 3,
+        title: 'Household Hazardous Waste Collection',
+        description: 'Facilities that collect household hazardous waste materials for recycling. Leftover household products that contain corrosive, toxic, ignitable, or reactive ingredients are considered to be household hazardous waste.'
+    },
+    {
+        id: 4,
+        title: 'Metal Recyclers',
+        description: 'Facilities that process metals for recycling e.g. aluminum, steel, copper, lead, zinc, and auto scrap.'
+    },
+]

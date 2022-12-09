@@ -1,6 +1,6 @@
 .map-side {
   width: calc(100% - 380px);
-  height: calc(100vh - 80px);
+  height: calc(100vh - 90px);
   padding: 10px;
   margin-left: auto;
 }
@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 900px) {
