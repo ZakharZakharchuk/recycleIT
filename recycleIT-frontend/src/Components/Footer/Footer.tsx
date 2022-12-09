@@ -5,6 +5,7 @@ import CallIcon from '@mui/icons-material/Call';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import call from '../assets/call.svg'
 import message from '../assets/message.svg'
+import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <Box className={styles.Footer_container}>
@@ -21,9 +22,15 @@ const Footer = () => {
                 </Typography>
             </Box>
             <Box className={styles.Footer_buttons_wrapper}>
-                <Button variant="text" className={styles.Footer_button}>HOME</Button>
-                <Button variant="text" className={styles.Footer_button}>SERVICES MAP</Button>
-                <Button variant="text" className={styles.Footer_button}>SUPPORT</Button>
+                <Link to="/" className={styles.Link}>
+                    <Button variant="text" className={styles.Footer_button}>HOME</Button>
+                </Link>
+                <Link to='/services' className={styles.Link}>
+                    <Button variant="text" className={styles.Footer_button}>SERVICES MAP</Button>
+                </Link>
+                <Link to='/support' className={styles.Link}>
+                    <Button variant="text" className={styles.Footer_button}>SUPPORT</Button>
+                </Link>
             </Box>
                 <Box className={styles.Footer_icons_wrapper}>
                     <img src={call} alt="call" className={styles.Footer_call}/>
