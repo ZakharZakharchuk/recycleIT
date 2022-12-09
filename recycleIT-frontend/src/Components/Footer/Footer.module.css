@@ -18,12 +18,18 @@
     justify-self: start;
 }
 .Footer_buttons_wrapper {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    max-width: 60%;
     padding-top: 5px;
 }
 .Footer_button {
     height: 24px;
     font-size: 14px;
     color: #313826 !important;
+} 
+.Footer_button:hover {
+    color: #4b6d13 !important;
 } 
 .Footer_icons_wrapper {
     align-items: center !important;
@@ -36,6 +42,15 @@
 }
 .Footer_message {
     padding: 0 0 0 30px;
+}
+.Link {
+    text-decoration: none;
+    color: #225839;
+    font-size: 18px;
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 .text {
     padding: 0 0 0 10px;

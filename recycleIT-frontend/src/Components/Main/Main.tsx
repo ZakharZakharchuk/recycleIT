@@ -11,6 +11,7 @@ import TabList from '@mui/lab/TabList';
 import { TabPanel } from "@mui/lab"
 import { FACILITIES_TYPES } from '../../util/data-list-mock'
 import { Link } from 'react-router-dom'
+import Footer from '../Footer/Footer'
 
 const Main = () => {
     const [item, setItem] = useState(data);
@@ -149,7 +150,7 @@ const Main = () => {
                         </div>
                     </Container>
                 </Box>           
-
+              <Footer/>                  
         </>
     )
 }

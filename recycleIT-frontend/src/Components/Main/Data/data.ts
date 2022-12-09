@@ -109,9 +109,9 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
     },
     {
         "id": "12",
-        "title": "Colorless glass",
+        "title": "Types of glass",
         "category": "glass",
-        "desc": "Transparent bottles",
+        "desc": " Bottles and Jars of any colour,Cosmetics and perfume containers",
         "image": glass,
         "value": '3',
     },
@@ -125,41 +125,41 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
     },
     {
         "id": "14",
-        "title": "Non-ferrous metals",
+        "title": "Metal Cans",
         "category": "metal",
-        "desc": "Soda cans, wrap foils, lead pipes",
+        "desc": "Drink cans or tin, steel, or bi-metal food cans.",
         "image": NonFerrous,
         "value": '4'
     },
     {
         "id": "15",
-        "title": "Non-ferrous metals",
+        "title": "Car",
         "category": "metal",
-        "desc": "Soda cans, wrap foils, lead pipes",
+        "desc": "Vehicles and cars",
         "image": metal,
         "value": '4'
     },
     {
         "id": "16",
-        "title": "Non-ferrous metals",
+        "title": "Plata",
         "category": "electronic",
-        "desc": "Soda cans, wrap foils, lead pipes",
+        "desc": "Plata and Battery",
         "image": recycleElectronic1,
         "value": '5'
     },
     {
         "id": "17",
-        "title": "Non-ferrous metals",
+        "title": "E-waste",
         "category": "electronic",
-        "desc": "Soda cans, wrap foils, lead pipes",
+        "desc": " Laptops, tablets and mobile phones.",
         "image": recycleElectronic2,
         "value": '5'
     },
     {
         "id": "18",
-        "title": "Non-ferrous metals",
+        "title": "Recycle TVs",
         "category": "electronic",
-        "desc": "Soda cans, wrap foils, lead pipes",
+        "desc": "TVs contain valuable materials.",
         "image": TV,
         "value": '5'
     }
