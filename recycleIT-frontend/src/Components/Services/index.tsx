@@ -33,7 +33,6 @@ const Services = () => {
     }, [isMobileDevice])
 
     const setServicesData = (services: IServiceList[] | null) => {
-        console.log('service list updated');
         setServicesList(services);
     }
 

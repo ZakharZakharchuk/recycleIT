@@ -23,7 +23,7 @@ const UserLocationMarker = (props: LocationType) => {
       title="Me" 
       placement="top" 
       style={{backgroundColor: 'white', color: 'black'}}>
-        <PersonPinCircleIcon fontSize='large' style={{color: '#1034a6'}}/>
+        <PersonPinCircleIcon className="marker" fontSize='large' style={{color: '#1034a6'}}/>
     </Tooltip>
   )
 }
@@ -34,7 +34,7 @@ export default function Map(props: IMapProps){
       lat: 40.730610,
       lng: -73.935242
     },
-    zoom: 5
+    zoom: 10
   };
   
   const chosenItemLocation = props.chosenItemLocation as ChosenItemType;
@@ -44,12 +44,12 @@ export default function Map(props: IMapProps){
   const [ chosenItemId, setChosenItemId ] = useState(0);
   
   useEffect(() => {
-    setCenter(chosenItemLocation);
-    setZoom(10);
     if (chosenItemLocation) {
+      setCenter({lat: Number(chosenItemLocation.lat), lng: Number(chosenItemLocation.lng)});
+      setZoom(15);
       setChosenItemId(chosenItemLocation.id);
     }
-  }, [chosenItemLocation])
+  }, [chosenItemLocation]);
 
   useEffect(() => {
     setCenter(userLocation);
@@ -58,8 +58,8 @@ export default function Map(props: IMapProps){
   useEffect(() => {
     if (props.servicesList) {
       setCenter({
-        lat: props.servicesList[0].latitude, 
-        lng: props.servicesList[0].longitude
+        lat: Number(props.servicesList[0].latitude), 
+        lng: Number(props.servicesList[0].longitude)
       });
       setZoom(8);
     }
