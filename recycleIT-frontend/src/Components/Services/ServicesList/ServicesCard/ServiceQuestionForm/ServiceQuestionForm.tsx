@@ -1,67 +1,120 @@
-import React from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import {
     Button,
     ButtonGroup,
     Divider,
     TextField
 } from '@mui/material'
+import { IQuestionFormState } from '../../../../interfaces/Interfaces';
+import { UserContext } from '../../../../UserContext/UserContextProvider';
+import ErrorMessage from '../../../../helpers/ErrorMessage/ErrorMessage';
 
 interface IServiceQuestionFormProps {
-    postQuestion: (message: string) => void,
+    postQuestion: (email: string, message: string) => void,
     closeQuestionForm: () => void
 }
 
+const emailRegexpr = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
+
 const ServiceQuestionForm = (props: IServiceQuestionFormProps) => {
+    const user = useContext(UserContext);
     // get email from user state
-    const [email, setEmail] = React.useState('');
-    const [message, setMessage] = React.useState('');
+    const [values, setValues] = useState<IQuestionFormState>({
+        email: user?.user?.email || '',
+        message: ''
+    });
+    const [validationError, setValidationError] = useState({
+        email: false,
+        message: false,
+    });
 
-    const handleMessageChange = (event: { target: { value: React.SetStateAction<string> } }) => {
-        setMessage(event.target.value)
+    useEffect(() => {
+        if (user?.isLoggedIn) {
+            if (user?.user?.email) {
+            setValues({...values, email: user?.user?.email})
+            }
+        } else {
+            setValues({ 
+            email: '',
+            message: ''
+            })
+        }
+    }, [user])
+
+    const handleChange =
+    (prop: keyof IQuestionFormState) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+    const sendQuestion = () => {
+        if (validateForm(values.email, values.message)) {
+            props.postQuestion(values.email, values.message);
+            setValues({email: user?.user?.email || '', message: ''})
+        }
     }
 
-    const handleEmailChange = (event: { target: { value: React.SetStateAction<string> } }) => {
-        setEmail(event.target.value)
-    }
+    const validateForm = (email: string, message: string) => {
+        let isEmailInvalid = false,
+            isMessageInvalid = false;
+        
+        isEmailInvalid = !emailRegexpr.test(email);
+        isMessageInvalid = !message.length || message.length > 140;
 
-    const sendQuestion = (message: string) => {
-        props.postQuestion(message);
-        setMessage('')
+        setValidationError({
+            email: isEmailInvalid,
+            message: isMessageInvalid
+        });   
+
+        return !(isEmailInvalid || isMessageInvalid);
     }
 
     return (
         <div className="item-details">
             <Divider 
-                style={{fontSize: '12px', fontFamily: 'sans-serif'}}
+                style={{fontSize: '13px', fontFamily: 'sans-serif', marginBottom: '5px'}}
             >
                 Ask A Question
             </Divider>
+            <TextField 
+                label="Your email" 
+                required
+                style={{width: '100%', marginTop: '5px'}} 
+                size="small"
+                margin="normal"
+                value={values.email}
+                onChange={handleChange('email')}
+                error={validationError.email}
+            />
             {
-                !email && <TextField 
-                            label="Your email" 
-                            variant="standard" 
-                            style={{width: '100%', marginTop: '5px'}} 
-                            size="small"
-                            margin="normal"
-                            value={email}
-                            onChange={handleEmailChange}
-                        />
+                validationError.email ?
+                    <ErrorMessage 
+                        text={"Email is invalid"}
+                    /> : null
             }
             <TextField 
                 label="Your message here" 
-                variant="standard" 
+                required
+                multiline
+                rows={3}
                 style={{width: '100%',  marginTop:'5px'}} 
                 size="small"
                 margin="normal"
-                value={message}
-                onChange={handleMessageChange}
+                value={values.message}
+                onChange={handleChange('message')}
+                error={validationError.message}
                 />
+                {
+                    validationError.message ?
+                        <ErrorMessage 
+                            text={"Message is required with maximum of 140 characters"}
+                        /> : null
+                }
             <ButtonGroup style={{width: '100%'}}>
                 <Button 
                     variant="outlined" 
                     size="small"
                     style={{width: '50%'}}
-                    onClick={() => sendQuestion(message)}
+                    onClick={sendQuestion}
                     >
                     Ask
                 </Button>            
@@ -74,7 +127,7 @@ const ServiceQuestionForm = (props: IServiceQuestionFormProps) => {
                     >
                     Cancel
                 </Button> 
-            </ButtonGroup>           
+            </ButtonGroup>          
         </div>
     )
 }

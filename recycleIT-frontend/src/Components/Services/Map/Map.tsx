@@ -73,7 +73,7 @@ export default function Map(props: IMapProps){
           lat={service.latitude} 
           lng={service.longitude}
           name={service.name}
-          rating={service.raiting}
+          rating={service.rating}
           key={service.id}
           id={service.id}
           showLabel={chosenItemId}

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect, SetStateAction } from 'react'
 import {
     Card,
     CardContent,
@@ -7,36 +7,81 @@ import {
     Button,
 } from '@mui/material'
 import ServiceQuestionForm from './ServiceQuestionForm/ServiceQuestionForm'
-import {IServiceCardProps} from '../../../interfaces/Interfaces'
+import { IServiceCardProps} from '../../../interfaces/Interfaces'
 import FacilitiesService from '../../../../Services/apiService'
+import MessageDialog from '../../../helpers/MessageDialog/MessageDialog'
+import { UserContext } from '../../../UserContext/UserContextProvider'
 
 const ServicesCard = (props: IServiceCardProps) => {
+    const user = useContext(UserContext);
     const [isQuestionFormOpened, setIsQuestionFormOpened] = useState(false);
-    const [rating, setRating] = useState(props.item.raiting);
-
+    const [rating, setRating] = useState(props.item.rating);
     const facilitiesService = new FacilitiesService();
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [dialogContent, setDialogContent] = useState({
+        title: '',
+        message: '',
+        spanText: '',
+        actionMessageText: 'Continue to page',
+    });
+
+    const handleClose = () => {
+        setDialogOpen(prev => !prev);
+    }
 
     const onChangeQuestionFormDisplay = () => {
         setIsQuestionFormOpened(prevValue => !prevValue)
-    }
+    }  
 
-    const postQuestion = (message: string) => {
-        if (message) {
-            alert(`message sent to server: ${message}`);
-            // send message to server
-        }
-    }
-
-    const setServiceRating = (event: any, newValue: any) => {
-        setRating(newValue);
-        // rate service on server
-        console.log('service ' + props.item.id + ' rated ' + rating);
-        facilitiesService.rateService(props.item.id, rating)
+    const postQuestion = (email: string, message: string) => {
+        facilitiesService.postServiceQuestion(props.item.id, email, message)
             .then(res => {
                 console.log(res);
+                // open dialog
+                setDialogContent({
+                    title: 'Thank you for your question!',
+                    message: 'Our support team will contact you via email',
+                    spanText: email,
+                    actionMessageText: 'Continue to page',
+                })
+                setDialogOpen(true);
+            })
+            .catch(error => {
+                console.log(error);
+                setDialogContent({
+                    title: 'Something went wrong',
+                    message: 'Please check your connection or try again later',
+                    spanText: '',
+                    actionMessageText: 'Continue to page'
+                })
+                setDialogOpen(true);
+            })
+    }
+
+    const rateServiceOnServer = (event: any, newValue: any) => {
+        setRating(newValue);
+
+        facilitiesService.rateService(props.item.id, newValue, user?.user?.token || '')
+            .then(res => {
+                console.log(res);
+                // open dialog
+                setDialogOpen(true);
+                setDialogContent({
+                    title: 'Thank you!',
+                    message: 'You have rated this service',
+                    spanText: `${rating} stars`,
+                    actionMessageText: 'Continue to page',
+                })
             })
             .catch(err => {
                 console.error(err);
+                setDialogOpen(true);
+                setDialogContent({
+                    title: 'Something went wrong',
+                    message: 'Please try again later',
+                    spanText: '',
+                    actionMessageText: 'Continue to page',
+                })
             })
     }
 
@@ -47,8 +92,9 @@ const ServicesCard = (props: IServiceCardProps) => {
         /> 
 
     return (
+        <>
         <Card>
-            <CardContent style={{padding: '15px'}}>
+            <div style={{padding: '15px'}}>
                 <Typography variant="h6" className="text-left">
                     {props.item.name}
                 </Typography>
@@ -56,7 +102,8 @@ const ServicesCard = (props: IServiceCardProps) => {
                     <Rating 
                         value={rating}   
                         style={{marginBottom: '10px'}}
-                        onChange={setServiceRating}
+                        onChange={rateServiceOnServer}
+                        disabled={!user?.isLoggedIn}
                     />
                 </div>
                 <div className="item-details">
@@ -94,8 +141,6 @@ const ServicesCard = (props: IServiceCardProps) => {
                     >
                         View
                     </Button>
-                    <Button variant="text" size="small">Call</Button>
-
                     {
                         !isQuestionFormOpened && 
                             <Button 
@@ -107,8 +152,18 @@ const ServicesCard = (props: IServiceCardProps) => {
                             </Button>
                     }
                 </div>
-            </CardContent>
+            </div>
         </Card>
+        <MessageDialog 
+            dialogOpen={dialogOpen}
+            handleClose={handleClose}
+            spanText={dialogContent.spanText}
+            title={dialogContent.title}
+            message={dialogContent.message}
+            showConfirm={false} 
+            actionMessageText={dialogContent.actionMessageText}                 
+        /> 
+    </>
     )
 }
 

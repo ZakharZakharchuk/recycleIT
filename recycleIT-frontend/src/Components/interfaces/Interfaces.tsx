@@ -9,7 +9,7 @@ export interface IServiceCardProps {
         longitude: number,
         contactPhone: string,
         facilitySubtypes: string,
-        raiting: number,
+        rating: number,
         delivery: boolean
     }
 }
@@ -36,7 +36,7 @@ export interface IServiceList {
     longitude: number,
     contactPhone: string,
     facilitySubtypes: string,
-    raiting: number,
+    rating: number,
     delivery: boolean
 }
 
@@ -64,6 +64,11 @@ export interface ChosenItemType {
     id: number,
     lat: number, 
     lng: number
+}
+
+export interface IQuestionFormState {
+    email: string,
+    message: string
 }
 
 

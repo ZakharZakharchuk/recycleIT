@@ -13,11 +13,9 @@ import {
 import styles from './Support.module.css'
 import ErrorMessage from '../helpers/ErrorMessage/ErrorMessage';
 import { UserContext } from '../UserContext/UserContextProvider';
-
-interface IQuestionFormState {
-  email: string,
-  message: string
-}
+import { IQuestionFormState } from '../interfaces/Interfaces';
+import FacilitiesService from '../../Services/apiService';
+import MessageDialog from '../helpers/MessageDialog/MessageDialog';
 
 const emailRegexpr = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
 
@@ -30,6 +28,14 @@ const Question = () => {
     email: user?.user?.email || '',
     message: ''
   });
+
+  const [dialogContent, setDialogContent] = useState({
+    title: '',
+    message: '',
+    spanText: ''
+  })
+
+  const facilitiesService = new FacilitiesService();
 
   const handleChange =
     (prop: keyof IQuestionFormState) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +52,7 @@ const Question = () => {
 
   const [validationError, setValidationError] = useState({
     email: false,
-    message: false,
+    message: false
   });
 
   useEffect(() => {
@@ -79,11 +85,27 @@ const Question = () => {
 
   const onFormSubmit = () => {
     if (validateForm(values.email, values.message)) {
-      console.log('send message to server');
       // server request
-
-      // open dialog
-      setDialogOpen(true);
+      facilitiesService.postSupportQuestion(values.email, values.message)
+        .then(res => {
+          console.log(res);
+          // open dialog
+          setDialogContent({
+            title: 'Thank you for your question!',
+            message: 'Our support team will contact you via email',
+            spanText: values.email
+          })
+          setDialogOpen(true);
+        })
+        .catch(err => {
+          console.log(err);
+          setDialogContent({
+            title: 'Something went wrong',
+            message: 'Please check your connection or try again later',
+            spanText: ''
+          })
+          setDialogOpen(true);
+        })
     }
   }
 
@@ -146,24 +168,15 @@ const Question = () => {
           SEND QUESTION
         </Button>
 
-        <Dialog
-          open={dialogOpen}
-          onClose={handleClose}
-          style={{padding: '20px'}}
-        >
-          <DialogTitle style={{textAlign: 'center'}}>
-            Thank you for your question!
-          </DialogTitle>
-          <DialogContent>
-          <DialogContentText>
-            Our support team will contact you via email 
-            <span style={{color: '#2E7D32'}}> {values.email} </span>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions style={{padding: '0 15px 15px'}}>
-          <Button color="success" onClick={handleClose}>Continue to page</Button>
-        </DialogActions>
-        </Dialog>
+        <MessageDialog 
+          dialogOpen={dialogOpen}
+          handleClose={handleClose}
+          spanText={dialogContent.spanText}
+          title={dialogContent.title}
+          message={dialogContent.message}
+          showConfirm={false} 
+          actionMessageText='Continue to page'        
+        />
       </div>
     )
 }
