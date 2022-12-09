@@ -1,5 +1,6 @@
 import GoogleMapReact from "google-map-react";
 import React from "react";
+import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 import Main from "./Components/Main/Main";
 import Services from "./Components/Services";

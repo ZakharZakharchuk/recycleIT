@@ -1,0 +1,59 @@
+.Footer_container {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    align-content: center;
+    height: 84px;
+    background: #F1F1F1;
+}
+.Footer_logo_wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: center;
+    width: 60%;
+}
+.Footer_logo_description {
+    font-size: 20px;
+    text-decoration: none;
+    color: #506037;
+    justify-self: start;
+}
+.Footer_buttons_wrapper {
+    padding-top: 5px;
+}
+.Footer_button {
+    height: 24px;
+    font-size: 14px;
+    color: #313826 !important;
+} 
+.Footer_icons_wrapper {
+    align-items: center !important;
+    padding-top: 5px;
+}
+.Footer_call .Footer_message{
+    padding-top: 15px !important;
+    font-size: 14px !important;
+    color: #313826 !important;
+}
+.Footer_message {
+    padding: 0 0 0 30px;
+}
+.text {
+    padding: 0 0 0 10px;
+}
+@media screen and (max-width: 1020px) {
+    .Footer_container {
+        grid-template-columns: auto auto;
+        grid-template-areas:
+            "logo buttons"
+            ". call"
+    }
+    .Footer_logo_wrapper {
+        grid-area: logo;
+    }
+    .Footer_buttons_wrapper {
+        grid-area: buttons;
+    }
+    .Footer_icons_wrapper {
+        grid-area: call;
+    }
+}
