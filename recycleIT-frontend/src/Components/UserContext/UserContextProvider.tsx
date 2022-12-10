@@ -71,7 +71,6 @@ const UserContextProvider = ({ children }: any) => {
     }, [authService, error])
 
     const signin = useCallback((email: string, password: string) => {
-        console.log(email);
         if (error) {
             setError(false)
         }
@@ -81,7 +80,6 @@ const UserContextProvider = ({ children }: any) => {
             // server request here
             authService.login(email, password)
                 .then(res => {
-                    console.log(res);
                     // save user to localstorage if request successful
                     const user = res?.data;
                     localStorage.setItem('user', JSON.stringify({name: user.username, email: email, token: user.token}));

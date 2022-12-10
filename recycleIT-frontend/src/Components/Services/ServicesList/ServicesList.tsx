@@ -35,8 +35,6 @@ const ServicesList = (props: IServiceListProps) => {
     const facilitiesService = new FacilitiesService();
 
     const fetchServices = (location: string, serviceType: string) => {
-        console.log(location, serviceType);
-        
         setLoading(true);
         if (error) {
             setError(false)

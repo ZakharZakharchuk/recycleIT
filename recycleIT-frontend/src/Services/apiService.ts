@@ -20,16 +20,34 @@ export class FacilitiesService {
             })
     }
 
-    async postServiceQuestion(userEmail: string, message: string) {
-        try {
-            return axios.post(baseURL, {})
-        } catch (error) {
-            console.error(error);
-        }
+    async postServiceQuestion(serviceId: number, email: string, message: string) {
+        return axios.post(baseURL + 'services_questions/send', 
+        {
+            serviceId,
+            email,
+            question: message
+        })
     }
 
-    async rateService(serviceId: number, rating: number) {
+    async rateService(serviceId: number, rating: number, token: string) {
+        return axios.post(baseURL + 'ratings/set-rating', 
+            {
+                serviceId: serviceId,
+                mark: rating
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer_${token}`
+                }
+            })
+    }
 
+    async postSupportQuestion(email: string, message: string) {
+        return axios.post(baseURL + 'support-questions/send', 
+        {
+            email,
+            question: message
+        })
     }
 }
 
