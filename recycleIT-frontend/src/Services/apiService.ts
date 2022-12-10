@@ -6,8 +6,6 @@ export class FacilitiesService {
     async getServicesTypes() {
         try {
             const res = await axios.get(baseURL + 'facilities/subtypes');
-            console.log(res);
-            
             return res.data
         } catch (error) {
             console.error(error);
@@ -32,7 +30,6 @@ export class FacilitiesService {
     }
 
     async rateService(serviceId: number, rating: number, token: string) {
-        // axios.defaults.headers.common['Authorization'] = `Bearer_${token}`;
         return axios.post(baseURL + 'ratings/set-rating', 
             {
                 serviceId: serviceId,

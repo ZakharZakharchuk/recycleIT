@@ -11,7 +11,7 @@ import { IServiceCardProps} from '../../../interfaces/Interfaces'
 import FacilitiesService from '../../../../Services/apiService'
 import MessageDialog from '../../../helpers/MessageDialog/MessageDialog'
 import { UserContext } from '../../../UserContext/UserContextProvider'
-
+import axios from "axios";
 const ServicesCard = (props: IServiceCardProps) => {
     const user = useContext(UserContext);
     const [isQuestionFormOpened, setIsQuestionFormOpened] = useState(false);
@@ -58,23 +58,21 @@ const ServicesCard = (props: IServiceCardProps) => {
             })
     }
 
-    const rateServiceOnServer = (event: any, newValue: any) => {
+    const rateServiceOnServer = async (event: any, newValue: any) => {
         setRating(newValue);
 
         facilitiesService.rateService(props.item.id, newValue, user?.user?.token || '')
             .then(res => {
-                console.log(res);
-                // open dialog
                 setDialogOpen(true);
                 setDialogContent({
                     title: 'Thank you!',
                     message: 'You have rated this service',
-                    spanText: `${rating} stars`,
+                    spanText: `${newValue} stars`,
                     actionMessageText: 'Continue to page',
                 })
             })
-            .catch(err => {
-                console.error(err);
+            .catch(error => {
+                console.error(error);
                 setDialogOpen(true);
                 setDialogContent({
                     title: 'Something went wrong',
