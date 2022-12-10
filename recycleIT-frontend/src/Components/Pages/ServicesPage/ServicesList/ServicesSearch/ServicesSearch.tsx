@@ -1,59 +1,64 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { 
-    Button, 
-    FormControl, 
-    InputLabel, 
-    Select, 
+import {
+    Button,
+    FormControl,
+    InputLabel,
+    Select,
     MenuItem,
-    SelectChangeEvent, 
+    SelectChangeEvent,
     Checkbox,
     FormControlLabel,
-} from '@mui/material';
-import { 
-    STATE_CODES
-} from '../../../../../util/constants';
-import { UserLocation } from '../../index';
-import AlertMessageBox from '../../../../UI/AlertMessageBox/AlertMessageBox';
-import { 
-    IServicesSearchProps, 
-    LocationType 
-} from '../../../../../util/Interfaces';
-import { renderMenuItems } from '../../../../../util/renderMenuItems';
-import FacilitiesService from '../../../../../Services/apiService';
+} from "@mui/material";
+import { STATE_CODES } from "../../../../../util/constants";
+import { UserLocation } from "../../index";
+import AlertMessageBox from "../../../../UI/AlertMessageBox/AlertMessageBox";
+import {
+    IServicesSearchProps,
+    LocationType,
+} from "../../../../../util/Interfaces";
+import { renderMenuItems } from "../../../../../util/renderMenuItems";
+import FacilitiesService from "../../../../../Services/apiService";
 
 const ServicesSearch = (props: IServicesSearchProps) => {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isCheckboxSelected, setIsCheckboxSelected] = useState(false);
-    const [location, setLocation] = useState('');
-    const [facilityType, setFacilityType] = useState('');
-    const [serviceTypes, setServiceTypes] = useState([{id: 0, name: ''}]);
-    
+    const [location, setLocation] = useState("");
+    const [facilityType, setFacilityType] = useState("");
+    const [serviceTypes, setServiceTypes] = useState([{ id: 0, name: "" }]);
+
     const userLocation = useContext(UserLocation) as LocationType;
     const apiService = new FacilitiesService();
 
     useEffect(() => {
         //server request to get all available services types
-        apiService.getServicesTypes()
-            .then(res => {
-                const servicesTypes = res.map((item: {id: number, shortName: string, guidanceHtml: string}) => {
-                    return {id: item.id, name: item.shortName}
-                })
+        apiService
+            .getServicesTypes()
+            .then((res) => {
+                const servicesTypes = res.map(
+                    (item: {
+                        id: number;
+                        shortName: string;
+                        guidanceHtml: string;
+                    }) => {
+                        return { id: item.id, name: item.shortName };
+                    }
+                );
                 setServiceTypes(servicesTypes);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
                 setError(true);
-            })
-    }, [])
+            });
+    }, []);
 
     const handleLocationChange = (event: SelectChangeEvent) => {
         if (error) {
-            setError(false)
+            setError(false);
         }
         if (isCheckboxSelected) {
-            setIsCheckboxSelected(false)
+            setIsCheckboxSelected(false);
         }
         setLocation(event.target.value);
     };
@@ -67,78 +72,94 @@ const ServicesSearch = (props: IServicesSearchProps) => {
 
     const toggleCheckbox = () => {
         if (!isCheckboxSelected) {
-            selectCurrentLocation()
+            selectCurrentLocation();
         } else {
-            setLocation('')
+            setLocation("");
         }
-        setIsCheckboxSelected(prev => !prev)
-        setError(false)
-    }
+        setIsCheckboxSelected((prev) => !prev);
+        setError(false);
+    };
 
     const requestFacilities = () => {
-        props.fetchServices(location, facilityType)
-    }
+        props.fetchServices(location, facilityType);
+    };
 
-    const selectCurrentLocation = () => {  
-        console.log('location request');
+    const selectCurrentLocation = () => {
+        console.log("location request");
         const API_KEY = process.env.REACT_APP_API_KEY,
             API_HOST = process.env.REACT_APP_API_HOST,
-            API_URL = 'https://address-from-to-latitude-longitude.p.rapidapi.com/geolocationapi' 
+            API_URL =
+                "https://address-from-to-latitude-longitude.p.rapidapi.com/geolocationapi";
 
         const options = {
-            method: 'GET',
+            method: "GET",
             url: API_URL,
-            params: {lat: userLocation.lat, lng: userLocation.lng},
+            params: { lat: userLocation.lat, lng: userLocation.lng },
             headers: {
-                'X-RapidAPI-Key': API_KEY,
-                'X-RapidAPI-Host': API_HOST
-            }
+                "X-RapidAPI-Key": API_KEY,
+                "X-RapidAPI-Host": API_HOST,
+            },
         };
 
         setLoading(true);
-        axios.request(options).then((response) => {
-            const reg = response.data.Results[0].region;
-            // find region code according to location
-            const stateCode = STATE_CODES
-                .find(state => state.name.toUpperCase() === reg.toUpperCase());
+        axios
+            .request(options)
+            .then((response) => {
+                const reg = response.data.Results[0].region;
+                // find region code according to location
+                const stateCode = STATE_CODES.find(
+                    (state) => state.name.toUpperCase() === reg.toUpperCase()
+                );
 
-            if (stateCode) {
-                setLocation(stateCode.id);
-            } else {
-                // show alert if location does not satisfy us
-                setError(true)
-            }
-            setLoading(false)
-        }).catch((error) => {
-            console.error(error);
-            setError(true)
-            setLoading(false)
-        });
-    }
-    
-    const errorComponent = error && <AlertMessageBox error={true} text="Sorry, currently the service is not available in you area"/>
-    const loader = loading && <AlertMessageBox loading={true} text="Loading your location"/>
+                if (stateCode) {
+                    setLocation(stateCode.id);
+                } else {
+                    // show alert if location does not satisfy us
+                    setError(true);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error(error);
+                setError(true);
+                setLoading(false);
+            });
+    };
+
+    const errorComponent = error && (
+        <AlertMessageBox
+            error={true}
+            text="Sorry, currently the service is not available in you area"
+        />
+    );
+    const loader = loading && (
+        <AlertMessageBox loading={true} text="Loading your location" />
+    );
 
     return (
         <div className="services-search">
-            <FormControl variant="standard" sx={{minWidth: '100%' }}>
-                <InputLabel id="demo-simple-select-standard-label">Select location</InputLabel>
+            <FormControl variant="standard" sx={{ minWidth: "100%" }}>
+                <InputLabel id="demo-simple-select-standard-label">
+                    Select location
+                </InputLabel>
                 <Select
                     labelId="demo-simple-select-standard-label"
                     value={location}
                     onChange={handleLocationChange}
                     label="Location"
-                    style={{maxWidth: '320px'}}
+                    style={{ maxWidth: "320px" }}
                 >
-                        <MenuItem value="">
-                            <em>All country</em>
-                        </MenuItem>
-                        { states }
+                    <MenuItem value="">
+                        <em>All country</em>
+                    </MenuItem>
+                    {states}
                 </Select>
             </FormControl>
 
-            <FormControl variant="standard" sx={{minWidth: '100%' }}>
-                <InputLabel id="demo-simple-select-standard-label">Select facility type</InputLabel>
+            <FormControl variant="standard" sx={{ minWidth: "100%" }}>
+                <InputLabel id="demo-simple-select-standard-label">
+                    Select facility type
+                </InputLabel>
                 <Select
                     labelId="demo-simple-select-standard-label"
                     value={facilityType}
@@ -148,33 +169,34 @@ const ServicesSearch = (props: IServicesSearchProps) => {
                     <MenuItem value="">
                         <em>Any type</em>
                     </MenuItem>
-                    { services }
+                    {services}
                 </Select>
             </FormControl>
 
-            <FormControlLabel 
+            <FormControlLabel
                 control={
                     <Checkbox
-                        inputProps={{ 'aria-label': 'controlled' }}
-                        color='success'
+                        inputProps={{ "aria-label": "controlled" }}
+                        color="success"
                         onChange={toggleCheckbox}
                         checked={isCheckboxSelected}
-                    />} 
-                label="Use my current location" 
+                    />
+                }
+                label="Use my current location"
             />
-            
-            { errorComponent }
-            { loader }
 
-            <Button 
-                variant="contained" 
-                style={{width: '100%', backgroundColor: "#82B23F"}}
+            {errorComponent}
+            {loader}
+
+            <Button
+                variant="contained"
+                style={{ width: "100%", backgroundColor: "#82B23F" }}
                 onClick={requestFacilities}
             >
                 Find
             </Button>
         </div>
-    )
-}
+    );
+};
 
-export default ServicesSearch
+export default ServicesSearch;

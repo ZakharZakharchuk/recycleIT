@@ -172,9 +172,11 @@ const Header:React.FC = () => {
         }
         {
           !isUserAuthorized &&
-          <button className={styles.Link} onClick={() => navigate('/authorization')}>
-            Sign in
-          </button>
+          <MenuItem>
+            <button className={styles.Link} onClick={() => navigate('/authorization')}>
+              Sign in
+            </button>
+          </MenuItem>
         }
       </Menu>
     </>

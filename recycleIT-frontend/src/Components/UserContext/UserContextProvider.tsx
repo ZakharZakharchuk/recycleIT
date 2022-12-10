@@ -1,23 +1,29 @@
-import React, { createContext, useState, useEffect, useCallback, useMemo } from "react";
+import React, {
+    createContext,
+    useState,
+    useEffect,
+    useCallback,
+    useMemo,
+} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthService } from "../../Services/authorizationService";
 
 interface User {
-    name: string,
-    email: string,
-    token: string
+    name: string;
+    email: string;
+    token: string;
 }
 
 interface UserContextType {
-    user: User | null,
-    isLoggedIn: boolean,
-    isRegistered: boolean,
-    signout: () => void,
-    signup: (name: string, email: string, password: string) => void,
-    signin: (email: string, password: string) => void,
-    loading: boolean,
-    error: boolean,
-    errorMessage: string
+    user: User | null;
+    isLoggedIn: boolean;
+    isRegistered: boolean;
+    signout: () => void;
+    signup: (name: string, email: string, password: string) => void;
+    signin: (email: string, password: string) => void;
+    loading: boolean;
+    error: boolean;
+    errorMessage: string;
 }
 // create user context
 const UserContext = createContext<UserContextType | null>(null);
@@ -27,7 +33,7 @@ const UserContextProvider = ({ children }: any) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('Error occured');
+    const [errorMessage, setErrorMessage] = useState("Error occured");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isRegistered, setIsRegistered] = useState(false);
     const navigate = useNavigate();
@@ -35,93 +41,125 @@ const UserContextProvider = ({ children }: any) => {
     const authService = new AuthService();
 
     useEffect(() => {
-        const userFromLocal = localStorage.getItem('user');
+        const userFromLocal = localStorage.getItem("user");
         if (userFromLocal) {
             const user = JSON.parse(userFromLocal);
-            setUser({name: user.name, email: user.email, token: user.token});
+            setUser({ name: user.name, email: user.email, token: user.token });
             setIsLoggedIn(true);
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
-        if (location.pathname !== '/authorization' && error) {
-            setError(false)
+        if (location.pathname !== "/authorization" && error) {
+            setError(false);
         }
-    }, [error, location])
+    }, [error, location]);
 
-    const signup = useCallback((name: string, email: string, password: string) => {
-        if (error) {
-            setError(false)
-        }
-        // server request
-        setLoading(true);
-        authService.register(name, email, password)
-            .then(() => {
-                setIsRegistered(true);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error(error);
-                setLoading(false);
-                setErrorMessage('Error registering user');
-                setError(true);
-            })
-    }, [authService, error])
-
-    const signin = useCallback((email: string, password: string) => {
-        if (error) {
-            setError(false)
-        }
-        setLoading(true);
-        if (!localStorage.getItem('user')) {
-            authService.login(email, password)
-                .then(res => {
-                    const user = res?.data;
-                    localStorage.setItem('user', JSON.stringify({name: user.username, email: email, token: user.token}));
-                    setUser({name: user.username, email: email, token: user.token});
-                    setIsLoggedIn(true);
+    const signup = useCallback(
+        (name: string, email: string, password: string) => {
+            if (error) {
+                setError(false);
+            }
+            // server request
+            setLoading(true);
+            authService
+                .register(name, email, password)
+                .then(() => {
+                    setIsRegistered(true);
                     setLoading(false);
-                    navigate('/');
                 })
-                .catch(error => {
-                    console.log(error);
+                .catch((error) => {
+                    console.error(error);
                     setLoading(false);
-                    setErrorMessage('Error signing in');
+                    setErrorMessage("Error registering user");
                     setError(true);
-                })
-        } 
-    }, [authService, error, navigate]);
+                });
+        },
+        [authService, error]
+    );
+
+    const signin = useCallback(
+        (email: string, password: string) => {
+            if (error) {
+                setError(false);
+            }
+            setLoading(true);
+            if (!localStorage.getItem("user")) {
+                authService
+                    .login(email, password)
+                    .then((res) => {
+                        const user = res?.data;
+                        localStorage.setItem(
+                            "user",
+                            JSON.stringify({
+                                name: user.username,
+                                email: email,
+                                token: user.token,
+                            })
+                        );
+                        setUser({
+                            name: user.username,
+                            email: email,
+                            token: user.token,
+                        });
+                        setIsLoggedIn(true);
+                        setLoading(false);
+                        navigate("/");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        setLoading(false);
+                        setErrorMessage("Error signing in");
+                        setError(true);
+                    });
+            }
+        },
+        [authService, error, navigate]
+    );
 
     const signout = useCallback(() => {
         const currentRoute = location.pathname;
         if (error) {
-            setError(false)
+            setError(false);
         }
-        if (localStorage.getItem('user')) {
-            localStorage.removeItem('user');
+        if (localStorage.getItem("user")) {
+            localStorage.removeItem("user");
             setUser(null);
             setIsLoggedIn(false);
         }
         navigate(currentRoute);
     }, [error, navigate]);
 
-    const contextValue: UserContextType = useMemo(() => ({
-        user,
-        isLoggedIn,
-        isRegistered,
-        signup,
-        signout,
-        signin,
-        loading,
-        error,
-        errorMessage
-    }), [user, isLoggedIn, isRegistered, signup, signout, signin, loading, error, errorMessage])
+    const contextValue: UserContextType = useMemo(
+        () => ({
+            user,
+            isLoggedIn,
+            isRegistered,
+            signup,
+            signout,
+            signin,
+            loading,
+            error,
+            errorMessage,
+        }),
+        [
+            user,
+            isLoggedIn,
+            isRegistered,
+            signup,
+            signout,
+            signin,
+            loading,
+            error,
+            errorMessage,
+        ]
+    );
 
     return (
         <UserContext.Provider value={contextValue}>
             {children}
         </UserContext.Provider>
     );
-}
+};
 
 export { UserContext, UserContextProvider };

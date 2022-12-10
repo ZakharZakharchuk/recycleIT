@@ -1,26 +1,29 @@
-import { Container, Typography } from '@mui/material';
-import Box from '@mui/material/Box';
-import Footer from '../../Layout/Footer/Footer';
-import Accordions from './Accordion';
-import Question from './Question';
-import styles from './Support.module.css'
+import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Footer from "../../Layout/Footer/Footer";
+import Accordions from "./Accordion";
+import Question from "./Question";
+import styles from "./Support.module.css";
 const Support = () => {
     return (
         <>
             <div className={styles.Support_page}>
                 <div className={styles.Support_ask_quetions}>
-                    <Typography variant="h4" className={styles.Support_ask_typography}>
+                    <Typography
+                        variant="h4"
+                        className={styles.Support_ask_typography}
+                    >
                         Frequently Asked Questions
                     </Typography>
                 </div>
                 <Box className={styles.Support_main_containner}>
-                    <Accordions/>
-                    <Question/>
+                    <Accordions />
+                    <Question />
                 </Box>
             </div>
-            <Footer/> 
+            <Footer />
         </>
-    )
-}
+    );
+};
 
-export default Support
+export default Support;
