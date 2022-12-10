@@ -1,0 +1,192 @@
+.container {
+    max-width: 1230px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.Main_container {
+    display: flex;
+}
+.Main_par_button_wrapper {
+    flex: 0 1 50%;
+    place-self: center stretch;
+}
+.Main_typography {
+    width: 100%;
+    color: #3F4732;
+}
+.Main_paragraph {
+    color: #4F4F4F;
+    width: 100%;
+}
+.Main_button {
+    width: 250px;
+}
+.Main_button_types {
+    height: 42px;
+    font-size: 85% !important;
+    color: #2E7D32 !important;
+    border: 1px solid #2E7D32 !important;
+} 
+.Main_Avatar {
+    width: 100% !important;
+    height: 100% !important;
+}
+.SectionTypes_container {
+    padding-top: 20px;
+    background: #F1F1F1;
+}
+.SectionTypes_container_white {
+    display: grid;
+    background: white;
+    padding-top: 30px;
+    row-gap: 15px;
+}
+.SectionTypes_typography {
+    color: #3F4732;
+    margin-left: 0;
+}
+.SectionTypes_paragraph {
+    margin-left: 0;
+    padding-top: 15px;
+    height: 28px;
+    font-size: 16px;
+    color: rgba(63, 71, 50, 0.87);
+}
+.SectionTypes_button {
+    width: 150px;
+    height: 60px;
+    background: #FFFFFF !important;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid rgb(235, 235, 235) !important;
+}
+.SectionTypes_button:active {
+    color: rgba(61, 178, 102, 0.899) !important;
+    background: #FFFFFF !important;
+    border: 1px solid rgb(235, 235, 235) !important;
+}
+
+.Card_inside_wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.Link {
+    text-decoration: none;
+    width: 100%;
+    color: white;
+}
+.Cards_container {
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+.Card_typography {
+    padding: 10px 8px 0;
+    font-weight: 500px !important;
+}
+
+.Card_parg {
+    padding: 0 10px;
+    font-size: 12px;
+    flex: 1 0 auto;
+}
+.Main_buttonBroup_wrapper {
+    display: flex;
+    gap:20px;
+}
+.Main_Avatar_wrapper {
+    flex: 0 0 40%;
+}
+.Main_Avatar_wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.SectionTypes_buttonBroup_wrapper {
+    width: 95%;
+    display: flex;
+}
+
+.Facilities_container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 20px 0;
+}
+.Facilities_card {
+    background-color: #f1f1f1;
+    padding: 8px 20px 10px;
+}
+.Facilities_title {
+    margin-left: 0;
+    font-weight: 500;
+}
+
+.Facilities_desc {
+    font-size: 14px;
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+    .Main_par_button_wrapper {
+        width: 40%;
+    }
+    .Main_Avatar_wrapper {
+        width: 60%;
+    }
+    .Main_typography {
+        font-size: 35px !important;
+    }
+    .Main_paragraph {
+        font-size: 14px !important;
+    }
+    .SectionTypes_button {
+        height: 55px;
+        flex: 1 1 110px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .Main_par_button_wrapper {
+        width: 40%;
+    }
+    .Main_par_button_wrapper > *:not(:last-child) {
+        margin-bottom: 30px;
+    }
+    .Cards_container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .SectionTypes_buttonBroup_wrapper {
+        display: flex;
+    } 
+}
+
+@media screen and (max-width: 800px) {
+    .SectionTypes_button {
+        width: 100px;
+        font-size: 12px;
+    }
+    .Main_par_button_wrapper {
+        flex: 1 1 100%;
+    }
+    .Main_Avatar_wrapper {
+        display: none;
+    }
+}
+@media screen and (max-width:620px) {
+    .Cards_container {
+        grid-template-columns: 1fr;
+    }
+    .Main_typography {
+        text-align: center;
+    }
+    .Main_buttonBroup_wrapper > * {
+        flex: 1 1 40%;
+    }
+    .Facilities_container {
+        display: flex;
+        flex-direction: column;
+    }
+}

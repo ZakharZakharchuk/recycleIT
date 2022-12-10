@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = 'http://recycleit-env.eba-xtnxyihv.us-east-1.elasticbeanstalk.com/'
+const baseURL = process.env.REACT_APP_API_URI;
 
 export class FacilitiesService {
     async getServicesTypes() {

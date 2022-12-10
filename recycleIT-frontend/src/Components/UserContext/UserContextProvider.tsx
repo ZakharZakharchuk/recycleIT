@@ -44,8 +44,6 @@ const UserContextProvider = ({ children }: any) => {
     }, [])
 
     useEffect(() => {
-        // if we leave the authorization page, 
-        // but the error is still present:
         if (location.pathname !== '/authorization' && error) {
             setError(false)
         }
@@ -75,12 +73,9 @@ const UserContextProvider = ({ children }: any) => {
             setError(false)
         }
         setLoading(true);
-        // check if user is already authenticated
         if (!localStorage.getItem('user')) {
-            // server request here
             authService.login(email, password)
                 .then(res => {
-                    // save user to localstorage if request successful
                     const user = res?.data;
                     localStorage.setItem('user', JSON.stringify({name: user.username, email: email, token: user.token}));
                     setUser({name: user.username, email: email, token: user.token});
@@ -110,7 +105,6 @@ const UserContextProvider = ({ children }: any) => {
         navigate(currentRoute);
     }, [error, navigate]);
 
-    // memoized context value to be passed to consumers
     const contextValue: UserContextType = useMemo(() => ({
         user,
         isLoggedIn,
