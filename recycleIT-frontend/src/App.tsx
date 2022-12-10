@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import Header from "./Components/Layout/Header/Header";
+import Main from "./Components/Pages/Main/Main";
+import Support from "./Components/Pages/Support/Support";
+import Authorization from "./Components/Pages/Athorization/Authorization";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { UserContextProvider } from "./Components/UserContext/UserContextProvider";
+import ServicesPage from "./Components/Pages/ServicesPage";
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+      <BrowserRouter>
+        <UserContextProvider>
+          <Header/>
+          <main>
+            <Routes>
+              <Route path="/" element={<Main/>}/>
+              <Route path="/services" element={<ServicesPage/>}/>
+              <Route path="/authorization" element={<Authorization/>}/>
+              <Route path="/support" element={<Support/>}/>
+            </Routes>    
+          </main>
+        </UserContextProvider>
+      </BrowserRouter>
+      </div>
+    );
+  }
 
-export default App;
+export default App
