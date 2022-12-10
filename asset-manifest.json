@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/recycleIT/static/css/main.6fab1483.css",
+    "main.js": "/recycleIT/static/js/main.19ea12a0.js",
+    "static/media/faq_bg.jpg": "/recycleIT/static/media/faq_bg.fdded6ab859a7989c656.jpg",
+    "static/media/mainBanner.svg": "/recycleIT/static/media/mainBanner.43c6246546c00195f7c0032cb238f7c1.svg",
+    "static/media/ColoredGlass.png": "/recycleIT/static/media/ColoredGlass.2b4bdb757ba5b13b40dc.png",
+    "static/media/Ferrous.png": "/recycleIT/static/media/Ferrous.7ad933c8bc7cc00b8aa7.png",
+    "static/media/recycleElectronic1.png": "/recycleIT/static/media/recycleElectronic1.e597bb14b40136f8a198.png",
+    "static/media/Household.png": "/recycleIT/static/media/Household.aa89ae4b591ce00f11ac.png",
+    "static/media/metal.png": "/recycleIT/static/media/metal.cf45fa2d9a4c7e199a95.png",
+    "static/media/PET.png": "/recycleIT/static/media/PET.3f0bea972220311126cf.png",
+    "static/media/PP.png": "/recycleIT/static/media/PP.2727b8e2ed40f7d8a3ca.png",
+    "static/media/recycleElectronic2.png": "/recycleIT/static/media/recycleElectronic2.aa945b1ab8a122767a09.png",
+    "static/media/TV.png": "/recycleIT/static/media/TV.af1218a5ec27f249500b.png",
+    "static/media/ColorlessGlass.png": "/recycleIT/static/media/ColorlessGlass.76f43e99108e2b928565.png",
+    "static/media/PVC.png": "/recycleIT/static/media/PVC.19b8c14a31aaf97fc680.png",
+    "static/media/Confidencial.png": "/recycleIT/static/media/Confidencial.a2a1682975d001c6e547.png",
+    "static/media/glass.png": "/recycleIT/static/media/glass.fe641cc00f1be3c813dc.png",
+    "static/media/HDPE.png": "/recycleIT/static/media/HDPE.929be8cb88ea120fc909.png",
+    "static/media/NonFerrous.png": "/recycleIT/static/media/NonFerrous.ac4e106500f9677361cf.png",
+    "static/media/CardBoard.png": "/recycleIT/static/media/CardBoard.5112c184f90483594c85.png",
+    "static/media/LDPE.png": "/recycleIT/static/media/LDPE.899c6d17b11e4d0a6ee8.png",
+    "static/media/PS.png": "/recycleIT/static/media/PS.350af70385b846a95a6b.png",
+    "static/media/IconLogo.svg": "/recycleIT/static/media/IconLogo.58e89347b3dd1a4d9e2ee2a9426f7228.svg",
+    "static/media/logoDarkGreen.svg": "/recycleIT/static/media/logoDarkGreen.455d0f60023f20865c92e5d64a10a22b.svg",
+    "static/media/call.svg": "/recycleIT/static/media/call.6d63b0fc86f3a3b991dea605c9a4b0ed.svg",
+    "static/media/LogoButton.svg": "/recycleIT/static/media/LogoButton.a983bc882af7b8d3a5cd4359d41df7c5.svg",
+    "index.html": "/recycleIT/index.html",
+    "static/media/message.svg": "/recycleIT/static/media/message.eff7b8f9a8b6181923c6a1eff68fb521.svg",
+    "main.6fab1483.css.map": "/recycleIT/static/css/main.6fab1483.css.map",
+    "main.19ea12a0.js.map": "/recycleIT/static/js/main.19ea12a0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6fab1483.css",
+    "static/js/main.19ea12a0.js"
+  ]
+}
