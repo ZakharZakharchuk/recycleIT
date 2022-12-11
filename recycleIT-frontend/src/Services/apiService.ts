@@ -4,7 +4,7 @@ const baseURL = process.env.REACT_APP_API_URI;
 
 export class FacilitiesService {
     async getServicesTypes() {
-        return await axios.get(baseURL + 'facilities/subtypes');
+        return axios.get(baseURL + 'facilities/subtypes');
     }
 
     async getFacilities(location: string, typeId: string) {
