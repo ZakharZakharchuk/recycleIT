@@ -36,7 +36,7 @@ const ServicesSearch = (props: IServicesSearchProps) => {
         apiService
             .getServicesTypes()
             .then((res) => {
-                const servicesTypes = res.map(
+                const servicesTypes = res.data.map(
                     (item: {
                         id: number;
                         shortName: string;

@@ -4,16 +4,11 @@ const baseURL = process.env.REACT_APP_API_URI;
 
 export class FacilitiesService {
     async getServicesTypes() {
-        try {
-            const res = await axios.get(baseURL + 'facilities/subtypes');
-            return res.data
-        } catch (error) {
-            console.error(error);
-        }
+        return await axios.get(baseURL + 'facilities/subtypes');
     }
 
     async getFacilities(location: string, typeId: string) {
-        return await axios.post(baseURL + 'facilities/all',  
+        return axios.post(baseURL + 'facilities/all',  
             {
                 facilityTypeId: typeId, 
                 stateCode: location
