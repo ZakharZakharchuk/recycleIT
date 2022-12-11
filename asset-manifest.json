@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/recycleIT/static/css/main.6fab1483.css",
-    "main.js": "/recycleIT/static/js/main.19ea12a0.js",
+    "main.js": "/recycleIT/static/js/main.f84e122a.js",
     "static/media/faq_bg.jpg": "/recycleIT/static/media/faq_bg.fdded6ab859a7989c656.jpg",
     "static/media/mainBanner.svg": "/recycleIT/static/media/mainBanner.43c6246546c00195f7c0032cb238f7c1.svg",
     "static/media/ColoredGlass.png": "/recycleIT/static/media/ColoredGlass.2b4bdb757ba5b13b40dc.png",
@@ -29,10 +29,10 @@
     "index.html": "/recycleIT/index.html",
     "static/media/message.svg": "/recycleIT/static/media/message.eff7b8f9a8b6181923c6a1eff68fb521.svg",
     "main.6fab1483.css.map": "/recycleIT/static/css/main.6fab1483.css.map",
-    "main.19ea12a0.js.map": "/recycleIT/static/js/main.19ea12a0.js.map"
+    "main.f84e122a.js.map": "/recycleIT/static/js/main.f84e122a.js.map"
   },
   "entrypoints": [
     "static/css/main.6fab1483.css",
-    "static/js/main.19ea12a0.js"
+    "static/js/main.f84e122a.js"
   ]
 }
