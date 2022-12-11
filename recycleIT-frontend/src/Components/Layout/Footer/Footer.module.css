@@ -62,6 +62,19 @@
     padding: 0 0 0 10px;
 }
 @media screen and (max-width: 1020px) {
+    .Footer_icons_wrapper {
+        display: grid;
+        grid-template-columns: auto;
+        widows: 80%;
+    }
+    .Footer_message {
+        padding: 0 ;
+    }
+    .Footer_icon {
+        padding: 0;
+    }
+}
+@media screen and (max-width: 770px) {
     .Footer_container {
         grid-template-columns: auto auto;
         grid-template-areas:
@@ -70,11 +83,16 @@
     }
     .Footer_logo_wrapper {
         grid-area: logo;
+        padding-top: 10px;
     }
     .Footer_buttons_wrapper {
         grid-area: buttons;
+        column-gap: 0;
+        padding-top: 15px;
     }
     .Footer_icons_wrapper {
         grid-area: call;
+        margin-bottom: 20px;
+        padding-left: 10px;
     }
 }
