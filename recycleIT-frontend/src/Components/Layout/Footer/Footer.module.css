@@ -2,7 +2,8 @@
     display: grid;
     grid-template-columns: 30% 40% 30%;
     align-content: center;
-    height: 84px;
+    margin-top: 30px;
+    height: 80px;
     background: #F1F1F1;
 }
 .Footer_logo_wrapper {
