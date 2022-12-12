@@ -1,5 +1,9 @@
 .Support_page {
     padding-bottom: 20px;
+    min-height: 100vh;
+	display: grid;
+	grid-template-rows: auto auto auto;
+	grid-template-columns: 100vw;
 }
 .Support_ask_quetions {
     position: relative;
