@@ -16,7 +16,7 @@ import { UserContext } from "../../UserContext/UserContextProvider";
 import { IQuestionFormState } from "../../../util/Interfaces";
 import FacilitiesService from "../../../Services/apiService";
 import MessageDialog from "../../UI/MessageDialog/MessageDialog";
-import { EMAIL_REGEXPR } from "../../../util/constants";
+import { EMAIL_REGEXPR, MAX_MESSAGE_LENGTH } from "../../../util/constants";
 
 const Question = () => {
     // user will be later retrieved from User context
@@ -73,7 +73,7 @@ const Question = () => {
             isMessageInvalid = false;
 
         isEmailInvalid = !EMAIL_REGEXPR.test(email);
-        isMessageInvalid = !message.length || message.length > 140;
+        isMessageInvalid = !message.length || message.length > MAX_MESSAGE_LENGTH;
 
         setValidationError({
             email: isEmailInvalid,
@@ -159,7 +159,7 @@ const Question = () => {
                 {validationError.message ? (
                     <ErrorMessage
                         text={
-                            "Message is required with maximum of 140 characters"
+                            `Message is required with maximum of ${MAX_MESSAGE_LENGTH} characters`
                         }
                     />
                 ) : null}

@@ -106,7 +106,7 @@
 }
 .SectionTypes_buttonBroup_wrapper {
     width: 95%;
-    display: flex;
+    margin: 0 0 0 -40px;
 }
 
 .Facilities_container {
@@ -175,6 +175,13 @@
         display: none;
     }
 }
+
+@media screen and (max-width:720px) {
+    .SectionTypes_buttonBroup_wrapper {
+        margin: 0;
+    }
+}
+
 @media screen and (max-width:620px) {
     .Cards_container {
         grid-template-columns: 1fr;

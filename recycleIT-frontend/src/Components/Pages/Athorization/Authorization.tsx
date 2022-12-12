@@ -47,7 +47,7 @@ const Authorization = () => {
     const [isLoginMode, setIsLoginMode] = useState(true);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(user?.errorMessage || "");
+    const [errorMessage, setErrorMessage] = useState(user?.errorMessage || 'Some error occured');
     const navigate = useNavigate();
 
     if (user?.isLoggedIn) {
@@ -258,7 +258,7 @@ const Authorization = () => {
                     {validationError.password ? (
                         <ErrorMessage
                             text={
-                                "Password must be minimum 8 characters, at least one letter and one number"
+                                "Must be at least 8 characters, contain letters and numbers, may contain special charaters"
                             }
                         />
                     ) : null}

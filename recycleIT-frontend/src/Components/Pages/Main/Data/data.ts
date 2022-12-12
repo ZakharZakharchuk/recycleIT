@@ -126,7 +126,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "id": "14",
         "title": "Metal Cans",
         "category": "metal",
-        "desc": "Drink cans or tin, steel, or bi-metal food cans.",
+        "desc": "Drink cans or tin, steel, or bi-metal food cans",
         "image": NonFerrous,
         "value": '4'
     },
@@ -150,7 +150,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "id": "17",
         "title": "E-waste",
         "category": "electronic",
-        "desc": " Laptops, tablets and mobile phones.",
+        "desc": " Laptops, tablets and mobile phones",
         "image": recycleElectronic2,
         "value": '5'
     },
@@ -158,7 +158,7 @@ const data: {category: string, id:string, title:string, desc:string, image:strin
         "id": "18",
         "title": "Recycle TVs",
         "category": "electronic",
-        "desc": "TVs contain valuable materials.",
+        "desc": "TVs contain valuable materials",
         "image": TV,
         "value": '5'
     }

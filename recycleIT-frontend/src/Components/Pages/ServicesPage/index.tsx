@@ -19,7 +19,7 @@ const ServicesPage = () => {
     const [userLocation, setUserLocation] = useState<LocationType | null>(null);
     const [chosenItemLocation, setChosenItemLocation] =
         useState<ChosenItemType | null>(null);
-    const isMobileDevice = useMediaQuery("(min-width:900px)");
+    const isMobileDevice = useMediaQuery("(min-width:1020px)");
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {

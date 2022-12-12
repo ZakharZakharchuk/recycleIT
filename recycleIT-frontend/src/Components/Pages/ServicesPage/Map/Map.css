@@ -1,12 +1,12 @@
 .map-side {
-  width: calc(100% - 380px);
+  width: calc(100% - 410px);
   height: calc(100vh - 90px);
   padding: 10px;
   margin-left: auto;
 }
 
 .map-container {
-  width: 95%;
+  width: 98%;
   height: 90%;
   display: flex;
   align-items: center;
@@ -14,7 +14,7 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1020px) {
   .map-side {
     width: 100%;
   }

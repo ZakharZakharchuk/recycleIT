@@ -3,7 +3,6 @@
     min-height: 100vh;
 	display: grid;
 	grid-template-rows: auto auto auto;
-	grid-template-columns: 100vw;
 }
 .Support_ask_quetions {
     position: relative;
@@ -105,5 +104,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .Support_ask_quetions {
+        background: #f1f1f1;
     }
 }

@@ -38,7 +38,7 @@ const MessageDialog = ({
         >
             <DialogTitle style={{ textAlign: "center" }}>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>
+                <DialogContentText style={{textAlign: 'center'}}>
                     {message}
                     <span style={{ color: "#2E7D32" }}> {spanText} </span>
                 </DialogContentText>

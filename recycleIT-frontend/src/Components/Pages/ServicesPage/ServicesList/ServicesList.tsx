@@ -16,7 +16,7 @@ import FacilitiesService from "../../../../Services/apiService";
 const ServicesList = (props: IServiceListProps) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState('Error loading data');
 
     const facilitiesService = new FacilitiesService();
 

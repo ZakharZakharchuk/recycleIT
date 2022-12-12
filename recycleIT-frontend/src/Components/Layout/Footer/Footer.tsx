@@ -4,6 +4,7 @@ import call from "../../../assets/call.svg";
 import message from "../../../assets/message.svg";
 import { Link } from "react-router-dom";
 import logoDarkGreen from "../../../assets/logoDarkGreen.svg";
+import { COMPANY_EMAIL } from "../../../util/constants";
 const Footer = () => {
     return (
         <Box className={styles.Footer_container}>
@@ -40,7 +41,7 @@ const Footer = () => {
                         alt="message"
                         className={styles.Footer_message}
                     />
-                    <span className={styles.text}>recycle.it@email.com</span>
+                    <span className={styles.text}>{COMPANY_EMAIL}</span>
                 </div>
             </Box>
         </Box>
