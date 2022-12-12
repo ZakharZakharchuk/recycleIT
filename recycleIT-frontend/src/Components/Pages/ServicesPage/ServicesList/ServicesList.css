@@ -14,7 +14,7 @@
     left: 0;
 }
 .services-list {
-    width: 360px;
+    width: 380px;
 }
 .services-search {
     margin-bottom: 20px;
@@ -49,14 +49,14 @@
 .list-subheader {
     font-weight: 600;
     position: sticky;
-    width: 360px;
+    width: 380px;
     height: 50px;
     padding: 0 20px;
     display: flex;
     justify-content: space-between
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1020px) {
     .side_bar {
         left: -380px;
     }

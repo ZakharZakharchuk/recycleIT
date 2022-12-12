@@ -45,6 +45,8 @@ export default function Map(props: IMapProps) {
     const [chosenItemId, setChosenItemId] = useState(0);
 
     useEffect(() => {
+        console.log(chosenItemLocation);
+        
         if (chosenItemLocation) {
             setCenter({
                 lat: Number(chosenItemLocation.lat),

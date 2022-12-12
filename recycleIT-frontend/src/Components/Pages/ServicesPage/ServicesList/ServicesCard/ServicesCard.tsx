@@ -137,6 +137,22 @@ const ServicesCard = (props: IServiceCardProps) => {
                             color="text.primary"
                             className="text-left"
                         >
+                            Phone Number
+                        </Typography>
+                        <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            className="text-left"
+                        >
+                            {props.item.contactPhone}
+                        </Typography>
+                    </div>
+                    <div className="item-details">
+                        <Typography
+                            variant="body1"
+                            color="text.primary"
+                            className="text-left"
+                        >
                             Delivery
                         </Typography>
                         <Typography
@@ -154,7 +170,7 @@ const ServicesCard = (props: IServiceCardProps) => {
 
                     <div className="button-group">
                         <Button
-                            variant="text"
+                            variant="outlined"
                             size="small"
                             onClick={() =>
                                 props.getItemLocation(
@@ -168,7 +184,7 @@ const ServicesCard = (props: IServiceCardProps) => {
                         </Button>
                         {!isQuestionFormOpened && (
                             <Button
-                                variant="text"
+                                variant="outlined"
                                 size="small"
                                 onClick={onChangeQuestionFormDisplay}
                             >

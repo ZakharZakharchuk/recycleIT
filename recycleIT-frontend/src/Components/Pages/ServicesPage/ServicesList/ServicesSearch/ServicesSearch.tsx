@@ -85,7 +85,6 @@ const ServicesSearch = (props: IServicesSearchProps) => {
     };
 
     const selectCurrentLocation = () => {
-        console.log("location request");
         const API_KEY = process.env.REACT_APP_API_KEY,
             API_HOST = process.env.REACT_APP_API_HOST,
             API_URL =
@@ -147,7 +146,7 @@ const ServicesSearch = (props: IServicesSearchProps) => {
                     value={location}
                     onChange={handleLocationChange}
                     label="Location"
-                    style={{ maxWidth: "320px" }}
+                    MenuProps={{ PaperProps: { sx: { maxHeight: 400 } } }}
                 >
                     <MenuItem value="">
                         <em>All country</em>
@@ -165,6 +164,7 @@ const ServicesSearch = (props: IServicesSearchProps) => {
                     value={facilityType}
                     onChange={handleFacilityTypeChange}
                     label="Location"
+                    MenuProps={{ PaperProps: { sx: { maxHeight: 400 } } }}
                 >
                     <MenuItem value="">
                         <em>Any type</em>

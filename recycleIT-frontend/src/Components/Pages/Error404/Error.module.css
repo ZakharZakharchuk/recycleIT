@@ -1,15 +1,15 @@
 .Error_wrapper {
     display: grid;
     justify-content: center; 
+    row-gap: 15px;
     margin-top: 30px;
 }
 .Error_header {
-    color: #124e2c;
-    font-size: 70px;
-    padding-left: 70px;
-    height: 50px;
+    color: #0d3b21;
+    text-align: center;
 }
 .Error_parg {
     color: #013316;
     font-size: 20px;
+    text-align: center;
 }
