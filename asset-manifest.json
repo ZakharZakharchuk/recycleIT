@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/recycleIT/static/css/main.6fab1483.css",
-    "main.js": "/recycleIT/static/js/main.d5f5bdf5.js",
+    "main.css": "/recycleIT/static/css/main.c316d6d6.css",
+    "main.js": "/recycleIT/static/js/main.28612198.js",
     "static/media/faq_bg.jpg": "/recycleIT/static/media/faq_bg.fdded6ab859a7989c656.jpg",
     "static/media/mainBanner.svg": "/recycleIT/static/media/mainBanner.43c6246546c00195f7c0032cb238f7c1.svg",
     "static/media/ColoredGlass.png": "/recycleIT/static/media/ColoredGlass.2b4bdb757ba5b13b40dc.png",
@@ -28,11 +28,11 @@
     "static/media/LogoButton.svg": "/recycleIT/static/media/LogoButton.a983bc882af7b8d3a5cd4359d41df7c5.svg",
     "index.html": "/recycleIT/index.html",
     "static/media/message.svg": "/recycleIT/static/media/message.eff7b8f9a8b6181923c6a1eff68fb521.svg",
-    "main.6fab1483.css.map": "/recycleIT/static/css/main.6fab1483.css.map",
-    "main.d5f5bdf5.js.map": "/recycleIT/static/js/main.d5f5bdf5.js.map"
+    "main.c316d6d6.css.map": "/recycleIT/static/css/main.c316d6d6.css.map",
+    "main.28612198.js.map": "/recycleIT/static/js/main.28612198.js.map"
   },
   "entrypoints": [
-    "static/css/main.6fab1483.css",
-    "static/js/main.d5f5bdf5.js"
+    "static/css/main.c316d6d6.css",
+    "static/js/main.28612198.js"
   ]
 }
