@@ -24,12 +24,15 @@ const ServicesList = (props: IServiceListProps) => {
 
     const [page, setPage] = React.useState(1);
     const [start, setStart] = React.useState(0);
-    const [end, setEnd] = React.useState(10);
+    const [end, setEnd] = React.useState(props.servicesList?.length || MAX_ITEMS_ON_PAGE);
 
     const ref: React.RefObject<HTMLInputElement> = React.createRef();
+    console.log(props.servicesList);
+    
 
     useEffect(() => {
         setPage(1);
+
     }, [props.servicesList])
 
     const handleClick = () => {
