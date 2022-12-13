@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# RecycleIT ♻️
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In this application it is possible to register collection points and types of materials collected, showing them on maps and allowing you to search for the nearest points. RecycleIT main objective is to bring recycling cooperatives closer to people who sort recyclable waste at home.
 
-## Available Scripts
+Registered users can request collections from the cooperatives, which in turn have the option of accepting or not the requests.
+The cooperative, after carrying out the collection, registers on the system that the request has been completed.
 
-In the project directory, you can run:
+Both users and cooperatives can track the progress and status of collection requests.
 
-### `npm start`
+## ⚙ Technologies
+  - **Back end**
+    Database: MySQL
+    Deployment: AWS, Heroku
+    VC: GitHub, Git
+    -Java, 
+    -Spring Boot, 
+    -Spring Security, 
+    -Spring Data Jpa, 
+    -Spring Mail,
+    -Lombok, 
+    -Maven, 
+    -Flyway, 
+    -Springdoc
+  
+  - **Front end**
+    - ReactJS
+    - Typescript
+    - react-router-dom
+    - axios
+    - Google-Map(Free map)
+    - MUI
+  
+## 💻 How to run
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+> Cloning the repository
+  ```bash
+    # Cloning repository
+    git clone https://github.com/ZakharZakharchuk/recycleIT.git
+    # Install all dependences
+    npm install
+    # Run code
+    npm start
+  ```
