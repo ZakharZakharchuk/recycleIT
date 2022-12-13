@@ -17,6 +17,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
+    public ResponseEntity login(@Validated @RequestBody AuthenticationRequestDto requestDto) {
         try {
             String username = userService.findByEmail(requestDto.getEmail()).getUsername();
             authenticationManager.authenticate(
@@ -64,7 +65,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody UserDto userDto) {
+    public ResponseEntity register(@Validated @RequestBody UserDto userDto) {
         try {
             userService.register(userDto.mapToUser());
 
