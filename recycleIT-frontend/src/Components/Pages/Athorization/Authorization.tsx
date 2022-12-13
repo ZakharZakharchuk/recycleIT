@@ -17,7 +17,7 @@ import { UserContext } from "../../UserContext/UserContextProvider";
 import AlertMessageBox from "../../UI/AlertMessageBox/AlertMessageBox";
 import LogoButton from "./../../../assets/LogoButton.svg";
 import { useNavigate } from "react-router-dom";
-import { EMAIL_REGEXPR, PASSWORD_REGEXPR } from "../../../util/constants";
+import { EMAIL_REGEXPR, PASSWORD_REGEXPR, USERNAME_REGEXPR } from "../../../util/constants";
 
 interface IFormState {
     name: string;
@@ -93,7 +93,7 @@ const Authorization = () => {
             isFormInvalid = false;
 
         if (!isLoginMode) {
-            isNameInvalid = name.length < 3 || name.length > 15;
+            isNameInvalid = !USERNAME_REGEXPR.test(name);
             doPasswordsMatch =
                 !repeatPassword || !(password === repeatPassword);
         }
@@ -209,7 +209,7 @@ const Authorization = () => {
                     />
                     {validationError.name ? (
                         <ErrorMessage
-                            text={"Name must be between 3 and 15 symbols"}
+                            text={"Name must be 3 - 15 symbols and contain letters, may contain numbers"}
                         />
                     ) : null}
                 </FormControl>

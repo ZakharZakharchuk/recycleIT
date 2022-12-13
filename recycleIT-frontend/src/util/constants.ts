@@ -271,6 +271,7 @@ export const WASTE_CATEGORIES = [
     }
 ];
 
+export const USERNAME_REGEXPR = /^[a-zA-Z]+[a-zA-Z0-9]{3,15}$/
 export const PASSWORD_REGEXPR = /^(?=.*[0-9])(?=.*[!@#$%^&_*])[a-zA-Z0-9!@#$%^&_*]{8,14}$/
 export const EMAIL_REGEXPR = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i
 export const MAX_MESSAGE_LENGTH = 500

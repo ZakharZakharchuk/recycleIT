@@ -55,6 +55,11 @@
     display: flex;
     justify-content: space-between
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
 
 @media screen and (max-width: 1020px) {
     .side_bar {
