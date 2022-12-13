@@ -89,7 +89,6 @@ const Question = () => {
             facilitiesService
                 .postSupportQuestion(values.email, values.message)
                 .then((res) => {
-                    console.log(res);
                     // open dialog
                     setDialogContent({
                         title: "Thank you for your question!",
