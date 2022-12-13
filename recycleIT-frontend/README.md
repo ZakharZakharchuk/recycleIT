@@ -1,11 +1,6 @@
 # RecycleIT ♻️
 
-In this application it is possible to register collection points and types of materials collected, showing them on maps and allowing you to search for the nearest points. RecycleIT main objective is to bring recycling cooperatives closer to people who sort recyclable waste at home.
-
-Registered users can request collections from the cooperatives, which in turn have the option of accepting or not the requests.
-The cooperative, after carrying out the collection, registers on the system that the request has been completed.
-
-Both users and cooperatives can track the progress and status of collection requests.
+This application is developed to provide users with the list of available nearby eco services, showing them on a map. The app provides the ability to search for different types of services according to the waste they accept and user's location.
 
 ## ⚙ Technologies
   - **Back end**
