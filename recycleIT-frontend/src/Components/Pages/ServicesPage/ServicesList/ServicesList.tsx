@@ -27,8 +27,6 @@ const ServicesList = (props: IServiceListProps) => {
     const [end, setEnd] = React.useState(props.servicesList?.length || MAX_ITEMS_ON_PAGE);
 
     const ref: React.RefObject<HTMLInputElement> = React.createRef();
-    console.log(props.servicesList);
-    
 
     useEffect(() => {
         setPage(1);
