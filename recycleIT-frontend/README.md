@@ -4,18 +4,18 @@ This application is developed to provide users with the list of available nearby
 
 ## ⚙ Technologies
   - **Back end**
-    Database: MySQL
-    Deployment: AWS, Heroku
-    VC: GitHub, Git
-    -Java, 
-    -Spring Boot, 
-    -Spring Security, 
-    -Spring Data Jpa, 
-    -Spring Mail,
-    -Lombok, 
-    -Maven, 
-    -Flyway, 
-    -Springdoc
+    - Java, 
+    - Spring Boot, 
+    - Spring Security, 
+    - Spring Data Jpa, 
+    - Spring Mail,
+    - Lombok, 
+    - Maven, 
+    - Flyway, 
+    - Springdoc
+    - Database: MySQL
+    - Deployment: AWS, Heroku
+    - VC: GitHub, Git
   
   - **Front end**
     - ReactJS
