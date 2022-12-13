@@ -258,7 +258,7 @@ const Authorization = () => {
                     {validationError.password ? (
                         <ErrorMessage
                             text={
-                                "Must be at least 8 characters, contain letters and numbers, may contain special charaters"
+                                "Must be 8 to 14 characters, contain letters, numbers and special charaters"
                             }
                         />
                     ) : null}

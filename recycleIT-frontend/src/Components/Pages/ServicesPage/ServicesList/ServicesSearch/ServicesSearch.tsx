@@ -128,7 +128,7 @@ const ServicesSearch = (props: IServicesSearchProps) => {
     const errorComponent = error && (
         <AlertMessageBox
             error={true}
-            text="Sorry, currently the service is not available in you area"
+            text="Sorry, currently the service is not available in your area"
         />
     );
     const loader = loading && (
