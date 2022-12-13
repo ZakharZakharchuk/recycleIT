@@ -13,9 +13,6 @@ This application is developed to provide users with the list of available nearby
     -Maven, 
     -Flyway, 
     -Springdoc
-    -Database: MySQL
-    -Deployment: AWS, Heroku
-    -VC: GitHub, Git
   
   - **Front end**
     - ReactJS
